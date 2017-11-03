@@ -1,0 +1,30 @@
+{
+  "name": "google-myanmar-tools",
+  "version": "1.0.0",
+  "description": "Tools for handling the Zawgyi font encoding in Myanmar.",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "gulp",
+    "test": "jasmine"
+  },
+  "keywords": [
+    "zawgyi",
+    "myanmar",
+    "zawgyi1",
+    "zawgyi-one"
+  ],
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-cli": "^1.4.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.6.1",
+    "gulp-typescript": "^3.2.3",
+    "gulp-uglify": "^3.0.0",
+    "jasmine": "^2.8.0",
+    "typescript": "^2.6.1"
+  },
+  "dependencies": {
+  }
+}
