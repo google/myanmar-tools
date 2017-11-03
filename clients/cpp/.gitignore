@@ -12,3 +12,4 @@ CMakeCache.txt
 CTestTestfile.cmake
 Makefile
 zawgyi_detector_test
+zawgyi_model_data.h
