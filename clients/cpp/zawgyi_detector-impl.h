@@ -52,7 +52,7 @@ class ZawgyiUnicodeMarkovModel {
 
   virtual ~ZawgyiUnicodeMarkovModel();
 
-  double Predict(const char* input_utf8, size_t length_size) const;
+  double Predict(const char* input_utf8, int32_t length_size) const;
 
  private:
   static const int64_t BINARY_TAG = 0x555A4D4F44454C20L;

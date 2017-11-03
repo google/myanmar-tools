@@ -27,7 +27,7 @@ class ZawgyiDetector {
   ZawgyiDetector();
   ~ZawgyiDetector();
 
-  double GetZawgyiProbability(const char* input_utf8, size_t length) const;
+  double GetZawgyiProbability(const char* input_utf8, int32_t length = -1) const;
 
  private:
   const ZawgyiUnicodeMarkovModel* model_;

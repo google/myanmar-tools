@@ -40,16 +40,19 @@ add_custom_command(
         COMMAND build_model_h
 )
 
-set(SOURCE_FILES zawgyi_detector.cpp zawgyi_detector.h zawgyi_detector-impl.h zawgyi_model_data.h)
-add_library(zawgyi_detector ${SOURCE_FILES})
-target_link_libraries(zawgyi_detector glog::glog)
+set(SOURCE_FILES zawgyi_detector.cpp public/myanmartools.h zawgyi_detector-impl.h zawgyi_model_data.h)
+add_library(myanmartools SHARED ${SOURCE_FILES})
+target_link_libraries(myanmartools glog::glog)
 
 set(TEST_FILES zawgyi_detector_unittest.cpp)
-add_executable(zawgyi_detector_test ${TEST_FILES})
-target_link_libraries(zawgyi_detector_test zawgyi_detector GTest::main)
+add_executable(myanmartools_test ${TEST_FILES})
+target_link_libraries(myanmartools_test myanmartools GTest::main)
 
 enable_testing()
 add_test(
         NAME ZawgyiDetectorTest
-        COMMAND zawgyi_detector_test
+        COMMAND myanmartools_test
 )
+
+install(TARGETS myanmartools DESTINATION lib)
+install(FILES public/myanmartools.h DESTINATION include)

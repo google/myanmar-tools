@@ -2,14 +2,17 @@
 _3rdParty/
 cmake-build-debug/
 CMakeFiles/
+Testing/
 
 *.a
 *.cbp
+*.so
 
 build_model_h
 cmake_install.cmake
 CMakeCache.txt
 CTestTestfile.cmake
+install_manifest.txt
 Makefile
-zawgyi_detector_test
+myanmartools_test
 zawgyi_model_data.h

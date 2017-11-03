@@ -18,7 +18,7 @@
 #include <unicode/utf8.h>
 #include <glog/logging.h>
 
-#include "zawgyi_detector.h"
+#include "public/myanmartools.h"
 #include "zawgyi_detector-impl.h"
 #include "zawgyi_model_data.h"
 
@@ -171,11 +171,14 @@ ZawgyiUnicodeMarkovModel::~ZawgyiUnicodeMarkovModel() {
 
 double
 ZawgyiUnicodeMarkovModel::Predict(const char* input_utf8,
-                                  size_t length_size) const {
-  if (length_size > __INT32_MAX__) {
-    return -std::numeric_limits<double>::infinity();
+                                  int32_t length) const {
+  if (length < 0) {
+    size_t length_size = strlen(input_utf8);
+    if (length_size > __INT32_MAX__) {
+      return -std::numeric_limits<double>::infinity();
+    }
+    length = static_cast<int32_t>(length_size);
   }
-  int32_t length = static_cast<int32_t>(length_size);
 
   // Start at the base state
   int prevState = 0;
@@ -253,6 +256,6 @@ ZawgyiDetector::~ZawgyiDetector() {
 }
 
 double ZawgyiDetector::GetZawgyiProbability(const char* input_utf8,
-                                            size_t length) const {
+                                            int32_t length) const {
   return model_->Predict(input_utf8, length);
 }

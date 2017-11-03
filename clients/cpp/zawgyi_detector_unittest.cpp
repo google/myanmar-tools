@@ -15,7 +15,7 @@
 #include <cstring>
 
 #include <gtest/gtest.h>
-#include "zawgyi_detector.h"
+#include "public/myanmartools.h"
 
 using namespace google_myanmar_tools;
 
