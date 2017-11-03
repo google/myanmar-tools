@@ -14,10 +14,13 @@
 
 
 cmake_minimum_required(VERSION 3.0)
-include("cmake/HunterGate.cmake")
-
 set(CMAKE_CXX_STANDARD 11)
 
+file(
+        DOWNLOAD "https://raw.githubusercontent.com/hunter-packages/gate/v0.8.1/cmake/HunterGate.cmake" CMakeFiles/HunterGate.cmake
+        EXPECTED_HASH SHA1=b07c64067aebe94ba07d375c74b1bd1d7a696c67
+)
+include("CMakeFiles/HunterGate.cmake")
 HunterGate(
         URL "https://github.com/ruslo/hunter/archive/v0.19.87.tar.gz"
         SHA1 "1b0041a06357d2c9f1f1a7e93ff3132c36411719"
@@ -31,11 +34,8 @@ find_package(GTest CONFIG REQUIRED)
 hunter_add_package(glog)
 find_package(glog CONFIG REQUIRED)
 
-find_package(ICU)
-
 set(SOURCE_FILES zawgyi_detector.cpp zawgyi_detector.h zawgyi_detector-impl.h zawgyi_model_data.h)
 add_library(zawgyi_detector ${SOURCE_FILES})
-target_include_directories(zawgyi_detector PRIVATE ${ICU_INCLUDE_DIRS})
 target_link_libraries(zawgyi_detector glog::glog)
 
 set(TEST_FILES zawgyi_detector_unittest.cpp)
