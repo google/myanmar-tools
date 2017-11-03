@@ -34,6 +34,12 @@ find_package(GTest CONFIG REQUIRED)
 hunter_add_package(glog)
 find_package(glog CONFIG REQUIRED)
 
+add_executable(build_model_h build_model_h.cpp)
+add_custom_command(
+        OUTPUT zawgyi_model_data.h
+        COMMAND build_model_h
+)
+
 set(SOURCE_FILES zawgyi_detector.cpp zawgyi_detector.h zawgyi_detector-impl.h zawgyi_model_data.h)
 add_library(zawgyi_detector ${SOURCE_FILES})
 target_link_libraries(zawgyi_detector glog::glog)
@@ -41,14 +47,6 @@ target_link_libraries(zawgyi_detector glog::glog)
 set(TEST_FILES zawgyi_detector_unittest.cpp)
 add_executable(zawgyi_detector_test ${TEST_FILES})
 target_link_libraries(zawgyi_detector_test zawgyi_detector GTest::main)
-
-add_executable(build_model_h build_model_h.cpp)
-
-add_custom_command(
-        TARGET zawgyi_detector
-        PRE_BUILD
-        COMMAND build_model_h
-)
 
 enable_testing()
 add_test(
