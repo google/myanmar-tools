@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "build": "gulp",
-    "test": "jasmine"
+    "test": "gulp test"
   },
   "keywords": [
     "zawgyi",
@@ -17,14 +17,17 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
     "gulp-cli": "^1.4.0",
-    "gulp-clone": "^1.0.0",
+    "gulp-jasmine": "^2.4.2",
+    "gulp-jasmine-browser": "^1.9.1",
     "gulp-preprocess": "^2.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.6.1",
     "gulp-typescript": "^3.2.3",
     "gulp-uglify": "^3.0.0",
     "jasmine": "^2.8.0",
+    "jasmine-reporters": "^2.2.1",
     "typescript": "^2.6.1"
   },
   "dependencies": {}
