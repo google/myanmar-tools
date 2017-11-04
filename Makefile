@@ -13,8 +13,10 @@
 # limitations under the License.
 
 
-# Path to the maven binary
+CMAKE=cmake
+MAKE=make
 MVN=mvn
+NPM=npm
 
 data/target: $(wildcard data/src/**/*)
 	$(MVN) -f data/pom.xml -q compile
@@ -40,3 +42,14 @@ copy-resources:
 	cp data/src/main/resources/compatibility.tsv clients/js/resources
 
 train: zawgyiUnicodeModel.dat compatibility.tsv testData.tsv copy-resources
+
+clients: $(wildcard clients/**/*)
+
+client-cpp: $(wildcard clients/cpp/**/*)
+	cd clients/cpp && $(CMAKE) CMakeLists.txt
+
+test: clients client-cpp
+	cd data && $(MVN) test
+	cd clients/cpp && $(MAKE) test
+	cd clients/java && $(MVN) test
+	cd clients/js && $(NPM) test
