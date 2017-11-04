@@ -14,7 +14,7 @@
     "zawgyi-one"
   ],
   "author": "",
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
