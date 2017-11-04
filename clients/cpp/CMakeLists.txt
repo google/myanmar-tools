@@ -34,7 +34,7 @@ find_package(GTest CONFIG REQUIRED)
 hunter_add_package(glog)
 find_package(glog CONFIG REQUIRED)
 
-add_executable(build_model_h build_model_h.cpp)
+add_executable(build_model_h build_model_h.cpp resources/zawgyiUnicodeModel.dat)
 add_custom_command(
         OUTPUT zawgyi_model_data.h
         COMMAND build_model_h
@@ -44,7 +44,7 @@ set(SOURCE_FILES zawgyi_detector.cpp public/myanmartools.h zawgyi_detector-impl.
 add_library(myanmartools SHARED ${SOURCE_FILES})
 target_link_libraries(myanmartools glog::glog)
 
-set(TEST_FILES zawgyi_detector_unittest.cpp)
+set(TEST_FILES zawgyi_detector_unittest.cpp resources/compatibility.tsv)
 add_executable(myanmartools_test ${TEST_FILES})
 target_link_libraries(myanmartools_test myanmartools GTest::main)
 

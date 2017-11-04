@@ -185,15 +185,15 @@ ZawgyiUnicodeMarkovModel::Predict(const char* input_utf8,
 
   double totalDelta = 0.0;
   bool seenTransition = false;
-  for (int32_t i = 0; i < length;) {
-    char32_t cp;
+  for (int32_t i = 0; i <= length;) {
     int currState;
     if (i >= length) {
-      cp = 0;
       currState = 0;
+      i++;
     } else {
       // TODO: U8_NEXT has a library dependency.
       // For now, assume the input is well-formed UTF-8.
+      char32_t cp;
       U8_NEXT_UNSAFE(input_utf8, i, cp);
       currState = GetIndexForCodePoint(cp);
     }
