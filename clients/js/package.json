@@ -18,6 +18,8 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-cli": "^1.4.0",
+    "gulp-clone": "^1.0.0",
+    "gulp-preprocess": "^2.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.6.1",
     "gulp-typescript": "^3.2.3",
@@ -25,6 +27,5 @@
     "jasmine": "^2.8.0",
     "typescript": "^2.6.1"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }

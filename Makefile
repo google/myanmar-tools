@@ -34,7 +34,9 @@ testData.tsv: data/target
 copy-resources:
 	cp data/src/main/resources/zawgyiUnicodeModel.dat clients/java/src/main/resources
 	cp data/src/main/resources/zawgyiUnicodeModel.dat clients/cpp/resources
+	cp data/src/main/resources/zawgyiUnicodeModel.dat clients/js/resources
 	cp data/src/main/resources/compatibility.tsv clients/java/src/test/resources
 	cp data/src/main/resources/compatibility.tsv clients/cpp/resources
+	cp data/src/main/resources/compatibility.tsv clients/js/resources
 
 train: zawgyiUnicodeModel.dat compatibility.tsv testData.tsv copy-resources
