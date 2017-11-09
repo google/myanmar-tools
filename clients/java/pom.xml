@@ -64,10 +64,10 @@ limitations under the License.
     </plugins>
   </build>
   <scm>
-    <connection>scm:git:https://github.com/googlei18n/myanmar-tools/</connection>
-    <developerConnection>scm:git:https://github.com/googlei18n/myanmar-tools/</developerConnection>
+    <connection>scm:git:https://github.com/googlei18n/myanmar-tools</connection>
+    <developerConnection>scm:git:git://github.com/googlei18n/myanmar-tools</developerConnection>
     <tag>HEAD</tag>
-    <url>https://github.com/googlei18n/myanmar-tools/</url>
+    <url>https://github.com/googlei18n/myanmar-tools</url>
   </scm>
   <dependencies>
     <dependency>
