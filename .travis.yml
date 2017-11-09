@@ -1,0 +1,50 @@
+matrix:
+  include:
+
+    # Training Data Project
+    - language: java
+      jdk:
+        - oraclejdk8
+      before_script:
+        - cd data/java
+        - mvn install
+      script:
+        - cd data/java
+        - mvn test
+
+    # C++ Client
+    - language: cpp
+      compiler:
+        - clang
+        - gcc
+      before_script:
+        - cd data/cpp
+        - cmake CMakeLists.txt
+      script:
+        - cd data/cpp
+        - make
+        - make test
+
+    # Java Client
+    - language: java
+      jdk:
+        - oraclejdk7  # minimum supported version
+      before_script:
+        - cd clients/java
+        - mvn install
+      script:
+        - cd clients/java
+        - mvn test
+
+    # JavaScript Client
+    - language: node_js
+      node_js:
+        - "node"
+        - "0.10"  # minimum supported version
+      before_script:
+        - cd clients/js
+        - npm install
+        - npm install -g gulp-cli
+      script:
+        - cd clients/js
+        - gulp test-node

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
- var fs = require("fs");
+var fs = require("fs");
 var clean = require("gulp-clean");
 var gulp = require("gulp");
 var jasmine = require("gulp-jasmine");
