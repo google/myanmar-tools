@@ -19,36 +19,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * <strong>Java Zawgyi Detector (go/zawgyi)</strong>
+ * Uses a machine learning model to determine whether a string of text is Zawgyi or Unicode.
  *
- * <p>Uses a machine learning Markov model to predict whether a string is encoded in the Zawgyi font
- * encoding for the Myanmar script.
- *
- * <p>A typical use case should look like this:
- *
- * <p><code><pre>
- * private static final ZawgyiDetector zawgyiDetector = new ZawgyiDetector();
- *
- * if (zawgyiDetector.getZawgyiProbability(input) > THRESHOLD) {
- *   // do stuff
- * }
- * </pre></code>
- *
- * <p>The method {@link #getZawgyiProbability(String)} returns a value between 0 and 1 for the
- * probability that the string is Zawgyi-encoded given that the string is either Unicode or Zawgyi.
- * With this in mind, use the following heuristics to set <code>THRESHOLD</code>:
- *
- * <ul>
- *   <li>If <em>under</em>-predicting Zawgyi is bad (e.g., when a human gets to evaluate the
- *       result), set a low threshold like <code>0.01</code>. This threshold guarantees that fewer
- *       than 1% of Zawgyi strings will go undetected.
- *   <li>If <em>over</em>-predicting Zawgyi is bad (e.g., when conversion will take place
- *       automatically), set a high threshold like <code>0.99</code>. This threshold guarantees that
- *       fewer than 1% of Unicode strings will be wrongly flagged.
- * </ul>
- *
- * <p>You should use this class in the form of a "private static final" singleton instance for
- * optimal performance.
+ * <p>For more details and documentation, see https://github.com/googlei18n/myanmar-tools
  */
 public final class ZawgyiDetector {
   final ZawgyiUnicodeMarkovModel model;
