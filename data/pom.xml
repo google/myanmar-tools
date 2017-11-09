@@ -1,19 +1,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.google.i18n.myanmar</groupId>
-  <artifactId>google-myanmar-tools-data</artifactId>
+  <groupId>com.google.myanmartools</groupId>
+  <artifactId>myanmar-tools-data</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>google-myanmar-tools-data</name>
+  <name>myanmar-tools-data</name>
   <url>http://maven.apache.org</url>
   <properties>
-    <exec.mainClass>com.google.i18n.myanmar.GenerateZawgyiUnicodeModelDAT</exec.mainClass>
+    <exec.mainClass>com.google.myanmartools.GenerateZawgyiUnicodeModelDAT</exec.mainClass>
   </properties>
   <dependencies>
     <dependency>
-      <groupId>com.google.i18n.myanmar</groupId>
-      <artifactId>google-myanmar-tools</artifactId>
+      <groupId>com.google.myanmartools</groupId>
+      <artifactId>myanmar-tools</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
