@@ -13,7 +13,10 @@
  * limitations under the License.
  */
 
-package com.google.i18n.myanmar;
+package com.google.myanmartools;
+
+import com.google.myanmartools.BinaryMarkov;
+import com.google.myanmartools.BinaryMarkovBuilder;
 
 /**
  * Shared immutable objects used in unit tests.

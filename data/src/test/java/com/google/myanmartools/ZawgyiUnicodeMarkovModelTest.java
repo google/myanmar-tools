@@ -13,12 +13,14 @@
  * limitations under the License.
  */
 
-package com.google.i18n.myanmar;
+package com.google.myanmartools;
 
 import static com.google.common.truth.Truth.assertWithMessage;
 
 import com.google.common.testing.EqualsTester;
-import com.google.i18n.myanmar.ZawgyiUnicodeMarkovModelBuilder.Category;
+import com.google.myanmartools.ZawgyiUnicodeMarkovModel;
+import com.google.myanmartools.ZawgyiUnicodeMarkovModelBuilder;
+import com.google.myanmartools.ZawgyiUnicodeMarkovModelBuilder.Category;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

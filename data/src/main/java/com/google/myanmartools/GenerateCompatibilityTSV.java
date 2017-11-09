@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-package com.google.i18n.myanmar;
+package com.google.myanmartools;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.io.Resources;
-import com.google.i18n.myanmar.ZawgyiDetector;
+import com.google.myanmartools.ZawgyiDetector;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

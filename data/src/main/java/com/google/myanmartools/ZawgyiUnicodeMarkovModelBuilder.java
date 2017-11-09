@@ -13,11 +13,13 @@
  * limitations under the License.
  */
 
-package com.google.i18n.myanmar;
+package com.google.myanmartools;
 
-import static com.google.i18n.myanmar.ZawgyiUnicodeMarkovModel.getIndexForCodePoint;
-import static com.google.i18n.myanmar.ZawgyiUnicodeMarkovModel.getSize;
+import static com.google.myanmartools.ZawgyiUnicodeMarkovModel.getIndexForCodePoint;
+import static com.google.myanmartools.ZawgyiUnicodeMarkovModel.getSize;
 
+import com.google.myanmartools.BinaryMarkov;
+import com.google.myanmartools.ZawgyiUnicodeMarkovModel;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;

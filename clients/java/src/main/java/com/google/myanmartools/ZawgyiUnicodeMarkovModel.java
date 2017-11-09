@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.google.i18n.myanmar;
+package com.google.myanmartools;
 
 import java.io.DataInputStream;
 import java.io.IOException;

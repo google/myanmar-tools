@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.google.i18n.myanmar;
+package com.google.myanmartools;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.truth.Truth.assertThat;
@@ -22,6 +22,7 @@ import static com.google.common.truth.Truth.assertWithMessage;
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.Resources;
+import com.google.myanmartools.ZawgyiDetector;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;

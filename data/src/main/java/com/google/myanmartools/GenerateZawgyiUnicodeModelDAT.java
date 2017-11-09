@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-package com.google.i18n.myanmar;
+package com.google.myanmartools;
 
-import com.google.i18n.myanmar.ZawgyiUnicodeMarkovModelBuilder.Category;
+import com.google.myanmartools.ZawgyiUnicodeMarkovModelBuilder.Category;
 import java.io.IOException;
 import java.util.List;
 

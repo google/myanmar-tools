@@ -13,11 +13,13 @@
  * limitations under the License.
  */
 
-package com.google.i18n.myanmar;
+package com.google.myanmartools;
 
 import static com.google.common.truth.Truth.assertWithMessage;
 
 import com.google.common.testing.EqualsTester;
+import com.google.myanmartools.BinaryMarkov;
+import com.google.myanmartools.BinaryMarkovBuilder;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

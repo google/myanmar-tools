@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-package com.google.i18n.myanmar;
+package com.google.myanmartools;
 
-import com.google.i18n.myanmar.BinaryMarkov;
+import com.google.myanmartools.BinaryMarkov;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
