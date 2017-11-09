@@ -65,7 +65,7 @@ limitations under the License.
   </build>
   <scm>
     <connection>scm:git:https://github.com/googlei18n/myanmar-tools</connection>
-    <developerConnection>scm:git:git://github.com/googlei18n/myanmar-tools</developerConnection>
+    <developerConnection>scm:git:git@github.com:googlei18n/myanmar-tools.git</developerConnection>
     <tag>HEAD</tag>
     <url>https://github.com/googlei18n/myanmar-tools</url>
   </scm>
