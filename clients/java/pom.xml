@@ -62,6 +62,7 @@ limitations under the License.
             </goals>
             <configuration>
               <pomFileName>clients/java/pom.xml</pomFileName>
+              <tagNameFormat>v@{project.version}</tagNameFormat>
             </configuration>
           </execution>
         </executions>
