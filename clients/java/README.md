@@ -2,6 +2,24 @@
 
 This documentation is for Java specific usage of *Myanmar Tools*.  For general documentation, see [the top-level README](../../README.md).
 
+Add this project as a dependency in your pom.xml:
+
+```xml
+<dependency>
+  <groupId>com.google.myanmartools</groupId>
+  <artifactId>myanmar-tools</artifactId>
+  <version>1.0.1</version>
+</dependency>
+```
+
+Or using Gradle:
+
+```
+dependencies {
+  compile 'com.google.myanmartools:myanmar-tools:1.0.1'
+}
+```
+
 To detect Zawgyi, create a static final instance of ZawgyiDetector, and call `getZawgyiProbability` with your string.
 
 ```java

@@ -4,6 +4,12 @@ This documentation is for Java specific usage of *Myanmar Tools*.  For general d
 
 ## Node.JS Usage
 
+Add the dependency to your project:
+
+```bash
+$ npm install --save myanmar-tools
+```
+
 To detect Zawgyi, create an instance of ZawgyiDetector, and call `getZawgyiProbability` with your string.
 
 ```js
