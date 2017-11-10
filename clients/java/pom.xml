@@ -21,7 +21,7 @@ limitations under the License.
   <groupId>com.google.myanmartools</groupId>
   <artifactId>myanmar-tools</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>myanmar-tools</name>
   <url>http://maven.apache.org</url>
   <properties>
