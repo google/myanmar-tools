@@ -54,6 +54,9 @@ limitations under the License.
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
         <version>2.3.2</version>
+        <configuration>
+          <tagNameFormat>v@{project.version}</tagNameFormat>
+        </configuration>
         <executions>
           <execution>
             <id>default</id>
@@ -62,7 +65,6 @@ limitations under the License.
             </goals>
             <configuration>
               <pomFileName>clients/java/pom.xml</pomFileName>
-              <tagNameFormat>v@{project.version}</tagNameFormat>
             </configuration>
           </execution>
         </executions>
