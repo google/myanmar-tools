@@ -53,7 +53,7 @@ limitations under the License.
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
-        <version>2.3.2</version>
+        <version>2.4.2</version>
         <configuration>
           <tagNameFormat>v@{project.version}</tagNameFormat>
         </configuration>
@@ -68,6 +68,14 @@ limitations under the License.
             </configuration>
           </execution>
         </executions>
+        <!-- Below is a fix for git commit: https://stackoverflow.com/a/20657721/1407170 -->
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.scm</groupId>
+            <artifactId>maven-scm-provider-gitexe</artifactId>
+            <version>1.8.1</version>
+          </dependency>
+        </dependencies>
       </plugin>
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
