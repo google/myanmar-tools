@@ -23,7 +23,7 @@ See language-specific documentation:
 
 - [C++](clients/cpp/README.md)
 - [Java](clients/java/README.md)
-- [JavaString](clients/js/README.md)
+- [JavaScript](clients/js/README.md)
 
 Depending on your programming language, a typical use case should look something like this:
 
