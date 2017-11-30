@@ -19,7 +19,7 @@
 var ZawgyiDetector, compatibilityTSV;
 if (typeof process !== "undefined") {
     // NodeJS
-    ZawgyiDetector = require("../build/zawgyi_detector").ZawgyiDetector;
+    ZawgyiDetector = require("../build_node/zawgyi_detector").ZawgyiDetector;
     compatibilityTSV = require("fs").readFileSync("resources/compatibility.tsv", "utf-8");
 } else {
     // Browser

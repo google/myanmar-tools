@@ -19,6 +19,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-append-prepend": "^1.0.4",
     "gulp-clean": "^0.3.2",
     "gulp-cli": "^1.4.0",
     "gulp-jasmine": "^2.4.2",
@@ -26,6 +27,7 @@
     "gulp-preprocess": "^2.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.6.1",
+    "gulp-sourcemaps": "^2.6.1",
     "gulp-typescript": "^3.2.3",
     "gulp-uglify": "^3.0.0",
     "jasmine": "^2.8.0",

@@ -18,11 +18,28 @@ var clean = require("gulp-clean");
 var gulp = require("gulp");
 var jasmine = require("gulp-jasmine");
 var jasmineBrowser = require("gulp-jasmine-browser");
+var prependText = require("gulp-append-prepend").prependText;
 var preprocess = require("gulp-preprocess");
 var rename = require("gulp-rename");
 var replace = require("gulp-replace");
+var sourcemaps = require("gulp-sourcemaps");
 var ts = require("gulp-typescript");
 var uglify = require("gulp-uglify");
+
+var LICENSE = `/* Copyright 2017 Google LLC
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*    http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/`;
 
 // Helper function to create a non-minified JavaScript stream.
 function typescriptToJavascript() {
@@ -41,36 +58,71 @@ gulp.task("build-node", function () {
         .pipe(preprocess({
             context: { NODEJS: true }
         }))
-        .pipe(gulp.dest("build"));
+        .pipe(gulp.dest("build_node"));
 });
 
-gulp.task("build-browser", function () {
+gulp.task("build-browser-full", function () {
+    // Non-minified browser build
     return typescriptToJavascript()
         .pipe(preprocess({
             context: { NODEJS: false }
         }))
         .pipe(uglify({
-            wrap: "google_myanmar_tools"
+            wrap: "google_myanmar_tools",
+            mangle: false,
+            compress: false,
+            output: { beautify: true }
         }))
+        .pipe(prependText(LICENSE, "\n"))
+        .pipe(gulp.dest("build_browser"));
+});
+
+gulp.task("build-browser-min", function () {
+    // Minified browser build
+    return typescriptToJavascript()
+        .pipe(sourcemaps.init())
+        .pipe(preprocess({
+            context: { NODEJS: false }
+        }))
+        .pipe(uglify({
+            wrap: "google_myanmar_tools",
+            mangle: false,
+            compress: false,
+        }))
+        .pipe(prependText(LICENSE, "\n"))
         .pipe(rename({
             extname: ".min.js"
         }))
-        .pipe(gulp.dest("build"));
+        .pipe(sourcemaps.write("."))
+        .pipe(gulp.dest("build_browser"));
 });
+
+gulp.task("build-browser", ["build-browser-full", "build-browser-min"]);
 
 gulp.task("test-node", ["build-node"], function () {
     return gulp.src("spec/**/*_spec.js")
         .pipe(jasmine());
 });
 
-gulp.task("test-browser", ["build-browser"], function () {
+gulp.task("test-browser-full", ["build-browser-full"], function () {
     return gulp.src([
-        "build/zawgyi_detector.min.js",
+        "build_browser/zawgyi_detector.js",
         "resources/compatibility.tsv",
         "spec/**/*_spec.js"])
         .pipe(jasmineBrowser.specRunner({ console: true }))
-        .pipe(jasmineBrowser.headless({ driver: "phantomjs" }));
+        .pipe(jasmineBrowser.headless({ driver: "phantomjs", port: 8001 }));
 });
+
+gulp.task("test-browser-min", ["build-browser-min"], function () {
+    return gulp.src([
+        "build_browser/zawgyi_detector.min.js",
+        "resources/compatibility.tsv",
+        "spec/**/*_spec.js"])
+        .pipe(jasmineBrowser.specRunner({ console: true }))
+        .pipe(jasmineBrowser.headless({ driver: "phantomjs", port: 8002 }));
+});
+
+gulp.task("test-browser", ["test-browser-full", "test-browser-min"]);
 
 gulp.task("clean", function () {
     return gulp.src("build").pipe(clean());
