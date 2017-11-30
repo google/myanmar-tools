@@ -85,9 +85,7 @@ gulp.task("build-browser-min", function () {
             context: { NODEJS: false }
         }))
         .pipe(uglify({
-            wrap: "google_myanmar_tools",
-            mangle: false,
-            compress: false,
+            wrap: "google_myanmar_tools"
         }))
         .pipe(prependText(LICENSE, "\n"))
         .pipe(rename({
