@@ -38,9 +38,13 @@ The method `getZawgyiProbability` returns a number between 0 and 1 to reflect th
 - If *under*-predicting Zawgyi is bad (e.g., when a human gets to evaluate the result), set a low threshold like <code>0.05</code>. This threshold guarantees that fewer than 1% of Zawgyi strings will go undetected.
 - If *over*-predicting Zawgyi is bad (e.g., when conversion will take place automatically), set a high threshold like <code>0.95</code>. This threshold guarantees that fewer than 1% of Unicode strings will be wrongly flagged.
 
+Additionally, keep in mind that you may want to tune your thresholds to the distribution of strings in your input data. For example, if your input data is biased toward Unicode, in order to reduce false positives, you may want to set a higher Zawgyi threshold than if your input data is biased toward Zawgyi. Ultimately, the best way to pick thresholds is to obtain a set of labeled strings representative of the data the detector will be processing, compute their scores, and tune the thresholds to your desired ratio of precision and recall.
+
 If a string contains a non-Burmese affix, it will get the same Zawgyi probability as if the
 affix were removed.  That is, `getZawgyiProbability("hello <burmese> world")` ==
 `getZawgyiProbability("<burmese>")`.
+
+Some strings are identical in both U and Z; this can happen if the string consists of mostly consonants with few diacritic vowels. The detector may return any value for such strings. If the user is concerned with this case, they can simply run the string through a converter and check whether or not the converter's output is equal to the converter's input.
 
 
 ## Training the Model
