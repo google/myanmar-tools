@@ -2,31 +2,23 @@
 
 This documentation is for Ruby specific usage of Myanmar Tools. For general documentation, see [the top-level README](../../README.md).
 
-[comment]: # Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'zawgyidetector'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install zawgyidetector
-
 ## Usage
 
-TODO: Write usage instructions here
+Prerequisites: Ruby >= 2.0.0-p0 and bundler >= 1.0
 
-## Development
+As this client is not released as a gem to rubygems yet, please check out the repo first and follow the steps to use:
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+1. After checking out the repo, go to `clients/ruby/zawgyidetector` folder and run `$ bundle install` to install dependencies.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+2. Run `$ rake test` to run the test-cases.
+
+3. Run `$ bundle exec rake build` in order to build the gem.
+
+4. To install this gem onto your local machine, run `$ bundle exec rake install`.
+
+5. Run `$ bundle console` for an interactive prompt that will allow you to experiment by loading the zawgyidetector gem.
+
+6. Once irb session is available, create an object by running `detector=ZawgyiDetector.new` and run `detector.get_zawgyi_probability("အပြည်ပြည်ဆိုင်ရာ လူ့အခွင့်အရေး ကြေညာစာတမ်း")` to get score of the input.
 
 ## Contributing
 
