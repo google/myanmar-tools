@@ -48,3 +48,15 @@ matrix:
       script:
         - cd clients/js
         - gulp test-node
+
+    # Ruby Client
+    - language: ruby
+      rvm:
+        - "2.0.0-p0"  # minimum supported version
+      before_script:
+        - gem install bundler
+        - cd clients/ruby/zawgyidetector
+        - bundle install
+      script:
+        - cd clients/ruby/zawgyidetector
+        - rake test

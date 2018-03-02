@@ -17,6 +17,7 @@ CMAKE=cmake
 MAKE=make
 MVN=mvn
 NPM=npm
+RAKE=rake
 
 data/target: $(wildcard data/src/**/*)
 	$(MVN) -f data/pom.xml -q compile
@@ -37,9 +38,11 @@ copy-resources:
 	cp data/src/main/resources/zawgyiUnicodeModel.dat clients/java/src/main/resources
 	cp data/src/main/resources/zawgyiUnicodeModel.dat clients/cpp/resources
 	cp data/src/main/resources/zawgyiUnicodeModel.dat clients/js/resources
+	cp data/src/main/resources/zawgyiUnicodeModel.dat clients/ruby/zawgyidetector/lib/zawgyidetector/resources
 	cp data/src/main/resources/compatibility.tsv clients/java/src/test/resources
 	cp data/src/main/resources/compatibility.tsv clients/cpp/resources
 	cp data/src/main/resources/compatibility.tsv clients/js/resources
+	cp data/src/main/resources/compatibility.tsv clients/ruby/zawgyidetector/lib/zawgyidetector/resources
 
 train: zawgyiUnicodeModel.dat compatibility.tsv testData.tsv copy-resources
 
@@ -53,3 +56,4 @@ test: clients client-cpp
 	cd clients/cpp && $(MAKE) test
 	cd clients/java && $(MVN) test
 	cd clients/js && $(NPM) test
+	cd clients/ruby/zawgyidetector && $(RAKE) test
