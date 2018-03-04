@@ -34,24 +34,24 @@ class ZawgyiUnicodeMarkovModel
     BINARY_VERSION = 1
   
     # Standard Myanmar code point range before digits
-    STD_CP0 = 4096 # "\u1000"
-    STD_CP1 = 4159 # "\u103F"
+    STD_CP0 = 0x1000
+    STD_CP1 = 0x103F
   
     # Standard Myanmar code point range after digits
-    AFT_CP0 = 4170 # "\u104A"
-    AFT_CP1 = 4255 # "\u109F"
+    AFT_CP0 = 0x104A
+    AFT_CP1 = 0x109F
   
     # Extended Myanmar code point range A
-    EXA_CP0 = 43616 # "\uAA60"
-    EXA_CP1 = 43647 # "\uAA7F"
+    EXA_CP0 = 0xAA60
+    EXA_CP1 = 0xAA7F
   
     # Extended Myanmar code point range B
-    EXB_CP0 = 43488 # "\uA9E0"
-    EXB_CP1 = 43519 # "\uA9FF"
+    EXB_CP0 = 0xA9E0
+    EXB_CP1 = 0xA9FF
   
     # Unicode space characters
-    SPC_CP0 = 8192 # "\u2000"
-    SPC_CP1 = 8203 # "\u200B"
+    SPC_CP0 = 0x2000
+    SPC_CP1 = 0x200B
   
     # Indices into Markov nodes
     STD_OFFSET = 1
@@ -176,7 +176,7 @@ class ZawgyiUnicodeMarkovModel
     # if the code point is equal to or greater than 0x10000, then the method returns 2.
     # otherwise, the method returns 1.
     def char_count(code_point)
-      code_point >= 10000 ? 2 : 1
+      code_point >= 0x10000 ? 2 : 1
     end
   end
   
