@@ -15,8 +15,8 @@
 #include <cmath>
 #include <limits>
 #include <cstring>
-#include <unicode/utf8.h>
 #include <glog/logging.h>
+#include <unicode/utf8.h>
 
 #include "public/myanmartools.h"
 #include "zawgyi_detector-impl.h"

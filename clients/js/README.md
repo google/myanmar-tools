@@ -33,7 +33,13 @@ For a complete working example, see [samples/node/demo.js](../../samples/node/de
 
 ## Browser Usage
 
-Include the file *zawgyi_detector.min.js*.  After doing this, the ZawgyiDetector will be available as the global `google_myanmar_tools.ZawgyiDetector`, and you can use it the same way as above:
+Include the file *zawgyi_detector.min.js*.  It is available on [Google Hosted Libraries](https://developers.google.com/speed/libraries/#myanmar-tools):
+
+```html
+<script src="https://ajax.googleapis.com/ajax/libs/myanmar-tools/1.0.1/zawgyi_detector.min.js"></script>
+```
+
+After doing this, the ZawgyiDetector will be available as the global `google_myanmar_tools.ZawgyiDetector`, and you can use it the same way as above:
 
 ```js
 const detector = new google_myanmar_tools.ZawgyiDetector();
