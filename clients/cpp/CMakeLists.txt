@@ -34,6 +34,13 @@ find_package(GTest CONFIG REQUIRED)
 hunter_add_package(glog)
 find_package(glog CONFIG REQUIRED)
 
+message(STATUS "Downloading and extracting ICU4C...")
+file(
+        DOWNLOAD "http://download.icu-project.org/files/icu4c/60.2/icu4c-60_2-src.tgz" CMakeFiles/icu4c-60_2-src.tgz
+        EXPECTED_HASH SHA1=7a099523fcb708b427e94f9b3c372fec3ebd1563
+)
+execute_process(COMMAND ${CMAKE_COMMAND} -E chdir _3rdParty tar xfz ../CMakeFiles/icu4c-60_2-src.tgz)
+
 add_executable(build_model_h build_model_h.cpp resources/zawgyiUnicodeModel.dat)
 add_custom_command(
         OUTPUT zawgyi_model_data.h
@@ -41,6 +48,7 @@ add_custom_command(
 )
 
 set(SOURCE_FILES zawgyi_detector.cpp public/myanmartools.h zawgyi_detector-impl.h zawgyi_model_data.h)
+include_directories(myanmartools _3rdParty/icu/source/common)
 add_library(myanmartools SHARED ${SOURCE_FILES})
 target_link_libraries(myanmartools glog::glog)
 

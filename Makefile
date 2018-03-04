@@ -47,9 +47,12 @@ clients: $(wildcard clients/**/*)
 
 client-cpp: $(wildcard clients/cpp/**/*)
 	cd clients/cpp && $(CMAKE) CMakeLists.txt
+	cd clients/cpp && $(MAKE) all
 
-test: clients client-cpp
-	cd data && $(MVN) test
+client-js: $(wildcard clients/js/**/*)
+	cd clients/js && $(NPM) install
+
+test: clients client-cpp client-js
 	cd clients/cpp && $(MAKE) test
 	cd clients/java && $(MVN) test
 	cd clients/js && $(NPM) test
