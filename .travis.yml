@@ -54,7 +54,7 @@ matrix:
       rvm:
         - "2.0.0-p0"  # minimum supported version
       script:
-        - cd clients/ruby/zawgyidetector
+        - cd clients/ruby
         - gem install bundler
         - bundle install
         - rake test
