@@ -34,8 +34,8 @@ class ZawgyiDetector
   # @param2 verbose If true, print debugging information to standard output.
   # @return The probability that the string is Zawgyi (between 0 and 1), or -Infinity if the string
   #   contains no Myanmar range code points.
-  def get_zawgyi_probability(input, verbose = false)
-    @model.predict(input, verbose)
+  def get_zawgyi_probability(input='', verbose = false)
+    @model.predict(String(input), verbose)
   end
 
   private
