@@ -12,10 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'zawgyidetector/version'
-require 'zawgyidetector/binary_markov'
-require 'zawgyidetector/zawgyi_unicode_markov_model'
+require 'myanmar-tools/version'
+require 'myanmar-tools/binary_markov'
+require 'myanmar-tools/zawgyi_unicode_markov_model'
 
+module MyanmarTools
 # Uses a machine learning model to determine whether a string of text is Zawgyi or Unicode.
 # For more details and documentation, see https://github.com/googlei18n/myanmar-tools
 class ZawgyiDetector
@@ -41,7 +42,7 @@ class ZawgyiDetector
 
   # Open markov model from the specified path
   def stream_markov_model
-    file_path = File.join(File.dirname(__FILE__), '/zawgyidetector/resources/zawgyiUnicodeModel.dat')
+    file_path = File.join(File.dirname(__FILE__), '/myanmar-tools/resources/zawgyiUnicodeModel.dat')
     if File.file?(file_path)
       begin
         File.open(file_path, File::RDONLY)
@@ -52,4 +53,5 @@ class ZawgyiDetector
       raise 'Could not find Markov model file.'
     end
   end
+end
 end

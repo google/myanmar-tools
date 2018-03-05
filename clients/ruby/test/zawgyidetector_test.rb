@@ -13,12 +13,12 @@
 # limitations under the License.
 
 require 'test/unit'
-require 'zawgyidetector'
+require 'myanmar-tools'
 require 'csv'
 
 class ZawgyiDetectorTest < Test::Unit::TestCase
   def setup
-    @detector = ZawgyiDetector.new
+    @detector = MyanmarTools::ZawgyiDetector.new
   end
 
   def test_ignore_non_myanmar_code_points
