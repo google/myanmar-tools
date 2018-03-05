@@ -45,7 +45,7 @@ class BinaryMarkov
 
     def generate_probability_differences(stream)
       size = stream.read(2).unpack('n*')[0]
-      probability_diffs = Array.new(size){ Array.new(1,size) }
+      probability_diffs = Array.new(size){ Array.new(size) }
       i1 = 0
       while i1 < size
         entries = stream.read(2).unpack('n*')[0]
