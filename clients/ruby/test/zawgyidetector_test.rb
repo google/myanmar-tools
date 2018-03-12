@@ -77,12 +77,10 @@ class ZawgyiDetectorTest < Test::Unit::TestCase
   end
 
   def test_compatibility
-    file_path = File.join(File.dirname(File.dirname(__FILE__)),'/lib/zawgyidetector/resources/compatibility.tsv')
-    if File.file?(file_path)
-      CSV.read(file_path,{col_sep: "\t"}).each{ |line|
-        expected = line[0] == '-Infinity' ? -1.0/0.0 : line[0].to_f
-        assert_equal expected, @detector.get_zawgyi_probability(line[1])
-      }
-    end
+    file_path = File.join(File.dirname(File.dirname(__FILE__)),'/lib/myanmar-tools/resources/compatibility.tsv')
+    CSV.read(file_path,{col_sep: "\t"}).each{ |line|
+      expected = line[0] == '-Infinity' ? -1.0/0.0 : line[0].to_f
+      assert_equal expected, @detector.get_zawgyi_probability(line[1])
+    }
   end
 end
