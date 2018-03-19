@@ -16,8 +16,8 @@ To detect Zawgyi, create an instance of ZawgyiDetector, and call `get_zawgyi_pro
 
 ```ruby
 require 'myanmar-tools'
-detector=MyanmarTools::ZawgyiDetector.new
-score = detector.get_zawgyi_probability('အျပည္ျပည္ဆိုင္ရာ လူ႔အခြင့္အေရး ေၾကညာစာတမ္း')
+detector = MyanmarTools::ZawgyiDetector.new
+score    = detector.get_zawgyi_probability('အျပည္ျပည္ဆိုင္ရာ လူ႔အခြင့္အေရး ေၾကညာစာတမ္း')
 # score is 1.0 (The input is definitely Zawgyi)
 ```
 
