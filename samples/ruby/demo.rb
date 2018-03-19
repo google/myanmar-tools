@@ -1,3 +1,7 @@
+# IMPORTANT: Firstly, run 'bundle install' to install Myanmar-Tools and Rabbit converter dependencies.
+# Then, run this file:
+# $ ruby demo.rb
+
 require 'myanmar-tools'
 require 'rabbit'
 
