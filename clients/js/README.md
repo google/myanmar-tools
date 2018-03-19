@@ -1,6 +1,6 @@
 # Myanmar Tools JavaScript Documentation
 
-This documentation is for Java specific usage of *Myanmar Tools*.  For general documentation, see [the top-level README](../../README.md).
+This documentation is for JavaScript specific usage of *Myanmar Tools*.  For general documentation, see [the top-level README](../../README.md).
 
 ## Node.JS Usage
 
