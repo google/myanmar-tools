@@ -10,6 +10,8 @@ Add the dependency to your project:
 
 ```bash
 $ gem install myanmar-tools
+or
+$ bundle add myanmar-tools
 ```
 
 To detect Zawgyi, create an instance of ZawgyiDetector, and call `get_zawgyi_probability` with your string.
@@ -21,7 +23,25 @@ score    = detector.get_zawgyi_probability('အျပည္ျပည္ဆို
 # score is 1.0 (The input is definitely Zawgyi)
 ```
 
+To convert from Zawgyi to Unicode, you can use [the Ruby wrapper over icu4c](https://github.com/fantasticfears/icu4r).  Install it like this:
+
+```
+$ gem install icu
+or
+$ bundle add icu
+```
+
+Then convert from Z to U like this:
+
+```
+require 'icu'
+converter = ICU::Transliterator.new "Zawgyi-my"
+output    = converter.transliterate("မ္း")
+# output is now "မ်း"
+```
+
 For a complete working example, see [samples/ruby/demo.rb](../../samples/ruby/demo.rb).
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/googlei18n/myanmar-tools . This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
