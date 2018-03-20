@@ -25,7 +25,7 @@ score    = detector.get_zawgyi_probability('အျပည္ျပည္ဆို
 
 To convert from Zawgyi to Unicode, you can use [the Ruby wrapper over icu4c](https://github.com/fantasticfears/icu4r).  Install it like this:
 
-```
+```bash
 $ gem install icu
 or
 $ bundle add icu
@@ -33,7 +33,7 @@ $ bundle add icu
 
 Then convert from Z to U like this:
 
-```
+```ruby
 require 'icu'
 converter = ICU::Transliterator.new "Zawgyi-my"
 output    = converter.transliterate("မ္း")
