@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'Tools for handling the Zawgyi font encoding in Myanmar.'
   spec.description   = 'Tools for handling the Zawgyi font encoding in Myanmar.'
   spec.homepage      = 'https://github.com/googlei18n/myanmar-tools'
+  spec.required_ruby_version = '>= 2.0.0'
   spec.license       = 'Apache-2.0'
 
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
