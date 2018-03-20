@@ -1,12 +1,12 @@
-# IMPORTANT: Firstly, run 'bundle install' to install Myanmar-Tools and Rabbit converter dependencies.
+# IMPORTANT: Firstly, run 'bundle install' to install Myanmar-Tools and ICU converter dependencies.
 # Then, run this file:
 # $ ruby demo.rb
 
 require 'myanmar-tools'
-require 'rabbit'
+require 'icu'
 
 detector    = MyanmarTools::ZawgyiDetector.new 
-converter   = Rabbit::Converter.new
+converter   = ICU::Transliterator.new 'Zawgyi-my'
 
 # Unicode string
 unicode_input   = 'အပြည်ပြည်ဆိုင်ရာ လူ့အခွင့်အရေး ကြေညာစာတမ်း'
@@ -24,7 +24,7 @@ puts 'Unicode Score: %0.6f' % unicode_score
 puts 'Zawgyi Score: %0.6f' % zawgyi_score
 
 # Convert zawgyi input to to unicode
-zawgyi_input_converted  = converter.zg2uni(zawgyi_input)
+zawgyi_input_converted  = converter.transliterate(zawgyi_input)
 raise 'The two inputs do not match: ' unless zawgyi_input_converted == unicode_input
 
 puts "Converted Text: #{zawgyi_input_converted}"
