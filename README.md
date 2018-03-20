@@ -77,9 +77,9 @@ Although this package does not support conversion on its own, the Common Locale 
 - Java: [ICU4J Transliterator](http://icu-project.org/apiref/icu4j/com/ibm/icu/text/Transliterator.html)
 - C++: [ICU4C Transliterator](http://icu-project.org/apiref/icu4c/classicu_1_1Transliterator.html)
 
-See the samples directory for examples on using the ICU Transliterator.
+Many other languages, including Python, Ruby, and PHP, have wrapper libraries over ICU4C, which means you can use the Zawgyi converter in those languages, too.  See the samples directory for examples on using the ICU Transliterator.
 
-In JavaScript, until there is support for CLDR transliteration in JavaScript, you can look at other packages on npm.  See [the JavaScript README](clients/js/README.md) for more details.
+In languages without full ICU support, like JavaScript in the browser, there are other open-source Zawgyi converters available.  The [Rabbit](https://github.com/Rabbit-Converter/Rabbit) converter is available in several different languages, including JavaScript.  See [the JavaScript README](clients/js/README.md) for more details.
 
 ## Contributing New Programming Language Support
 
