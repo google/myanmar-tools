@@ -191,10 +191,8 @@ ZawgyiUnicodeMarkovModel::Predict(const char* input_utf8,
       currState = 0;
       i++;
     } else {
-      // TODO: U8_NEXT has a library dependency.
-      // For now, assume the input is well-formed UTF-8.
       char32_t cp;
-      U8_NEXT_UNSAFE(input_utf8, i, cp);
+      U8_NEXT(input_utf8, i, length, cp);
       currState = GetIndexForCodePoint(cp);
     }
     // Ignore 0-to-0 transitions
