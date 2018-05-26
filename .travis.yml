@@ -5,11 +5,11 @@ matrix:
     - language: java
       jdk:
         - oraclejdk8
+        - openjdk8
       before_script:
         - cd data/java
         - mvn compile
       script:
-        - cd data/java
         - mvn test
 
     # C++ Client
@@ -21,7 +21,6 @@ matrix:
         - cd data/cpp
         - cmake CMakeLists.txt
       script:
-        - cd data/cpp
         - make
         - make test
 
@@ -29,11 +28,13 @@ matrix:
     - language: java
       jdk:
         - oraclejdk7  # minimum supported version
+        - oraclejdk8
+        - oraclejdk9
+        - openjdk8
       before_script:
         - cd clients/java
-        - mvn compile
       script:
-        - cd clients/java
+        - mvn compile
         - mvn test
 
     # JavaScript Client
@@ -44,17 +45,18 @@ matrix:
       before_script:
         - cd clients/js
         - npm install
-        - npm install -g gulp-cli
       script:
-        - cd clients/js
-        - gulp test-node
+        - npm run test
 
     # Ruby Client
     - language: ruby
       rvm:
+        - 2.2
+        - jruby
         - "2.0.0-p0"  # minimum supported version
-      script:
+      before_script:
         - cd clients/ruby
         - gem install bundler
         - bundle install
+      script:
         - rake test
