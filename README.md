@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/googlei18n/myanmar-tools.svg?branch=master)](https://travis-ci.org/googlei18n/myanmar-tools)
+
 # Myanmar Tools (Zawgyi detection)
 
 This project includes tools for processing font encodings used in Myanmar, currently with support for the widespread Zawgyi-One font encoding.  For more information on font encodings in Myanmar, read [the Unicode Myanmar FAQ](http://www.unicode.org/faq/myanmar.html).
