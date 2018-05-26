@@ -7,7 +7,7 @@ matrix:
         - oraclejdk8
       before_script:
         - cd data/java
-        - mvn install
+        - mvn compile
       script:
         - cd data/java
         - mvn test
@@ -31,7 +31,7 @@ matrix:
         - oraclejdk7  # minimum supported version
       before_script:
         - cd clients/java
-        - mvn install
+        - mvn compile
       script:
         - cd clients/java
         - mvn test
