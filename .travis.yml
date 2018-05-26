@@ -12,9 +12,15 @@ matrix:
 
     # C++ Client
     - language: cpp
-      compiler:
-        - clang
-        - gcc
+      compiler: gcc
+      # Install CMake 3.0 for Hunter
+      addons:
+        apt:
+          sources:
+            - george-edison55-precise-backports
+          packages:
+            - cmake-data
+            - cmake
       before_script:
         - cd clients/cpp
         - cmake CMakeLists.txt
@@ -24,7 +30,7 @@ matrix:
 
     # Java Client
     - language: java
-      jdk: oraclejdk7  # minimum supported version
+      jdk: openjdk7  # minimum supported version
       before_script:
         - cd clients/java
       script:
