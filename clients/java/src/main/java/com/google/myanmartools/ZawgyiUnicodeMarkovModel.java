@@ -35,7 +35,7 @@ import java.util.Objects;
  * except for characters in the Myanmar script or characters in the Unicode whitespace range U+2000
  * through U+200B.
  *
- * <p>This class is tested in the google-myanmar-tools-data package because this implementation does
+ * <p>This class is tested in the myanmar-tools-training package because this implementation does
  * not include any logic for building a new instance other than from a binary data stream.
  */
 class ZawgyiUnicodeMarkovModel {

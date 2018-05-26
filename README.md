@@ -57,6 +57,7 @@ To re-train the model, first run Corpus Crawler locally.  For example:
 ```bash
 $ mkdir ~/corpuscrawler_output && cd ~/corpuscrawler_output
 $ corpuscrawler --language my --output . &
+$ corpuscrawler --language my-t-d0-zawgyi --output . &
 $ corpuscrawler --language shn --output . &
 ```
 
