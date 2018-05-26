@@ -3,11 +3,9 @@ matrix:
 
     # Training Data Project
     - language: java
-      jdk:
-        - oraclejdk8
-        - openjdk8
+      jdk: openjdk8  # minimum supported version
       before_script:
-        - cd data/java
+        - cd training
         - mvn compile
       script:
         - mvn test
@@ -18,7 +16,7 @@ matrix:
         - clang
         - gcc
       before_script:
-        - cd data/cpp
+        - cd clients/cpp
         - cmake CMakeLists.txt
       script:
         - make
@@ -26,11 +24,7 @@ matrix:
 
     # Java Client
     - language: java
-      jdk:
-        - oraclejdk7  # minimum supported version
-        - oraclejdk8
-        - oraclejdk9
-        - openjdk8
+      jdk: oraclejdk7  # minimum supported version
       before_script:
         - cd clients/java
       script:
@@ -51,7 +45,7 @@ matrix:
     # Ruby Client
     - language: ruby
       rvm:
-        - 2.2
+        - 2.0
         - jruby
         - "2.0.0-p0"  # minimum supported version
       before_script:
