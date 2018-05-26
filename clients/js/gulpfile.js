@@ -95,14 +95,14 @@ gulp.task("build-browser-min", function () {
         .pipe(gulp.dest("build_browser"));
 });
 
-gulp.task("build-browser", ["build-browser-full", "build-browser-min"]);
+gulp.task("build-browser", gulp.parallel("build-browser-full", "build-browser-min"));
 
-gulp.task("test-node", ["build-node"], function () {
+gulp.task("test-node", gulp.series("build-node", function () {
     return gulp.src("spec/**/*_spec.js")
         .pipe(jasmine());
-});
+}));
 
-gulp.task("test-browser-full", ["build-browser-full"], function () {
+gulp.task("test-browser-full", function () {
     return gulp.src([
         "build_browser/zawgyi_detector.js",
         "resources/compatibility.tsv",
@@ -111,7 +111,7 @@ gulp.task("test-browser-full", ["build-browser-full"], function () {
         .pipe(jasmineBrowser.headless({ driver: "phantomjs", port: 8001 }));
 });
 
-gulp.task("test-browser-min", ["build-browser-min"], function () {
+gulp.task("test-browser-min", function () {
     return gulp.src([
         "build_browser/zawgyi_detector.min.js",
         "resources/compatibility.tsv",
@@ -120,11 +120,15 @@ gulp.task("test-browser-min", ["build-browser-min"], function () {
         .pipe(jasmineBrowser.headless({ driver: "phantomjs", port: 8002 }));
 });
 
-gulp.task("test-browser", ["test-browser-full", "test-browser-min"]);
+gulp.task("test-browser", gulp.series(
+    "build-browser",
+    "test-browser-full",
+    "test-browser-min"
+));
 
 gulp.task("clean", function () {
     return gulp.src("build").pipe(clean());
 });
 
-gulp.task("test", ["test-node", "test-browser"]);
-gulp.task("default", ["build-node", "build-browser"]);
+gulp.task("default", gulp.parallel("build-node", "build-browser"));
+gulp.task("test", gulp.series("test-node", "test-browser"));
