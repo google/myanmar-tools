@@ -13,6 +13,11 @@
 # limitations under the License.
 
 
+# All of the following must be installed on your system. Example commands:
+# $ sudo gem install bundle rake
+# $ sudo apt install cmake make maven nodejs
+
+BUNDLE=bundle
 CMAKE=cmake
 MAKE=make
 MVN=mvn
@@ -55,7 +60,10 @@ client-cpp: $(wildcard clients/cpp/**/*)
 client-js: $(wildcard clients/js/**/*)
 	cd clients/js && $(NPM) install
 
-test: clients client-cpp client-js
+client-ruby: $(wildcard clients/ruby/**/*)
+	cd clients/ruby && $(BUNDLE) install --path vendor/bundle
+
+test: clients client-cpp client-js client-ruby
 	cd clients/cpp && $(MAKE) test
 	cd clients/java && $(MVN) test
 	cd clients/js && $(NPM) test

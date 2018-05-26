@@ -6,5 +6,6 @@
 /pkg/
 /spec/reports/
 /tmp/
+/vendor/
 *.gem
 *.lock
