@@ -21,9 +21,6 @@ matrix:
           packages:
             - cmake-data
             - cmake
-      # Give Hunter a clean root directory (the default gave errors on Travis)
-      env:
-        - HUNTER_ROOT=/tmp/hunter_myanmar_tools
       before_script:
         - cd clients/cpp
         - cmake CMakeLists.txt

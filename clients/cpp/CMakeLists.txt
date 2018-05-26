@@ -21,9 +21,10 @@ file(
         EXPECTED_HASH SHA1=b07c64067aebe94ba07d375c74b1bd1d7a696c67
 )
 include("CMakeFiles/HunterGate.cmake")
+set(HUNTER_TLS_VERIFY ON)
 HunterGate(
-        URL "https://github.com/ruslo/hunter/archive/v0.19.87.tar.gz"
-        SHA1 "1b0041a06357d2c9f1f1a7e93ff3132c36411719"
+        URL "https://github.com/ruslo/hunter/archive/v0.21.19.tar.gz"
+        SHA1 "5ead1e069b437930d0de8a21824b20fb52b37b50"
 )
 
 project(myanmar-tools)
