@@ -32,11 +32,11 @@ zawgyiUnicodeModel.dat: training/target
 	$(MVN) -f training/pom.xml -q process-resources
 
 compatibility.tsv: zawgyiUnicodeModel.dat training/target
-	TMP=`mktemp`; $(MVN) -f training/pom.xml -q -e exec:java -Dexec.mainClass=com.google.i18n.myanmar.GenerateCompatibilityTSV > $$TMP; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP training/src/main/resources/compatibility.tsv; exit 0; fi
+	TMP=`mktemp`; $(MVN) -f training/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.GenerateCompatibilityTSV > $$TMP; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP training/src/main/resources/compatibility.tsv; exit 0; fi
 	$(MVN) -f training/pom.xml -q process-resources
 
 testData.tsv: training/target
-	TMP=`mktemp`; $(MVN) -f training/pom.xml -q -e exec:java -Dexec.mainClass=com.google.i18n.myanmar.GenerateTestDataTSV -Dexec.args="'$(CORPUS)'" > $$TMP; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP training/src/test/resources/testData.tsv; exit 0; fi
+	TMP=`mktemp`; $(MVN) -f training/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.GenerateTestDataTSV -Dexec.args="'$(CORPUS)'" > $$TMP; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP training/src/test/resources/testData.tsv; exit 0; fi
 	$(MVN) -f training/pom.xml -q process-resources
 
 copy-resources:
