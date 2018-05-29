@@ -6,3 +6,6 @@ my.txt
 my-t-d0-zawgyi.txt
 shn.txt
 samples/ruby/Gemfile.lock
+**.idea/**
+clients/php/vendor
+clients/php/composer.lock
