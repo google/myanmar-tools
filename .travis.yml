@@ -65,8 +65,6 @@ matrix:
     - language: php
       php:
         - 7.0
-        - 7.1
-        - 7.2
       before_script:
         - cd clients/php
         - composer install
