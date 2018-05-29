@@ -61,7 +61,7 @@ matrix:
       script:
         - rake test
 
-    # Ruby Client
+    # PHP Client
     - language: php
       php:
         - 7.0
