@@ -8,5 +8,6 @@ shn.txt
 samples/ruby/Gemfile.lock
 **.idea/**
 .idea/workspace.xml
+.idea/php.xml
 clients/php/vendor
 clients/php/composer.lock

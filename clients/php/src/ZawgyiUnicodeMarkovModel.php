@@ -151,7 +151,6 @@ class ZawgyiUnicodeMarkovModel
     {
         if ($verbose) {
             printf("Running detector on string: %s\n", $input);
-            echo "<br />";
         }
 
         // Start at the base state
@@ -179,7 +178,6 @@ class ZawgyiUnicodeMarkovModel
                         printf("!");
                     }
                     print("\n");
-                    echo "<br />";
                 }
                 $totalDelta     += $delta;
                 $seenTransition = true;
@@ -192,7 +190,6 @@ class ZawgyiUnicodeMarkovModel
 
         if ($verbose) {
             printf("Final: delta=%.4f\n", $totalDelta);
-            echo "<br />";
         }
 
         // Special case: if there is no signal, return -Infinity,
