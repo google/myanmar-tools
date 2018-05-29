@@ -6,7 +6,7 @@ This documentation is for PHP specific usage of *Myanmar Tools*. For general doc
 
 Prerequisites: PHP >=7.0 and composer >= 1.0
 
-Add the dependency to your project:
+Add the dependency to your project: (Pending)
 
 ```bash
 $ composer install myanmar-tools
