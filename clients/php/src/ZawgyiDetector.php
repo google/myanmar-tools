@@ -10,15 +10,12 @@ namespace Googlei18n\MyanmarTools;
 
 use Exception;
 
-// TODO Custom Exception with Symphony
-
 final class ZawgyiDetector
 {
     private $model = 0;
 
     public function __construct()
     {
-        // TODO IOException
         try {
             $fileName = './resources/zawgyiUnicodeModel.dat';
             // file open with read permission with binary format
@@ -44,7 +41,6 @@ final class ZawgyiDetector
      *
      * <p>If the string does not contain any Myanmar range code points, -Infinity is returned.
      *
-     *     contains no Myanmar range code points.
      * @param string $input The string on which to run detection.
      * @param bool $verbose If true, print debugging information to standard output.
      * @return float The probability that the string is Zawgyi (between 0 and 1), or -Infinity if the string
