@@ -7,5 +7,6 @@ my-t-d0-zawgyi.txt
 shn.txt
 samples/ruby/Gemfile.lock
 **.idea/**
+.idea/workspace.xml
 clients/php/vendor
 clients/php/composer.lock
