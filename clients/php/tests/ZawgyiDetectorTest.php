@@ -17,6 +17,9 @@ class ZawgyiDetectorTest extends TestCase
 
     public function setUp()
     {
+        // set multibyte encoding.
+        mb_internal_encoding('utf-8');
+
         $this->detector = new ZawgyiDetector();
     }
 
