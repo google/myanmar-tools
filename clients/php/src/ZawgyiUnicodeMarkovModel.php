@@ -216,12 +216,4 @@ class ZawgyiUnicodeMarkovModel
         $u32 = mb_convert_encoding($c, "UTF-32BE");
         return unpack("N", $u32)[1];
     }
-
-    # Determine the number of char values needed to represent the specified character (Unicode code point)
-    # if the code point is equal to or greater than 0x10000, then the method returns 2.
-    # otherwise, the method returns 1.
-    public static function charCount($codePoint)
-    {
-        return $codePoint >= 0x10000 ? 2 : 1;
-    }
 }
