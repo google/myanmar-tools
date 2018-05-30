@@ -75,7 +75,7 @@ class ZawgyiUnicodeMarkovModel
     public function __construct($stream)
     {
         // Check magic number and serial version number
-        $binaryTag = bin2hex(fread($stream, 8));
+        $binaryTag = unpack("H*", fread($stream, 8))[1];
 
         if ($binaryTag !== self::BINARY_TAG) {
             throw new Exception(
@@ -83,7 +83,8 @@ class ZawgyiUnicodeMarkovModel
                     "Unexpected magic number; expected %016X but got %016X", self::BINARY_TAG, $binaryTag));
         }
 
-        $binaryVersion = (int)bin2hex(fread($stream, 4));
+        $binaryVersion = (int) unpack("H*", fread($stream, 4))[1];
+
         if ($binaryVersion !== self::BINARY_VERSION) {
             throw new Exception(
                 sprintf(

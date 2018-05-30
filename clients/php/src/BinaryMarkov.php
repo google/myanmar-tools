@@ -72,7 +72,7 @@ class BinaryMarkov
             $next     = -1;
             for ($i2 = 0; $i2 < $size; $i2++) {
                 if ($entries > 0 && $next < $i2) {
-                    $next = hexdec(bin2hex(fread($stream, 2)));
+                    $next = unpack("n*", fread($stream, 2))[1];
                     $entries--;
                 }
 
