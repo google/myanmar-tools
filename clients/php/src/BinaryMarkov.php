@@ -89,14 +89,6 @@ class BinaryMarkov
         $this->logProbabilityDifferences = $logProbabilityDifferences;
     }
 
-    // Deprecated
-    public static function hex2Float($strHex) {
-        $hex = sscanf($strHex, "%02x%02x%02x%02x");
-        $hex = array_reverse($hex);
-        $bin = implode('', array_map('chr', $hex));
-        $array = unpack("gnum", $bin);
-        return $array['num'];
-    }
     /**
      * Gets the difference in log probabilities between chain A and chain B. This behaves as if you
      * had two Markov chains and called <code>
