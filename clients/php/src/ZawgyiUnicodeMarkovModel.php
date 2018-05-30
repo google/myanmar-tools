@@ -92,8 +92,11 @@ class ZawgyiUnicodeMarkovModel
                     self::BINARY_VERSION, $binaryVersion));
         }
 
-        // set multibyte encoding.
-        mb_internal_encoding('utf-8');
+        // check for utf-8 encoding.
+        if (mb_internal_encoding() != "UTF-8") {
+            $message = sprintf("Encoding must be UTF-8; got %s. Please call mb_internal_encoding('UTF-8')", mb_internal_encoding());
+            throw new Exception($message);
+        }
 
         $this->classifier = new BinaryMarkov($stream);
     }
