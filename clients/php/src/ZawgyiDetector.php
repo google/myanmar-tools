@@ -30,7 +30,7 @@ final class ZawgyiDetector
             fclose($inStream);
 
         } catch (Exception $exception) {
-            throw new Exception("Could not load Markov model from resource file");
+            throw new Exception("Could not load Markov model from resource file", 0, $exception);
         }
     }
 
