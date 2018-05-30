@@ -187,7 +187,7 @@ class ZawgyiUnicodeMarkovModel
                 $seenTransition = true;
             }
 
-            $offset    += self::charCount($cp);
+            $offset    += 1;
             $prevCp    = $cp;
             $prevState = $currState;
         }
@@ -213,16 +213,8 @@ class ZawgyiUnicodeMarkovModel
         if (empty($c))
             return;
 
-        $b0 = ord($c[0]);
-        if ($b0 < 0x80) {
-            return $b0;
-        }
-        $b1 = ord($c[1]);
-        if ($b0 < 0xE0) {
-            return (($b0 & 0x1F) << 6) + ($b1 & 0x3F);
-        }
-
-        return (($b0 & 0x0F) << 12) + (($b1 & 0x3F) << 6) + (ord($c[2]) & 0x3F);
+        $u32 = mb_convert_encoding($c, "UTF-32BE");
+        return unpack("N", $u32)[1];
     }
 
     # Determine the number of char values needed to represent the specified character (Unicode code point)
