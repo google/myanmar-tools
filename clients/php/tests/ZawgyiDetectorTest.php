@@ -99,10 +99,7 @@ class ZawgyiDetectorTest extends TestCase
             while (($data = fgetcsv($handle, 0, "\t")) !== FALSE) {
                 $expected = $data[0] === "-Infinity" ? INF : (double) $data[0];
                 $actual = $this->detector->getZawgyiProbability($data[1]);
-                // Since php natural logarithmic calculation (exp()) is a little bit far from exact value
-                // we have to put very very small delta point
-                $delta = 0.00000001;
-                $this->assertEquals($expected, $actual, implode(" expected from ", $data), $delta);
+                $this->assertEquals($expected, $actual, implode(" expected from ", $data));
             }
         }
 
