@@ -48,6 +48,18 @@ matrix:
       script:
         - npm run test
 
+    # PHP Client
+    - language: php
+      php:
+        - 7.0
+        - 7.1
+        - 7.2
+      before_script:
+        - cd clients/php
+        - composer install
+      script:
+        - ./vendor/bin/phpunit
+
     # Ruby Client
     - language: ruby
       rvm:
@@ -60,15 +72,3 @@ matrix:
         - bundle install
       script:
         - rake test
-
-    # PHP Client
-    - language: php
-      php:
-        - 7.0
-        - 7.1
-        - 7.2
-      before_script:
-        - cd clients/php
-        - composer install
-      script:
-        - ./vendor/bin/phpunit
