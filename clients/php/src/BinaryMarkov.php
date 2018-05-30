@@ -68,7 +68,7 @@ class BinaryMarkov
 
         for ($i1 = 0; $i1 < $size; $i1++) {
             $entries  = unpack('n*', fread($stream, 2))[1];
-            $fallback = ($entries == 0) ? 0.0 : round(unpack("Gnum", fread($stream, 4))['num'], 8);
+            $fallback = ($entries == 0) ? 0.0 : unpack("G*", fread($stream, 4))[1];
             $next     = -1;
             for ($i2 = 0; $i2 < $size; $i2++) {
                 if ($entries > 0 && $next < $i2) {
@@ -78,7 +78,7 @@ class BinaryMarkov
 
                 if ($next == $i2) {
                     $readData = fread($stream, 4);
-                    $logProbabilityDifferences[$i1][$i2] = round(unpack("Gnum", $readData)['num'], 8);
+                    $logProbabilityDifferences[$i1][$i2] = unpack("G*", $readData)[1];
                 } else {
                     $logProbabilityDifferences[$i1][$i2] = $fallback;
                 }
