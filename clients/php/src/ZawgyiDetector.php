@@ -17,7 +17,7 @@ final class ZawgyiDetector
     public function __construct()
     {
         try {
-            $fileName = './resources/zawgyiUnicodeModel.dat';
+            $fileName = __DIR__ . '/../resources/zawgyiUnicodeModel.dat';
             // file open with read permission with binary format
             $inStream = fopen($fileName, "rb") or die("Unable to open file!");
 
