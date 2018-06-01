@@ -8,11 +8,17 @@
   <name>myanmar-tools-genconvert</name>
   <url>http://maven.apache.org</url>
   <properties>
-    <exec.mainClass>com.google.myanmartools.GenerateZawgyiUnicodeModelDAT</exec.mainClass>
+    <exec.mainClass>com.google.myanmartools.CompileTranslitToJavascript</exec.mainClass>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/com.ibm.icu/icu4j -->
+    <dependency>
+      <groupId>com.ibm.icu</groupId>
+      <artifactId>icu4j</artifactId>
+      <version>61.1</version>
+    </dependency>
     <dependency>
       <groupId>com.google.myanmartools</groupId>
       <artifactId>myanmar-tools</artifactId>

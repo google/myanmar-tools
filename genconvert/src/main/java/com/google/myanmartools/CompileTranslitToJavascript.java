@@ -1,8 +1,5 @@
 package com.google.myanmartools;
 
-import com.google.common.flags.Flags;
-import com.google.common.flags.InvalidFlagValueException;
-
 import com.ibm.icu.text.Transliterator;
 
 import java.io.BufferedWriter;
@@ -300,8 +297,7 @@ public final class CompileTranslitToJavascript {
   }
 
 
-  public static void main(String[] args) throws IOException, InvalidFlagValueException {
-    args = Flags.parseAndReturnLeftovers(args);
+  public static void main(String[] args) throws IOException {
     if (args.length <= 0) {
       // Require an input file.
       System.out.println(
