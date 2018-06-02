@@ -1,0 +1,31 @@
+# Transliteration to convert Zawgyi text to a more consistent version,
+# removing some of the variation in code point order and positioning of
+# subscripted consonants and some diacritics.
+#
+# Possible use: use the conversion rules on Zawgyi to prepare it for comparison
+# with other Zawygi text. Note that it's not perfect, but can help with Zawgyi
+# text processing.
+
+\u1025 \u102e > \u1026 ;
+\u102f ([\u102d\u1036]) > $1 \u102f ;
+\u1039 ([\u1037\u1094\u1095]) > $1 \u1039 ;
+\u103c ([\u102e\u1032]) > $1 \u103c ;
+\u1033 \u102d > \u102d \u1033 ;
+\u103d \u102d > \u102d \u103d ;
+\u1089 > \u103d \u1034 ;
+
+# Kinzi and others
+\u1064 \u103a > \u103a \u1064 ;
+\u1067 > \u1066 ;
+\u1072 > \u1071 ;
+\u1074 > \u1073 ;
+\u1093 > \u107b ;
+
+# Phase 1. Handle duplicate codes.
+::Null;
+\u102f+ > \u102f ;
+\u103b+ > \u103b ;
+\u1039+ > \u1039 ;
+
+ # Phase 2. Visually similar results.
+[\u1037\u1094\u1095]+ > \u1037 ;

@@ -18,4 +18,6 @@ ZNorm.js takes Zawgyi-encoded text and produces a version of Zawgyi that is more
 
 ## Why these converters?
 
-Conversion of Zawgyi data to Unicode is supported by the ICU Transliterator class in C++ and Java, using CLDR transform rules. However, there is no Javascript implementation of the transliterator, and the full transliterator is not needed for thes Burmese transformations.
+Conversion of Zawgyi data to Unicode is supported by the ICU Transliterator class in C++ and Java, using CLDR transform rules. However, there is no Javascript implementation of the transliterator, and the full transliterator is not needed for these Burmese transformations.
+
+The use of these allows web developers to support Unicode and Zawgyi text, convering as needed within the web browser environment.
