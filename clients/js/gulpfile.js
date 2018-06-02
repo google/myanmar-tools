@@ -49,6 +49,18 @@ function typescriptToJavascript() {
             "<BASE64_DATA_PLACEHOLDER>",
             fs.readFileSync("resources/zawgyiUnicodeModel.dat", "base64")
         ))
+        .pipe(replace(
+            "<Z2U_CONVERSION_RULES_PLACEHOLDER>",
+            fs.readFileSync("resources/Z2U.js", "utf8")
+        ))
+        .pipe(replace(
+            "<U2Z_CONVERSION_RULES_PLACEHOLDER>",
+            fs.readFileSync("resources/U2Z.js", "utf8")
+        ))
+        .pipe(replace(
+            "<ZNORM_CONVERSION_RULES_PLACEHOLDER>",
+            fs.readFileSync("resources/ZNorm.js", "utf8")
+        ))
         .pipe(tsProject())
         .js;
 }
@@ -104,6 +116,7 @@ gulp.task("test-node", gulp.series("build-node", function () {
 
 gulp.task("test-browser-full", function () {
     return gulp.src([
+        "build_browser/zawgyi_converter.js",
         "build_browser/zawgyi_detector.js",
         "resources/compatibility.tsv",
         "spec/**/*_spec.js"])
@@ -113,6 +126,7 @@ gulp.task("test-browser-full", function () {
 
 gulp.task("test-browser-min", function () {
     return gulp.src([
+        "build_browser/zawgyi_converter.min.js",
         "build_browser/zawgyi_detector.min.js",
         "resources/compatibility.tsv",
         "spec/**/*_spec.js"])
