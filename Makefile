@@ -17,12 +17,14 @@
 # $ sudo gem install bundle rake
 # $ sudo apt install cmake make maven nodejs
 
+COMPOSER=composer
 BUNDLE=bundle
 CMAKE=cmake
 MAKE=make
 MVN=mvn
 NPM=npm
 RAKE=rake
+PHPUNIT=./vendor/bin/phpunit --configuration clients/php/phpunit.xml
 
 training/target: $(wildcard training/src/**/*)
 	$(MVN) -f training/pom.xml -q compile
@@ -44,10 +46,12 @@ copy-resources:
 	cp training/src/main/resources/zawgyiUnicodeModel.dat clients/cpp/resources
 	cp training/src/main/resources/zawgyiUnicodeModel.dat clients/js/resources
 	cp training/src/main/resources/zawgyiUnicodeModel.dat clients/ruby/lib/myanmar-tools/resources
+	cp training/src/main/resources/zawgyiUnicodeModel.dat clients/php/resources
 	cp training/src/main/resources/compatibility.tsv clients/java/src/test/resources
 	cp training/src/main/resources/compatibility.tsv clients/cpp/resources
 	cp training/src/main/resources/compatibility.tsv clients/js/resources
 	cp training/src/main/resources/compatibility.tsv clients/ruby/lib/myanmar-tools/resources
+	cp training/src/main/resources/compatibility.tsv clients/php/resources
 
 train: zawgyiUnicodeModel.dat compatibility.tsv testData.tsv copy-resources
 
@@ -63,8 +67,12 @@ client-js: $(wildcard clients/js/**/*)
 client-ruby: $(wildcard clients/ruby/**/*)
 	cd clients/ruby && $(BUNDLE) install --path vendor/bundle
 
-test: clients client-cpp client-js client-ruby
+client-php: $(wildcard clients/php/**/*)
+	cd clients/php && $(COMPOSER) install
+
+test: clients client-cpp client-js client-ruby client-php
 	cd clients/cpp && $(MAKE) test
 	cd clients/java && $(MVN) test
 	cd clients/js && $(NPM) test
 	cd clients/ruby && $(RAKE) test
+	$(PHPUNIT) test
