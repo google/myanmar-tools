@@ -6,7 +6,8 @@
         "detector",
         "zawgyi",
         "unicode",
-        "myanmar-font"
+        "myanmar-font",
+        "myanmar-tools"
     ],
     "homepage": "http://stevenay.wordpress.com",
     "authors": [
