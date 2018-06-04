@@ -48,6 +48,18 @@ matrix:
       script:
         - npm run test
 
+    # PHP Client
+    - language: php
+      php:
+        - 7.0
+        - 7.1
+        - 7.2
+      before_script:
+#        - cd clients/php # this line has to remove
+        - composer install
+      script:
+        - ./vendor/bin/phpunit --configuration clients/php/phpunit.xml
+
     # Ruby Client
     - language: ruby
       rvm:

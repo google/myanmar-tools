@@ -1,0 +1,31 @@
+{
+    "name": "googlei18n/myanmar-tools",
+    "description": "Zawgyi and Unicode Font Detector using Markov Model (Machine Learning)",
+    "license": "MIT",
+    "keywords": [
+        "detector",
+        "zawgyi",
+        "unicode",
+        "myanmar-font",
+        "myanmar-tools"
+    ],
+    "homepage": "http://stevenay.wordpress.com",
+    "authors": [
+        {
+            "name": "SteveNay",
+            "email": "stevenaylinaung@gmail.com"
+        }
+    ],
+    "type": "library",
+    "require": {
+        "php": ">=7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Googlei18n\\MyanmarTools\\": "clients/php/src"
+        }
+    }
+}
