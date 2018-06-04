@@ -24,7 +24,7 @@ MAKE=make
 MVN=mvn
 NPM=npm
 RAKE=rake
-PHPUNIT=./vendor/bin/phpunit
+PHPUNIT=./vendor/bin/phpunit --configuration clients/php/phpunit.xml
 
 training/target: $(wildcard training/src/**/*)
 	$(MVN) -f training/pom.xml -q compile
