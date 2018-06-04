@@ -55,7 +55,6 @@ matrix:
         - 7.1
         - 7.2
       before_script:
-#        - cd clients/php # this line has to remove
         - composer install
       script:
         - ./vendor/bin/phpunit --configuration clients/php/phpunit.xml

@@ -95,7 +95,7 @@ class ZawgyiDetectorTest extends TestCase
     /** @tests */
     public function compatibility()
     {
-        $fileName = __DIR__ . '/../resources/compatibility.tsv';
+        $fileName = join(DIRECTORY_SEPARATOR, [__DIR__, "..", "resources", "compatibility.tsv"]);
         $row = 1;
         if (($handle = fopen($fileName, "r")) !== FALSE) {
             // omitting the length parameter by setting zero
