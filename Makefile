@@ -75,4 +75,4 @@ test: clients client-cpp client-js client-ruby client-php
 	cd clients/java && $(MVN) test
 	cd clients/js && $(NPM) test
 	cd clients/ruby && $(RAKE) test
-	cd clients/php && $(PHPUNIT) test
+	$(PHPUNIT) test
