@@ -24,7 +24,7 @@ MAKE=make
 MVN=mvn
 NPM=npm
 RAKE=rake
-PHPUNIT=./vendor/bin/phpunit --configuration clients/php/phpunit.xml
+PHPUNIT=./vendor/bin/phpunit
 
 training/target: $(wildcard training/src/**/*)
 	$(MVN) -f training/pom.xml -q compile
@@ -68,11 +68,11 @@ client-ruby: $(wildcard clients/ruby/**/*)
 	cd clients/ruby && $(BUNDLE) install --path vendor/bundle
 
 client-php: $(wildcard clients/php/**/*)
-	cd clients/php && $(COMPOSER) install
+	$(COMPOSER) install
 
 test: clients client-cpp client-js client-ruby client-php
 	cd clients/cpp && $(MAKE) test
 	cd clients/java && $(MVN) test
 	cd clients/js && $(NPM) test
 	cd clients/ruby && $(RAKE) test
-	$(PHPUNIT) test
+	$(PHPUNIT) --configuration clients/php/phpunit.xml
