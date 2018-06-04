@@ -8,3 +8,5 @@ shn.txt
 samples/ruby/Gemfile.lock
 .idea/
 vendor/
+# checking in composer.lock causes failures due to incompatible PHP versions
+composer.lock
