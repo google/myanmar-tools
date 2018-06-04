@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Googlei18n\\MyanmarTools\\": "src/"
+            "Googlei18n\\MyanmarTools\\": "clients/php/src"
         }
     }
 }

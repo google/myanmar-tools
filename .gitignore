@@ -7,3 +7,5 @@ my-t-d0-zawgyi.txt
 shn.txt
 samples/ruby/Gemfile.lock
 .idea/
+vendor/
+composer.lock
