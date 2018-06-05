@@ -1,0 +1,19 @@
+{
+    "name": "googlei18n/myanmar-tools-sample",
+    "description": "Sample for how to use myanmar-tools detector",
+    "license": "MIT",
+    "keywords": [
+        "sample"
+    ],
+    "homepage": "https://developers.google.com/international",
+    "authors": [
+        {
+            "name": "googlei18n",
+            "email": "sample@gmail.com"
+        }
+    ],
+    "type": "project",
+    "require": {
+        "googlei18n/myanmar-tools": ">=0.1.0"
+    }
+}
