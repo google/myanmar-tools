@@ -6,13 +6,13 @@ This documentation is for PHP specific usage of *Myanmar Tools*. For general doc
 
 Prerequisites: PHP >=7.0 and composer >= 1.0
 
-Add the dependency to your project: (Pending)
+Add the dependency to your project:
 
 ```bash
 $ composer install myanmar-tools
 ```
 
-To detect Zawgyi, create an instance of ZawgyiDetector, and call `getZawgyiProbability` with your string. Generally, if the score is greater than or equal to 0.95, you can assume the string is Zawgyi. If the score is lower or equal to 0.05, you can assume it is Unicode.
+To detect Zawgyi, create an instance of ZawgyiDetector, and call `getZawgyiProbability` with your string. Generally, if the score is greater than or equal to 0.95, you can generally assume the string is Zawgyi. If the score is lower or equal to 0.05, you can assume it is Unicode.
 
 ```
 $autoload = __DIR__.'/vendor/autoload.php';
@@ -47,7 +47,7 @@ Rabbit::zg2uni("သီဟိုဠ္မွ ဉာဏ္ႀကီးရွင္
 // output is now "သီဟိုဠ်မှ ဉာဏ်ကြီးရှင်သည် အာယုဝဍ်ဎနဆေးညွှန်းစာကို ဇလွန်ဈေးဘေးဗာဒံပင်ထက် အဓိဋ္ဌာန်လျက် ဂဃနဏဖတ်ခဲ့သည်။"
 ```
 
-For a complete working example, see [samples/php/demo.rb](../../samples/php/demo.php).
+For a complete working example, see [samples/php/Demo.php](../../samples/php/Demo.php).
 
 ## Contributing
 
@@ -55,7 +55,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/google
 
 ## License
 
-The gem is available as open source under the terms of the [Apache-2.0 License](http://www.apache.org/licenses/LICENSE-2.0).
+The package is available as open source under the terms of the [Apache-2.0 License](http://www.apache.org/licenses/LICENSE-2.0).
 
 ## Code of Conduct
 
