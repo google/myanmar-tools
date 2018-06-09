@@ -7,7 +7,7 @@ This project includes tools for processing font encodings used in Myanmar, curre
 Features:
 
 - Detect whether a string is Zawgyi or Unicode.
-- Support for C++, Java, JavaScript (both Node.js and browser) and Ruby.
+- Support for C++, Java, JavaScript (both Node.js and browser), PHP, and Ruby.
 
 Conversion from Zawgyi to Unicode is provided with the help of the CLDR Zawgyi conversion rules (see "Zawgyi-to-Unicode Conversion" below).
 
@@ -26,6 +26,7 @@ See language-specific documentation:
 - [C++](clients/cpp/README.md)
 - [Java](clients/java/README.md)
 - [JavaScript](clients/js/README.md)
+- [PHP](clients/php/README.md)
 - [Ruby](clients/ruby/README.md)
 
 Depending on your programming language, a typical use case should look something like this:
