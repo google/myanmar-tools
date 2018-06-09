@@ -9,7 +9,7 @@ Prerequisites: PHP >=7.0 and composer >= 1.0
 Add the dependency to your project:
 
 ```bash
-$ composer install myanmar-tools
+$ composer require googlei18n/myanmar-tools
 ```
 
 To detect Zawgyi, create an instance of ZawgyiDetector, and call `getZawgyiProbability` with your string. Generally, if the score is greater than or equal to 0.95, you can generally assume the string is Zawgyi. If the score is lower or equal to 0.05, you can assume it is Unicode.
