@@ -124,7 +124,7 @@ $ukinzi ($consonant) > $1 \u1064 ;
 \u100B\u1039\u100B > \u1097 ;
 \u104E\u1004\u103A\u1038 > \u104E ;
 
-#### PHASE 1: Everything is not in Zawgyi code points. REORDERING RULES.
+#### PHASE 1: Everything is now in Zawgyi code points. REORDERING RULES.
 ::Null;
 
 # E Vowel + medial ra. Move the e vowel

@@ -547,14 +547,14 @@ describe("ZawgyiConverter Z2U", function () {
 
 describe("ZawgyiConverter U2Z", function () {
     // TODO: Enable this test case once fixed. (change "xit" to "it")
-    xit("should pass the data-driven test", function () {
+    it("should pass the data-driven test", function () {
         const converter = new ZawgyiConverter();
         for (var i = 0; i < zawygi_unicode_convert_data.length; i++) {
             var test_case = zawygi_unicode_convert_data[i];
             var converted = converter.unicodeToZawgyi(test_case.u);
             var expected = converter.normalizeZawgyi(test_case.z);
             var actual = converter.normalizeZawgyi(converted);
-            expect(actual).toEqual(expected);
+            expect(i+" "+actual).toEqual(i+" "+expected);
         }
     });
 });
