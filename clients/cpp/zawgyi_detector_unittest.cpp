@@ -15,12 +15,17 @@
 #include <cmath>
 #include <cstring>
 #include <fstream>
+#include <iostream>
 #include <string>
 
 #include <gtest/gtest.h>
 #include "public/myanmartools.h"
 
-using namespace google_myanmar_tools;
+using google_myanmar_tools::ZawgyiDetector;
+
+namespace {
+
+const char* gCompatibilityTsvPath = "";
 
 class ZawgyiDetectorTest : public testing::Test {
  protected:
@@ -41,7 +46,7 @@ TEST_F (ZawgyiDetectorTest, strongTest) {
 TEST_F (ZawgyiDetectorTest, compatibilityTest) {
   // Compare results with those obtained from Java version of the detector.
   // They should be the same, within float tolerances.
-  std::ifstream infile("resources/compatibility.tsv");
+  std::ifstream infile(gCompatibilityTsvPath);
 
   if (!infile.is_open()) {
     FAIL() << "Could not open compatibility.tsv";
@@ -59,4 +64,18 @@ TEST_F (ZawgyiDetectorTest, compatibilityTest) {
     EXPECT_DOUBLE_EQ(expected_probability, computed_probability)
               << "Test string: " << test_text;
   }
+}
+
+} // namespace
+
+
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    if (argc != 2) {
+      std::cerr << "Expected 1 argument: the path to compatibility.tsv"
+          << std::endl;
+      return 1;
+    }
+    gCompatibilityTsvPath = argv[1];
+    return RUN_ALL_TESTS();
 }
