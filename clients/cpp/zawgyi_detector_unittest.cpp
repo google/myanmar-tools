@@ -43,6 +43,10 @@ TEST_F (ZawgyiDetectorTest, compatibilityTest) {
   // They should be the same, within float tolerances.
   std::ifstream infile("resources/compatibility.tsv");
 
+  if (!infile.is_open()) {
+    FAIL() << "Could not open compatibility.tsv";
+  }
+
   // Reads test file lines with numeric probability from Java for the string.
   // Compares each for identical values.
   std::string input_line;
