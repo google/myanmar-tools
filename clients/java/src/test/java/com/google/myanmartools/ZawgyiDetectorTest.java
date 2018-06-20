@@ -118,7 +118,7 @@ public class ZawgyiDetectorTest {
 
   @Test
   public void testCompatibility() throws IOException {
-    InputStream inputStream = ZawgyiDetector.class.getResourceAsStream("/compatibility.tsv");
+    InputStream inputStream = ZawgyiDetector.class.getResourceAsStream("/com/google/myanmartools/compatibility.tsv");
     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
     String line = null;
     while ((line = reader.readLine()) != null) {
