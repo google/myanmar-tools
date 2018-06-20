@@ -17,9 +17,14 @@
 #include <iostream>
 #include <iterator>
 
-int main() {
+int main(int argc, char* argv[]) {
+  if (argc != 2) {
+    std::cerr << "Expected 1 argument, the path to zawgyiUnicodeModel.dat" << std::endl;
+    return 1;
+  }
+
   std::fstream fsIn;
-  fsIn.open("resources/zawgyiUnicodeModel.dat",
+  fsIn.open(argv[1],
             std::fstream::in | std::fstream::binary);
 
   std::fstream fsOut;
