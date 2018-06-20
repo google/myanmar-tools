@@ -18,8 +18,10 @@
 #include <iterator>
 
 int main(int argc, char* argv[]) {
-  if (argc != 2) {
-    std::cerr << "Expected 1 argument, the path to zawgyiUnicodeModel.dat" << std::endl;
+  if (argc != 3) {
+    std::cerr << "Expected 2 arguments, the paths to the input "
+      << "(zawgyiUnicodeModel.dat) and output (zawgyi_model_data.h)"
+      << std::endl;
     return 1;
   }
 
@@ -28,7 +30,7 @@ int main(int argc, char* argv[]) {
             std::fstream::in | std::fstream::binary);
 
   std::fstream fsOut;
-  fsOut.open("zawgyi_model_data.h", std::fstream::out | std::fstream::trunc);
+  fsOut.open(argv[2], std::fstream::out | std::fstream::trunc);
 
   // Header
   fsOut << "#include <cstdint>\nnamespace google_myanmar_tools {\nconst uint8_t kModelData[] = {";
