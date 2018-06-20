@@ -18,7 +18,6 @@
 #include <string>
 
 #include <gtest/gtest.h>
-#include <glog/logging.h>
 #include "public/myanmartools.h"
 
 using namespace google_myanmar_tools;
@@ -53,9 +52,6 @@ TEST_F (ZawgyiDetectorTest, compatibilityTest) {
     const char* test_text = input_line.data() + tab_index + 1;
 
     double computed_probability = detector_.GetZawgyiProbability(test_text);
-    VLOG(2) << "exact? " << expected_probability <<
-            " vs " << computed_probability <<
-            " diff = " << fabs(expected_probability - computed_probability);
     EXPECT_DOUBLE_EQ(expected_probability, computed_probability)
               << "Test string: " << test_text;
   }
