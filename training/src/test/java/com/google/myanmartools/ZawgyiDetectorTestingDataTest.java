@@ -49,13 +49,13 @@ public class ZawgyiDetectorTestingDataTest {
       org.junit.Assume.assumeNoException(e);
     }
 
-    URL modelResource = Resources.getResource("zawgyiUnicodeModel.dat");
+    URL modelResource = Resources.getResource("com/google/myanmartools/zawgyiUnicodeModel.dat");
     detector = new ZawgyiDetector(Resources.asByteSource(modelResource).openStream());
   }
 
   private static ImmutableList<String> loadStrings(boolean zawgyi) throws IOException {
     try (Stream<String> lines =
-        Resources.asCharSource(Resources.getResource("testData.tsv"), Charsets.UTF_8).lines()) {
+        Resources.asCharSource(Resources.getResource("com/google/myanmartools/testData.tsv"), Charsets.UTF_8).lines()) {
       return lines
           .map(line -> line.trim())
           .filter(line -> !line.isEmpty())

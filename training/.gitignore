@@ -1,2 +1,2 @@
 target/
-src/test/resources/testData.tsv
+src/test/resources/com/google/myanmartools/testData.tsv
