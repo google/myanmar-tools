@@ -30,28 +30,28 @@ training/target: $(wildcard training/src/**/*)
 	$(MVN) -f training/pom.xml -q compile
 
 zawgyiUnicodeModel.dat: training/target
-	TMP=`mktemp`; $(MVN) -f training/pom.xml -q -e exec:java -Dexec.args="'$(CORPUS)'" > $$TMP; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP training/src/main/resources/zawgyiUnicodeModel.dat; exit 0; fi
+	TMP=`mktemp`; $(MVN) -f training/pom.xml -q -e exec:java -Dexec.args="'$(CORPUS)'" > $$TMP; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat; exit 0; fi
 	$(MVN) -f training/pom.xml -q process-resources
 
 compatibility.tsv: zawgyiUnicodeModel.dat training/target
-	TMP=`mktemp`; $(MVN) -f training/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.GenerateCompatibilityTSV > $$TMP; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP training/src/main/resources/compatibility.tsv; exit 0; fi
+	TMP=`mktemp`; $(MVN) -f training/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.GenerateCompatibilityTSV > $$TMP; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP training/src/main/resources/com/google/myanmartools/compatibility.tsv; exit 0; fi
 	$(MVN) -f training/pom.xml -q process-resources
 
 testData.tsv: training/target
-	TMP=`mktemp`; $(MVN) -f training/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.GenerateTestDataTSV -Dexec.args="'$(CORPUS)'" > $$TMP; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP training/src/test/resources/testData.tsv; exit 0; fi
+	TMP=`mktemp`; $(MVN) -f training/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.GenerateTestDataTSV -Dexec.args="'$(CORPUS)'" > $$TMP; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP training/src/test/resources/com/google/myanmartools/testData.tsv; exit 0; fi
 	$(MVN) -f training/pom.xml -q process-resources
 
 copy-resources:
-	cp training/src/main/resources/zawgyiUnicodeModel.dat clients/java/src/main/resources
-	cp training/src/main/resources/zawgyiUnicodeModel.dat clients/cpp/resources
-	cp training/src/main/resources/zawgyiUnicodeModel.dat clients/js/resources
-	cp training/src/main/resources/zawgyiUnicodeModel.dat clients/ruby/lib/myanmar-tools/resources
-	cp training/src/main/resources/zawgyiUnicodeModel.dat clients/php/resources
-	cp training/src/main/resources/compatibility.tsv clients/java/src/test/resources
-	cp training/src/main/resources/compatibility.tsv clients/cpp/resources
-	cp training/src/main/resources/compatibility.tsv clients/js/resources
-	cp training/src/main/resources/compatibility.tsv clients/ruby/lib/myanmar-tools/resources
-	cp training/src/main/resources/compatibility.tsv clients/php/resources
+	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/java/src/main/resources/com/google/myanmartools
+	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/cpp/resources
+	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/js/resources
+	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/ruby/lib/myanmar-tools/resources
+	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/php/resources
+	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/java/src/test/resources/com/google/myanmartools
+	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/cpp/resources
+	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/js/resources
+	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/ruby/lib/myanmar-tools/resources
+	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/php/resources
 
 train: zawgyiUnicodeModel.dat compatibility.tsv testData.tsv copy-resources
 

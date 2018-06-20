@@ -29,7 +29,7 @@ public final class ZawgyiDetector {
   /** Loads the model from the resource and returns a ZawgyiDetector instance. */
   public ZawgyiDetector() {
     try (InputStream inStream =
-        ZawgyiDetector.class.getResourceAsStream("/zawgyiUnicodeModel.dat")) {
+        ZawgyiDetector.class.getResourceAsStream("/com/google/myanmartools/zawgyiUnicodeModel.dat")) {
       if (inStream == null) {
         throw new IOException("Model file zawgyiUnicodeModel.dat not found");
       }
