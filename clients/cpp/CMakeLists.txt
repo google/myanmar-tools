@@ -45,7 +45,7 @@ execute_process(COMMAND ${CMAKE_COMMAND} -E chdir _3rdParty tar xfz ../CMakeFile
 add_executable(build_model_h build_model_h.cpp resources/zawgyiUnicodeModel.dat)
 add_custom_command(
         OUTPUT zawgyi_model_data.h
-        COMMAND build_model_h resources/zawgyiUnicodeModel.dat
+        COMMAND build_model_h resources/zawgyiUnicodeModel.dat zawgyi_model_data.h
 )
 
 set(SOURCE_FILES zawgyi_detector.cpp public/myanmartools.h zawgyi_detector-impl.h zawgyi_model_data.h)
