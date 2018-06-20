@@ -60,7 +60,7 @@ target_link_libraries(myanmartools_test myanmartools GTest::main)
 enable_testing()
 add_test(
         NAME ZawgyiDetectorTest
-        COMMAND myanmartools_test
+        COMMAND myanmartools_test resources/compatibility.tsv
 )
 
 install(TARGETS myanmartools DESTINATION lib)
