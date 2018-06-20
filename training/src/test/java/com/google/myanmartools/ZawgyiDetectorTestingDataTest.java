@@ -26,6 +26,7 @@ import com.google.myanmartools.ZawgyiDetector;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,13 +54,17 @@ public class ZawgyiDetectorTestingDataTest {
   }
 
   private static ImmutableList<String> loadStrings(boolean zawgyi) throws IOException {
-    return Resources.asCharSource(Resources.getResource("testData.tsv"), Charsets.UTF_8)
-        .lines()
-        .map(line -> line.trim())
-        .filter(line -> !line.isEmpty())
-        .filter(line -> line.charAt(0) == (zawgyi ? 'Z' : 'U'))
-        .map(line -> line.substring(2))
-        .collect(toImmutableList());
+    try (Stream<String> lines =
+        Resources.asCharSource(Resources.getResource("testData.tsv"), Charsets.UTF_8).lines()) {
+      return lines
+          .map(line -> line.trim())
+          .filter(line -> !line.isEmpty())
+          .filter(line -> line.charAt(0) == (zawgyi ? 'Z' : 'U'))
+          .map(line -> line.substring(2))
+          .collect(toImmutableList());
+    } catch (IOException err) {
+      throw err;
+    }
   }
 
   /* TODO: This test cannot be run during testing because it requires the corpus.
