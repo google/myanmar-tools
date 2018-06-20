@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
   fsOut.open(argv[2], std::fstream::out | std::fstream::trunc);
 
   // Header
-  fsOut << "#include <cstdint>\nnamespace google_myanmar_tools {\nconst uint8_t kModelData[] = {";
+  fsOut << "#include <cstddef>\n#include <cstdint>\nnamespace google_myanmar_tools {\nconst uint8_t kModelData[] = {";
   uint64_t modelSize = 0;
 
   for (std::istreambuf_iterator<char> it(fsIn), end; it != end; it++) {

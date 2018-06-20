@@ -15,7 +15,7 @@
 #ifndef CPP_LIBRARY_H
 #define CPP_LIBRARY_H
 
-#include <cstddef>
+#include <cstdint>
 
 namespace google_myanmar_tools {
 
