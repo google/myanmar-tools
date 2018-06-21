@@ -27,9 +27,10 @@ public final class GenerateZawgyiUnicodeModelDAT {
    * model in the intermediate binary data format.
    */
   public static void main(String[] args) throws IOException {
-    if (args.length != 1) {
+    if (args.length < 1) {
       throw new RuntimeException("\n# # # # # # # #\n"
-          + "Call this binary with one argument, the path to your CorpusCrawler output directory.\n"
+          + "Call this binary with at least one argument:\n"
+          + "the path to your CorpusCrawler output directory.\n"
           + "If running from make train, provide the path in CORPUS like this:\n"
           + "$ make train CORPUS=\"/path/to/corpus/crawler/output\"\n"
           + "If running from MVN, provide the path in the argument exec.args like this:\n"
@@ -38,7 +39,12 @@ public final class GenerateZawgyiUnicodeModelDAT {
     }
     BurmeseData.DATA_DIRECTORY = args[0];
 
-    ZawgyiUnicodeMarkovModelBuilder builder = new ZawgyiUnicodeMarkovModelBuilder();
+    int ssv = 0;
+    if (args.length >= 2 && args[1].equals("1")) {
+      ssv = 1;
+    }
+
+    ZawgyiUnicodeMarkovModelBuilder builder = new ZawgyiUnicodeMarkovModelBuilder(ssv);
     List<String> unicodeData = BurmeseData.getUnicodeTrainingData();
     List<String> zawgyiData = BurmeseData.getZawgyiTrainingData();
 
