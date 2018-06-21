@@ -41,10 +41,7 @@ import java.util.Objects;
 class ZawgyiUnicodeMarkovModel {
 
   /** Magic number used to identify this object in byte streams. (Reads in ASCII as "UZMODEL") */
-  private static final long BINARY_TAG = 0x555A4D4F44454C20L;
-
-  /** Current serial format version number, used in association with the magic number. */
-  private static final int BINARY_VERSION = 1;
+  static final long BINARY_TAG = 0x555A4D4F44454C20L;
 
   // Standard Myanmar code point range before digits
   private static final int STD_CP0 = '\u1000';
@@ -72,7 +69,19 @@ class ZawgyiUnicodeMarkovModel {
   private static final short EXA_OFFSET = AFT_OFFSET + AFT_CP1 - AFT_CP0 + 1;
   private static final short EXB_OFFSET = EXA_OFFSET + EXA_CP1 - EXA_CP0 + 1;
   private static final short SPC_OFFSET = EXB_OFFSET + EXB_CP1 - EXB_CP0 + 1;
-  private static final short NUM_STATES = SPC_OFFSET + SPC_CP1 - SPC_CP0 + 1;
+  private static final short END_OFFSET = SPC_OFFSET + SPC_CP1 - SPC_CP0 + 1;
+
+  /**
+   * SSV: An ID representing which Unicode code points to include in the model:
+   *
+   * <p>SSV_STD_EXA_EXB_SPC - include Myanmar, Extended A, Extended B, and space-like
+   * <p>STD_EXA_EXB - same as above but no space-like code points
+   *
+   * <p>"SSV" originally stands for State Set Version.
+   */
+  static final int SSV_STD_EXA_EXB_SPC = 0;
+  static final int SSV_STD_EXA_EXB = 1;
+  static final int SSV_COUNT = 2;
 
   /**
    * Returns the index of the state in the Markov chain corresponding to the given code point.
@@ -84,9 +93,10 @@ class ZawgyiUnicodeMarkovModel {
    * <p>Package-private so that the builder can use this method.
    *
    * @param cp The code point to convert to a state index.
+   * @param ssv The SSV corresponding to which code points included in the model.
    * @return The index of the state in the Markov chain. 0 <= state < getSize()
    */
-  static int getIndexForCodePoint(int cp) {
+  static int getIndexForCodePoint(int cp, int ssv) {
     if (STD_CP0 <= cp && cp <= STD_CP1) {
       return cp - STD_CP0 + STD_OFFSET;
     }
@@ -99,22 +109,24 @@ class ZawgyiUnicodeMarkovModel {
     if (EXB_CP0 <= cp && cp <= EXB_CP1) {
       return cp - EXB_CP0 + EXB_OFFSET;
     }
-    if (SPC_CP0 <= cp && cp <= SPC_CP1) {
+    if (ssv == SSV_STD_EXA_EXB_SPC && SPC_CP0 <= cp && cp <= SPC_CP1) {
       return cp - SPC_CP0 + SPC_OFFSET;
     }
     return 0;
   }
 
   /** The number of states in the Markov chain. */
-  static short getSize() {
-    return NUM_STATES;
+  static short getSize(int ssv) {
+    return ssv == SSV_STD_EXA_EXB_SPC ? END_OFFSET : SPC_OFFSET;
   }
 
   final BinaryMarkov classifier;
+  final int ssv;
 
   /** Internal constructor used by ZawgyiUnicodeMarkovModelBuilder */
-  ZawgyiUnicodeMarkovModel(BinaryMarkov classifier) {
+  ZawgyiUnicodeMarkovModel(BinaryMarkov classifier, int ssv) {
     this.classifier = classifier;
+    this.ssv = ssv;
   }
 
   /**
@@ -132,11 +144,23 @@ class ZawgyiUnicodeMarkovModel {
               "Unexpected magic number; expected %016X but got %016X", BINARY_TAG, binaryTag));
     }
     int binaryVersion = dis.readInt();
-    if (binaryVersion != BINARY_VERSION) {
+    if (binaryVersion == 1) {
+      // Binary version 1 has no SSV field; SSV_STD_EXA_EXB_SPC is always used
+      ssv = SSV_STD_EXA_EXB_SPC;
+    } else if (binaryVersion == 2) {
+      // Binary version 2 adds the SSV field
+      ssv = dis.readInt();
+    } else {
       throw new IOException(
           String.format(
-              "Unexpected serial version number; expected %08X but got %08X",
-              BINARY_VERSION, binaryVersion));
+              "Unexpected serial version number; expected 1 or 2 but got %08X",
+              binaryVersion));
+    }
+    if (ssv < 0 || ssv >= SSV_COUNT) {
+      throw new IOException(
+          String.format(
+              "Unexpected value in ssv position; expected 0 or 1 but got %08X",
+              ssv));
     }
     classifier = new BinaryMarkov(stream);
   }
@@ -161,7 +185,7 @@ class ZawgyiUnicodeMarkovModel {
         currState = 0;
       } else {
         cp = input.codePointAt(offset);
-        currState = getIndexForCodePoint(cp);
+        currState = getIndexForCodePoint(cp, ssv);
       }
       // Ignore 0-to-0 transitions
       if (prevState != 0 || currState != 0) {
@@ -215,11 +239,12 @@ class ZawgyiUnicodeMarkovModel {
     if (!(other instanceof ZawgyiUnicodeMarkovModel)) {
       return false;
     }
-    return Objects.equals(classifier, ((ZawgyiUnicodeMarkovModel) other).classifier);
+    ZawgyiUnicodeMarkovModel _other = (ZawgyiUnicodeMarkovModel) other;
+    return Objects.equals(classifier, _other.classifier) && (ssv == _other.ssv);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hashCode(classifier);
+    return Objects.hashCode(classifier) ^ Objects.hashCode(ssv);
   }
 }
