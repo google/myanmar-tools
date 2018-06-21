@@ -56,9 +56,9 @@ class ZawgyiUnicodeMarkovModel {
 
  private:
   static const int64_t BINARY_TAG = 0x555A4D4F44454C20L;
-  static const int32_t VERSION = 1;
 
   BinaryMarkovClassifier* classifier_;
+  int32_t ssv_;
 
   int16_t GetIndexForCodePoint(char32_t cp) const;
 
@@ -89,6 +89,18 @@ class ZawgyiUnicodeMarkovModel {
   static const int EXB_OFFSET = EXA_OFFSET + EXA_CP1 - EXA_CP0 + 1;
   static const int SPC_OFFSET = EXB_OFFSET + EXB_CP1 - EXB_CP0 + 1;
   static const int NUM_STATES = SPC_OFFSET + SPC_CP1 - SPC_CP0 + 1;
+
+  /**
+   * SSV: An ID representing which Unicode code points to include in the model:
+   *
+   * <p>SSV_STD_EXA_EXB_SPC - include Myanmar, Extended A, Extended B, and space-like
+   * <p>STD_EXA_EXB - same as above but no space-like code points
+   *
+   * <p>"SSV" originally stands for State Set Version.
+   */
+  static const int SSV_STD_EXA_EXB_SPC = 0;
+  static const int SSV_STD_EXA_EXB = 1;
+  static const int SSV_COUNT = 2;
 };
 
 }
