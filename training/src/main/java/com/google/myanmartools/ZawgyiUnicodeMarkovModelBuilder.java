@@ -28,10 +28,7 @@ import java.io.OutputStream;
 public final class ZawgyiUnicodeMarkovModelBuilder {
 
   /** Magic number used to identify this object in byte streams. (Reads in ASCII as "UZMODEL") */
-  private static final long BINARY_TAG = 0x555A4D4F44454C20L;
-
-  /** Current serial format version number, used in association with the magic number. */
-  private static final int BINARY_VERSION = 1;
+  private static final long BINARY_TAG = ZawgyiUnicodeMarkovModel.BINARY_TAG;
 
   /** Enum used for training. Not intended to be exposed outside of this package. */
   public static enum Category {
@@ -40,9 +37,11 @@ public final class ZawgyiUnicodeMarkovModelBuilder {
   }
 
   private final BinaryMarkovBuilder classifierBuilder;
+  private final int ssv;
 
-  public ZawgyiUnicodeMarkovModelBuilder() {
-    classifierBuilder = new BinaryMarkovBuilder(getSize());
+  public ZawgyiUnicodeMarkovModelBuilder(int ssv) {
+    classifierBuilder = new BinaryMarkovBuilder(getSize(ssv));
+    this.ssv = ssv;
   }
 
   /**
@@ -60,7 +59,7 @@ public final class ZawgyiUnicodeMarkovModelBuilder {
 
     for (int offset = 0; offset < input.length(); ) {
       int codePoint = input.codePointAt(offset);
-      int currState = getIndexForCodePoint(codePoint);
+      int currState = getIndexForCodePoint(codePoint, ssv);
 
       // Add this transition to the Markov chain
       // Ignore 0-to-0 transitions
@@ -87,13 +86,15 @@ public final class ZawgyiUnicodeMarkovModelBuilder {
     DataOutputStream dos = new DataOutputStream(stream);
     // Write magic number and serial version number
     dos.writeLong(BINARY_TAG);
-    dos.writeInt(BINARY_VERSION);
+    dos.writeInt(2);
+    // Serial version 2 includes the SSV.
+    dos.writeInt(ssv);
     classifierBuilder.buildToStream(stream);
   }
 
   /** Convenience method to obtain a ZawgyiUnicodeMarkovModel instance directly. */
   public ZawgyiUnicodeMarkovModel buildObject() {
     BinaryMarkov classifier = classifierBuilder.buildObject();
-    return new ZawgyiUnicodeMarkovModel(classifier);
+    return new ZawgyiUnicodeMarkovModel(classifier, ssv);
   }
 }

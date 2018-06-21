@@ -37,7 +37,7 @@ public class ZawgyiUnicodeMarkovModelTest {
   @BeforeClass
   public static void trainModel() {
     basicModel =
-        new ZawgyiUnicodeMarkovModelBuilder()
+        new ZawgyiUnicodeMarkovModelBuilder(ZawgyiUnicodeMarkovModel.SSV_STD_EXA_EXB_SPC)
             .trainOnString("\u1000\u1001\u1002", Category.UNICODE)
             .trainOnString("\u1000\u1003\u1004", Category.ZAWGYI)
             .trainOnString("\u1005\u1006", Category.UNICODE)
@@ -94,33 +94,66 @@ public class ZawgyiUnicodeMarkovModelTest {
   }
 
   @Test
+  public void testSSV() {
+    ZawgyiUnicodeMarkovModel model1 =
+        new ZawgyiUnicodeMarkovModelBuilder(ZawgyiUnicodeMarkovModel.SSV_STD_EXA_EXB_SPC)
+            .trainOnString("\u2000\u1002\u1005", Category.UNICODE)
+            .trainOnString("\u2000\u1002\u1006", Category.UNICODE)
+            .trainOnString("\u1002\u1007", Category.ZAWGYI)
+            .buildObject();
+
+    ZawgyiUnicodeMarkovModel model2 =
+        new ZawgyiUnicodeMarkovModelBuilder(ZawgyiUnicodeMarkovModel.SSV_STD_EXA_EXB)
+            .trainOnString("\u2000\u1002\u1005", Category.UNICODE)
+            .trainOnString("\u2000\u1002\u1006", Category.UNICODE)
+            .trainOnString("\u1002\u1007", Category.ZAWGYI)
+            .buildObject();
+
+    // The transition from base to U+1002 is Zawgyi in model1 but Unicode in model2.
+    assertZawgyi("Case 8A", model1, "\u1002");
+    assertUnicode("Case 8B", model2, "\u1002");
+  }
+
+  @Test
   public void testEquals() {
     ZawgyiUnicodeMarkovModel likeBasic =
-        new ZawgyiUnicodeMarkovModelBuilder()
+        new ZawgyiUnicodeMarkovModelBuilder(ZawgyiUnicodeMarkovModel.SSV_STD_EXA_EXB_SPC)
             .trainOnString("\u1000\u1001\u1002", Category.UNICODE)
             .trainOnString("\u1000\u1003\u1004", Category.ZAWGYI)
             .trainOnString("\u1005\u1006", Category.UNICODE)
             .trainOnString("\u1007", Category.ZAWGYI)
             .buildObject();
-    ZawgyiUnicodeMarkovModel unlikeBasic =
-        new ZawgyiUnicodeMarkovModelBuilder()
+
+    // Different training data:
+    ZawgyiUnicodeMarkovModel unlikeBasic1 =
+        new ZawgyiUnicodeMarkovModelBuilder(ZawgyiUnicodeMarkovModel.SSV_STD_EXA_EXB_SPC)
             .trainOnString("\u1001\u1002\u1003", Category.UNICODE)
             .trainOnString("\u1001\u1004\u1005", Category.ZAWGYI)
             .trainOnString("\u1006\u1007", Category.UNICODE)
             .trainOnString("\u1008", Category.ZAWGYI)
             .buildObject();
 
+    // Same training data, different SSV:
+    ZawgyiUnicodeMarkovModel unlikeBasic2 =
+        new ZawgyiUnicodeMarkovModelBuilder(ZawgyiUnicodeMarkovModel.SSV_STD_EXA_EXB)
+            .trainOnString("\u1000\u1001\u1002", Category.UNICODE)
+            .trainOnString("\u1000\u1003\u1004", Category.ZAWGYI)
+            .trainOnString("\u1005\u1006", Category.UNICODE)
+            .trainOnString("\u1007", Category.ZAWGYI)
+            .buildObject();
+
     // Test #equals() and #hashCode() using Guava EqualsTester
     new EqualsTester()
         .addEqualityGroup(basicModel, likeBasic)
-        .addEqualityGroup(unlikeBasic)
+        .addEqualityGroup(unlikeBasic1)
+        .addEqualityGroup(unlikeBasic2)
         .testEquals();
   }
 
   @Test
   public void testBinaryFormat() throws IOException {
     ZawgyiUnicodeMarkovModelBuilder builder =
-        new ZawgyiUnicodeMarkovModelBuilder()
+        new ZawgyiUnicodeMarkovModelBuilder(ZawgyiUnicodeMarkovModel.SSV_STD_EXA_EXB_SPC)
             .trainOnString("\u1000\u1001", Category.UNICODE)
             .trainOnString("\u1000\u1003\u1004", Category.ZAWGYI);
     ZawgyiUnicodeMarkovModel object = builder.buildObject();
@@ -128,9 +161,9 @@ public class ZawgyiUnicodeMarkovModelTest {
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     builder.buildToStream(outputStream);
     byte[] bytes = outputStream.toByteArray();
-    assertWithMessage("Serialized Markov model should be 526 bytes long")
+    assertWithMessage("Serialized Markov model should be 530 bytes long")
         .that(bytes.length)
-        .isEqualTo(526);
+        .isEqualTo(530);
     ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
     ZawgyiUnicodeMarkovModel copy = new ZawgyiUnicodeMarkovModel(inputStream);
     assertWithMessage("Deserialized Markov model should equal the original")
