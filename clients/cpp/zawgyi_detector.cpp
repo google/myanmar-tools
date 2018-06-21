@@ -160,7 +160,16 @@ ZawgyiUnicodeMarkovModel::ZawgyiUnicodeMarkovModel(const uint8_t* data_models) {
   int32_t version = BigEndian::loadInt32(input_ptr);
   input_ptr += sizeof(version);
 
-  CHECK_EQ(VERSION, version);
+  if (version == 1) {
+    // No SSV field
+    ssv_ = 0;
+  } else {
+    CHECK_EQ(2, version);
+    ssv_ = BigEndian::loadInt32(input_ptr);
+    input_ptr += sizeof(ssv_);
+    CHECK_GE(ssv_, 0);
+    CHECK_LT(ssv_, SSV_COUNT);
+  }
 
   classifier_ = new BinaryMarkovClassifier(input_ptr);
 }
@@ -231,7 +240,7 @@ int16_t ZawgyiUnicodeMarkovModel::GetIndexForCodePoint(char32_t cp) const {
   if (EXB_CP0 <= cp && cp <= EXB_CP1) {
     return cp - EXB_CP0 + EXB_OFFSET;
   }
-  if (SPC_CP0 <= cp && cp <= SPC_CP1) {
+  if (ssv_ == SSV_STD_EXA_EXB_SPC && SPC_CP0 <= cp && cp <= SPC_CP1) {
     return cp - SPC_CP0 + SPC_OFFSET;
   }
   return 0;
