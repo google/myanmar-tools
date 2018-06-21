@@ -75,3 +75,7 @@ NOTE: If you don't want to save your username and password in plaintext, [this v
 ### Update Documentation
 
 The file *clients/java/README.md* has a version hard-coded in two places: the example pom.xml and gradle dependency blocks.  Once the release has been performed, you should update those lines.
+
+## Releasing to RubyGems and PHP Composer/Packagist
+
+There is an account "google-myanmar-tools-user" that has push access to each of these two repositories.  All Googlers on the project can perform pushes using the accounts.  For information on accessing the accounts, see go/valentine.
