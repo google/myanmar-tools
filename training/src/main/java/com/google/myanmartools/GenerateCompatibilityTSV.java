@@ -18,7 +18,6 @@ package com.google.myanmartools;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.io.Resources;
-import com.google.myanmartools.ZawgyiDetector;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,7 +41,7 @@ public class GenerateCompatibilityTSV {
     ZawgyiDetector detector = new ZawgyiDetector(getResourceAsStream("com/google/myanmartools/zawgyiUnicodeModel.dat"));
     String line;
     while ((line = tsvReader.readLine()) != null) {
-      String input = line.split("\t")[1].trim();
+      String input = line.split("\t", -1)[1].trim();
       double newScore = detector.getZawgyiProbability(input);
       System.out.print(Double.toString(newScore));
       System.out.print("\t");

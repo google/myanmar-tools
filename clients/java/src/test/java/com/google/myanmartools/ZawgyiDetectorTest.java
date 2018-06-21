@@ -41,7 +41,7 @@ public class ZawgyiDetectorTest {
   @Test
   public void sanity() {
     double actual = detector.getZawgyiProbability("hello world");
-    assertThat(actual).isEqualTo(Double.NEGATIVE_INFINITY);
+    assertThat(actual).isNegativeInfinity();
   }
 
   @Test
@@ -111,7 +111,7 @@ public class ZawgyiDetectorTest {
   @Test
   public void testIgnoreNumerals() {
     // Digits/numerals are ignored and treated like non-Myanmar code points.
-    assertThat(detector.getZawgyiProbability("၉၆.၀ kHz")).isEqualTo(Double.NEGATIVE_INFINITY);
+    assertThat(detector.getZawgyiProbability("၉၆.၀ kHz")).isNegativeInfinity();
     assertThat(detector.getZawgyiProbability("၂၄၀၉ ဒဂုန်"))
         .isEqualTo(detector.getZawgyiProbability("ဒဂုန်"));
   }
@@ -127,7 +127,7 @@ public class ZawgyiDetectorTest {
       String input = line.substring(tabIdx + 1);
       double actual = detector.getZawgyiProbability(input);
       try {
-        assertWithMessage(line).that(expected).isEqualTo(actual);
+        assertWithMessage(line).that(actual).isEqualTo(expected);
       } catch (AssertionError e) {
         // Print verbose output for the failure
         detector.getZawgyiProbability(input, true);
