@@ -25,6 +25,17 @@ $ukinzi = \u1004\u103A\u1039;  # Codepoints representing kinzi in Unicode
 # This character has multiple representations in the Zawgyi font.
 $zmedialra = [\u103B\u107E-\u1084];
 
+# Types of space characters to remove before Myanmar combiners.
+# 0020: ASCII space
+# 00a0: no-break space
+# 200b: zero width space
+# 200c: zero width non-joiner
+# 200d: zero width joiner
+# 2060: word joiner
+# feff: zero width no-break space
+$spacetoremove = [\u0020\u00a0\u2002\u2006\u2008\u200b-\u200d\u2060\ufeff];
+$vowelsAndConsonants = [\u1000-\u102a];
+
 ####
 #### STAGE 1: CODEPOINT MAPPING FROM ZAWGYI TO UNICODE
 ####
@@ -140,8 +151,30 @@ $zmedialra = [\u103B\u107E-\u1084];
 \u104E → \u104E\u1004\u103A\u1038 ;
 
 # yayit
-$zmedialra → \u103C ;
+($zmedialra)+ → \u103C ;
 
+####
+#### STAGE 1.1: Remove spaces immediately before combining characters.
+####
+::Null;
+
+# Don't remove spaces before E vowel or medial Ra
+($spacetoremove)+ ([\u102b-\u1030\u1032-\u103b\u103d\u103e]) → $2;
+# Remove a duplicate
+\u1037 \u1037+ → \u1037;
+
+# Evowel before 0 only -> convert to the consonant.
+\u1031 \u1040 ($nondigits) > \u1031 \u101D $1;
+
+# Move e-vowel after medials
+([\u1031]+) $ukinzi ($consonant) > $ukinzi $2 \u1031;
+\u1031 \u103c ($consonant) > $1 \u103c \u1031;
+\u1031 ($consonant) ($umedial+) > $1 $2 \u1031;
+\u1031 ($vowelsAndConsonants) > $1 \u1031;
+
+\u1031 (\u1037+) ($consonant) > $2 \u1031 \u1037 ;
+
+\u1031 ($consonant) $ukinzi > $ukinzi \u1031 ;
 
 ####
 #### STAGE 2: POST REORDERING RULES FOR UNICODE RENDERING
@@ -151,8 +184,9 @@ $zmedialra → \u103C ;
 ::Null;
 
 # Case of MYANMAR digit being used instead of a letter
-# Lone digit zero
-[$] \u1040 ($nondigits) → \u101D $1;
+# Lone digit zero at start
+^ \u1040 ($nondigits) → \u101D $1;
+
 ([\u102b-\u103f]) \u1040 ($nondigits) → $1 \u101d $2;
 # Lone digit 4
 ^ \u1044 ($nondigits) → | \u104E $1 ;
@@ -181,6 +215,7 @@ $zmedialra → \u103C ;
 
 ::Null;
 
+($umedial) \u1039 ($consonant) > \u1039 $2 $1;
 # 1031 moved after consonant, with and without kinzi or medials
 ([\u1031]+) $ukinzi ($consonant) → $ukinzi $2 $1;
 
@@ -238,7 +273,7 @@ $zmedialra → \u103C ;
 \u103E\u103D → \u103D\u103E ;
 
 # Move visarga (\u1038) after other signs
-\u1038 ([$vowelmedial]) → $1 \u1038;
+\u1038 ($vowelmedial) → $1 \u1038;
 \u1038 ([\u1036\u1037\u103A]) → $1 \u1038;
 
 # Reorder
@@ -250,8 +285,24 @@ $zmedialra → \u103C ;
 ###
 
 ::Null;
-# Fix duplicate and overlapping modifiers.
+# Fix duplicate combiners
+\u102D \u102D+ → \u102D;
+\u102E \u102E+ → \u102E;
 \u102F \u102F+ → \u102F;
+\u1030 \u1030+ → \u1030;
+\u1032 \u1032+ → \u1032;
+\u1033 \u1033+ → \u1033;
+\u1035 \u1035+ → \u1035;
+\u1036 \u1036+ → \u1036;
+\u1037 \u1037+ → \u1037;
+\u1039 \u1039+ → \u1039;
+\u103a \u103a+ → \u103a;
+\u103b \u103b+ → \u103b;
+\u103c \u103c+ → \u103c;
+\u103d \u103d+ → \u103d;
+\u103e \u103e+ → \u103e; # http://unicode.org/cldr/trac/ticket/10386
+
+# Fix overlapping signs
 \u102F \u1030 → \u102F;
 \u102F \u103A → \u102F;
 \u102D \u102E → \u102E;
