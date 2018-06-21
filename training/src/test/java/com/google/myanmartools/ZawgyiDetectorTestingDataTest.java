@@ -62,8 +62,6 @@ public class ZawgyiDetectorTestingDataTest {
           .filter(line -> line.charAt(0) == (zawgyi ? 'Z' : 'U'))
           .map(line -> line.substring(2))
           .collect(toImmutableList());
-    } catch (IOException err) {
-      throw err;
     }
   }
 

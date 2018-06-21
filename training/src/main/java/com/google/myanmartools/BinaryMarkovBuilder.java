@@ -79,7 +79,7 @@ public class BinaryMarkovBuilder {
       // Compute the fallback (the most common) and how many values are different than the fallback.
       // Can't use Java 8 streams to construct the counter because the raw data is of type float,
       // and there is no Stream primitive for float.
-      Map<Float, Long> counter = new HashMap<Float, Long>();
+      Map<Float, Long> counter = new HashMap<>();
       for (float f : logProbabilityDifferences[i1]) {
         counter.put(f, counter.getOrDefault(f, 0L) + 1);
       }
