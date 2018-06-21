@@ -68,7 +68,7 @@ NOTE: If you don't want to save your username and password in plaintext, [this v
 
 1. Edit `clients/java/pom.xml` with the new version number.  Keep the "-SNAPSHOT" tag.
 2. Make sure that your working copy is clean.  Commit or stash any lingering changes.
-3. Run `mvn release:prepare` from the `clients/java` directory.  Choose the default for the three questions Maven will ask you.  This command is a black box that does a lot of work, including making commits to Github with the new version tag.
+3. Run `mvn release:prepare` from the `clients/java` directory.  Choose the default for the first and third questions Maven will ask you.  On the second question, use the tag name but add a `+java` to the end of it (for example, `v1.1.0+java`); this is to distringuish tags for releases in different client languages.  This command is a black box that does a lot of work, including making commits to Github with the new version tag.
 4. Confirm that there are two new commits on master, both prefixed with "[maven-release-plugin]".  If you don't see these commits, you may need to update the plugin; see https://stackoverflow.com/a/20657721/1407170
 5. Once you've confirmed everything is okay, run `mvn release:perform`.
 
