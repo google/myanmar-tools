@@ -39,8 +39,6 @@ public final class CompileTranslitToJavascript {
   static private String getTranslitFile(String filepath) {
 
     // TODO: If the input is an XML file, then get the CDATA.
-    System.out.println(" filepath substring = " +
-        filepath.substring(filepath.length()-4)+ "\n");
     if (filepath.substring(filepath.length()-4).equals(".xml")) {
       System.out.println(" XML file found.");
       System.out.println(" Not yet handling this file type.");
@@ -84,7 +82,7 @@ public final class CompileTranslitToJavascript {
         }
 
         // Change ":Wspace:" to the Unicode white spaces.
-        rulePattern = rulePattern.replace(":WSpace:", "\u0020\u00a0\u1680\u2000-\u200a\u202f\u205f\u3000");
+        rulePattern = rulePattern.replace(":WSpace:", "\u0020\u00a0\u1680\u2000-\u200d\u2060\u202f\u205f\u3000\ufeff");
 
         atStart = false;
         // Special case for matching at first position
@@ -96,7 +94,7 @@ public final class CompileTranslitToJavascript {
         // Clean up the spaces in the output.
         ruleResult = ruleParts[1].replace(" ", "");
 
-        // TODO: handle literal |
+        // TODO: handle literal | for positions other than 0.
         // Handle revisit location in the output.
         revisitPosition = -1;
         int vBarPos = ruleResult.indexOf('|');
@@ -124,7 +122,6 @@ public final class CompileTranslitToJavascript {
         }
 
         // Remove unescaped } (after_context).
-        // TODO: handle literal }
         afterContext = "";
         int rbracePos = rulePattern.indexOf('}');
         if (rbracePos >= 0) {
@@ -135,7 +132,7 @@ public final class CompileTranslitToJavascript {
         }
 
         // Remove unescaped { (before_context).
-        // TODO: handle literal {
+        // TODO: handle literal { at positions other than 0.
         int lbracePos = rulePattern.indexOf('{');
         beforeContext = "";
         if (lbracePos >= 0) {
@@ -201,25 +198,27 @@ public final class CompileTranslitToJavascript {
     }
 
     // The functions reused in the JS implementation.
-    public ArrayList<String> javascriptBasicStuff() {
+    public ArrayList<String> javascriptBasicStuff(String inputFilename, String nameSuffix) {
       ArrayList<String> jsOutput = new ArrayList<String>();
 
-      jsOutput.add("function transliterate(inString) {\n");
-      jsOutput.add("  var outString = inString;\n");
+
+      jsOutput.add("// Input path: " + inputFilename + "\n");
+      jsOutput.add("function getAllRules" + nameSuffix + "() {\n");
+      // OLD: jsOutput.add("  var outString = inString;\n");
 
       return jsOutput;
     }
 
-    public ArrayList<String> generateJS() {
+    public ArrayList<String> generateJS(String inputFilename, String nameSuffix) {
       //For each phase in all phases.
 
-      ArrayList<String> jsOutput = javascriptBasicStuff();
-      jsOutput.add("\n");
+      ArrayList<String> jsOutput = javascriptBasicStuff(inputFilename, nameSuffix);
+      // Not needed: jsOutput.add("\n");
 
       int phaseNum = 0;
       for (TranslitPhase phase: phases) {
 
-        jsOutput.add("  // Rules for phase " + phaseNum + "\n");
+        // Not needed: jsOutput.add("  // Rules for phase " + phaseNum + "\n");
         jsOutput.add("  var rules" + phaseNum + " = [\n");
 
         for (TranslitRule rule: phase.phaseRules) {
@@ -258,24 +257,70 @@ public final class CompileTranslitToJavascript {
           }
         }
         jsOutput.add("  ];\n");
-
-        // Process the phase
-        jsOutput.add("  outString = runPhase(rules" + phaseNum + ", outString);\n");
-
         phaseNum += 1;
       }
 
-      jsOutput.add("  return outString;\n");
+      // Return the rules for each phase.
+      StringBuilder sb = new StringBuilder();
+      sb.append("  return [");
+      for (int phaseId = 0; phaseId < phaseNum; phaseId ++) {
+        sb.append("rules" + phaseId);
+        if (phaseId < phaseNum - 1) {
+          sb.append(", ");
+        }
+      }
+      sb.append("];\n");
+
+      jsOutput.add(sb.toString());
+
       jsOutput.add("}\n");
 
-      System.out.println("// *** Number of phases found: " + phaseNum);
       return jsOutput;
     }
 
-    public ArrayList<String> generateJava() {
+    public ArrayList<String> javaBasicStuff(String inputFilename, String nameSuffix) {
+      ArrayList<String> jsOutput = new ArrayList<String>();
+
+      jsOutput.add("/* Copyright 2018 Google LLC\n");
+      jsOutput.add(" *\n");
+      jsOutput.add(" * Licensed under the Apache License, Version 2.0 (the \"License\");\n");
+      jsOutput.add(" * you may not use this file except in compliance with the License.\n");
+      jsOutput.add(" * You may obtain a copy of the License at\n");
+      jsOutput.add(" *\n");
+      jsOutput.add(" *    http://www.apache.org/licenses/LICENSE-2.0\n");
+      jsOutput.add(" *\n");
+      jsOutput.add(" * Unless required by applicable law or agreed to in writing, software\n");
+      jsOutput.add(" * distributed under the License is distributed on an \"AS IS\" BASIS,\n");
+      jsOutput.add(" * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n");
+      jsOutput.add(" * See the License for the specific language governing permissions and\n");
+      jsOutput.add(" * limitations under the License.\n");
+      jsOutput.add(" */\n");
+      jsOutput.add("\n");
+      jsOutput.add("package com.google.myanmartools;\n");
+      jsOutput.add("\n");
+      jsOutput.add("/**\n");
+      jsOutput.add(" * Transliteration initialization of phases and rules.\n");
+      jsOutput.add(" */\n");
+      jsOutput.add("\n");
+      jsOutput.add("// local imports\n");
+      jsOutput.add("import Transliterate;\n");
+      jsOutput.add("import Phase;\n");
+      jsOutput.add("import Rule;\n");
+      jsOutput.add("\n");
+
+      String className = "Transliterate" + nameSuffix;
+      jsOutput.add("public class " + className + " extends Transliterate {\n");
+
+      jsOutput.add("  public " + className + "() {\n");
+
+      return jsOutput;
+    }
+
+    public ArrayList<String> generateJava(String inputFilename, String nameSuffix) {
       //For each phase in all phases.
 
-      ArrayList<String> out = new ArrayList<String>();
+      ArrayList<String> out = javaBasicStuff(inputFilename, nameSuffix);
+
       out.add("\n");
 
       // TODO: Add structure for Java data.
@@ -283,31 +328,81 @@ public final class CompileTranslitToJavascript {
 
       int phaseNum = 0;
       for (TranslitPhase phase: phases) {
-
+        String phaseName = "phase" + phaseNum;
         out.add("  // Rules for phase " + phaseNum + "\n");
-        out.add("   rules" + phaseNum + " = [\n");
+        out.add("  Phase " + phaseName + " = addPhase();\n");  // TODO: id for phase?
 
         for (TranslitRule rule: phase.phaseRules) {
+          // phase0.addRule(new Rule("patternA", "substA"));
+          if (rule.rulePattern != null && rule.rulePattern.substring(0,1) != "\n") {
+
+            if (rule.afterContext.length() == 0 && rule.revisitPosition < 0) {
+            out.add("      " + phaseName + ".addRule(new Rule(" +
+                "\"" + rule.rulePattern + "\", \"" + rule.ruleResult + "\"" +
+                "));\n");
+            } else if (rule.afterContext.length() > 0) {
+              // We have afterContext.
+              if (rule.revisitPosition < 0) {
+                out.add("      " + phaseName + ".addRule(new Rule(" +
+                    "\"" + rule.rulePattern + "\", \"" + rule.ruleResult + "\"" +
+                    ", " + rule.afterContext +
+                    "));  // AFTER CONTEXT\n");
+              }
+              else {
+                // And revisit, too.
+                if (rule.revisitPosition < 0) {
+                  out.add("      " + phaseName + ".addRule(new Rule(" +
+                      "\"" + rule.rulePattern + "\", \"" + rule.ruleResult + "\"" +
+                      ", " + rule.afterContext +
+                      ", " + rule.revisitPosition +
+                      "));  // AFTER CONTEXT AND REVISIT\n");
+                }
+              }
+            } else if (rule.revisitPosition >= 0) {
+              // Only have revisit.
+              out.add("      " + phaseName + ".addRule(new Rule(" +
+                  "\"" + rule.rulePattern + "\", \"" + rule.ruleResult + "\"" +
+                  ", " + rule.afterContext +
+                  ", " + rule.revisitPosition +
+                  "));  // REVISIT\n");
+            }
+            }
+
         }
 
         phaseNum += 1;
       }
+
+    // TODO: complete the java class.
+      out.add("    }\n");
+      out.add("  }\n");
+      out.add("}\n");
+
       return out;
     }
   }
 
-
   public static void main(String[] args) throws IOException {
-    if (args.length <= 0) {
+    if (args.length < 2) {
       // Require an input file.
       System.out.println(
-          "Error: Input file path is required. Output pat may be specified.");
+          "  Error: Input file path and output file path are required.\n  Optional suffix for function");
+      System.out.println(
+          "   in_path js_out_path [nameSuffix [java_out_path]]");
       return;
     }
 
-    // Get the Unicode data input:
-    System.out.println("// Input path: " + args[0]);
+    String nameSuffix = "";
+    if (args.length >= 3) {
+      nameSuffix = args[2];
+    }
 
+    Path javaOutputPath = null;
+    if (args.length > 3) {
+      javaOutputPath = Paths.get(args[3]);
+    }
+
+    // Get the Unicode data input:
     String translitText = getTranslitFile(args[0]);
 
     /* Use the ICU4J tra31nsliterator to preprocess rules, removing defines. */
@@ -328,31 +423,24 @@ public final class CompileTranslitToJavascript {
     }
 
     // TODO: add runtime flag for JS or Java output (or ...)
-    ArrayList<String> jsOutput = translitInfo.generateJS();
+    ArrayList<String> jsOutput = translitInfo.generateJS(args[0], nameSuffix);
 
-    ArrayList<String> javaOutput = translitInfo.generateJava();
+    ArrayList<String> javaOutput = translitInfo.generateJava(args[0], nameSuffix);
 
     // Get output file.
     BufferedWriter output = null;
 
-    if (args.length < 2) {
-      output = new BufferedWriter(new OutputStreamWriter(System.out, StandardCharsets.UTF_8));
-    } else {
-      // Create a file and dump to that output.
-      Path outputPath = Paths.get(args[1]);
-
-      try {
-        output = Files.newBufferedWriter(
-            outputPath,
-            StandardCharsets.UTF_8,
-            StandardOpenOption.CREATE,
-            StandardOpenOption.WRITE);
-      } catch (IOException e) {
-        System.out.println("Error: cannot open output file " + args[1]);
-        System.out.println(e.toString());
-        System.exit(-2);
-      }
+    Path outputPath = Paths.get(args[1]);
+    try {
+      output = Files.newBufferedWriter(
+          outputPath,
+          StandardCharsets.UTF_8);
+    } catch (IOException e) {
+      System.out.println("Error: cannot open output file " + args[1]);
+      System.out.println(e.toString());
+      System.exit(-2);
     }
+
 
     output.write("// TRANSLITERATION RULES");
     output.newLine();
@@ -362,8 +450,31 @@ public final class CompileTranslitToJavascript {
     }
     output.write("// END OF TRANSLITERATION RULES");
     output.newLine();
-
+    output.flush();
     output.close();
+
+    if (javaOutputPath != null) {
+      // Write to Java output file, specified in args[3].
+      System.out.println("*** Writing Java output file: " + args[3]);
+
+      BufferedWriter javaOutputFile = null;
+      try {
+        javaOutputFile = Files.newBufferedWriter(
+            javaOutputPath,
+            StandardCharsets.UTF_8);
+      } catch (IOException e) {
+        System.out.println("Error: cannot open output file " + javaOutputPath);
+        System.out.println(e.toString());
+        System.exit(-2);
+      }
+      for (String javaLine : javaOutput) {
+        javaOutputFile.write(javaLine);
+      }
+      javaOutputFile.write("// END OF TRANSLITERATION RULES");
+      javaOutputFile.newLine();
+      javaOutputFile.flush();
+      javaOutputFile.close();
+    }
   }
 
 }

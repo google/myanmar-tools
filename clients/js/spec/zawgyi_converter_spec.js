@@ -519,6 +519,15 @@ var zawygi_unicode_convert_data = [
     z: "ျမန္္မာကို",
     u: "မြန်မာကို"
 }
+,
+  {  // For reorder of 1031 and 103b
+    z: "လယၱီေ်မ",
+    u: "လယ္တျီမေ"
+  }
+ , {
+   z: "တာ ့မိမိရဲ့",
+   u: "တာ့ မိမိရဲ့",
+ }
 ];
 
 // It would be nice to use preprocessor flags here, but that would require

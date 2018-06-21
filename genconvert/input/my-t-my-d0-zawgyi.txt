@@ -240,7 +240,7 @@ $medialraZ ($wideconsonant) > \u107e $1 ;
 
 ([\u103D\u103E]) \u103C > \u103C $1;
 \u103E\u103D > \u103D\u103E ;
-\u1038 ([$vowelmedial]) > $1 \u1038;
+\u1038 ($vowelmedial) > $1 \u1038;
 \u1038 ([\u1036\u1037\u103A]) > $1 \u1038;
 
 \u1036 \u102f > \u102f \u1036;
@@ -280,3 +280,5 @@ $medialraZ ($wideconsonant) > \u107e $1 ;
 \u1039 \u1037 > \u1037 \u1039 ;
 \u103c \u1032 > \u1032 \u103c ;
 \u103c \u102e > \u102e \u103c ;
+
+\u103d \u1088 > \u1088 ;

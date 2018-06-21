@@ -5,6 +5,8 @@
 # Possible use: use the conversion rules on Zawgyi to prepare it for comparison
 # with other Zawygi text. Note that it's not perfect, but can help with Zawgyi
 # text processing.
+$consonant = [\u1000-\u1021];
+$zmedialra = [\u103b\u107e-\u1084];
 
 \u1025 \u102e > \u1026 ;
 \u102f ([\u102d\u1036]) > $1 \u102f ;
@@ -23,9 +25,46 @@
 
 # Phase 1. Handle duplicate codes.
 ::Null;
+\u102d+ > \u102d ;
+\u102e+ > \u102e ;
 \u102f+ > \u102f ;
-\u103b+ > \u103b ;
+\u1030+ > \u1030 ;
+\u1032+ > \u1032 ;
+\u1033+ > \u1033 ;
+\u1034+ > \u1034 ;
+\u1036+ > \u1036 ;
+\u1037+ > \u1037 ;
 \u1039+ > \u1039 ;
+\u103a+ > \u103a ;
+\u103b+ > \u103b ;
+\u103c+ > \u103c ;
+\u103d+ > \u103d ;
+\u103e+ > \u103d ;  # Mix of Unicode and Zawgyi
 
  # Phase 2. Visually similar results.
+::Null;
 [\u1037\u1094\u1095]+ > \u1037 ;
+\u1005 \u103a > \u1008 ;
+\u101d > \u1040 ; # Digit zero
+\u102f \u1088 > \u1088 ;
+\u103b \u103a > \u103a \u103b ;
+\u103d \u102f > \u1088 ;
+\u103d \u1088 > \u1088 ;
+\u1037 \u1039 \u1037 > \u1037 \u1039 ;
+\u103b ($consonant) \u103b $ > \u103b $1 ;
+
+# Phase 3. Do not distinguish among various medial ra forms, at least for testing.
+::Null;
+$zmedialra+ > \u103b;  
+
+# Phase 4. Normalize medial ra plus U sign
+::Null;
+($zmedialra) ($consonant) \u1036 \u102f > $1 $2 \u1033 \u1036;
+
+# Phase 5. Handle variant for
+::Null;
+\u1033 > \u102f ;
+
+# Phase N. Remove spaces.
+::Null;
+[:WSpace:]+ ([\u1000-\u109f]) > | $1 ;
