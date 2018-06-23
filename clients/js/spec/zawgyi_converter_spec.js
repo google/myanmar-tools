@@ -31,9 +31,10 @@ var zawygi_unicode_convert_data = [
     u: ".!@"
 },
 {
-    z: "\u1021\u102C\u100F\u102C\u1015\u102D\u102F\u1004\u1039\u1031" +               "\u1010\u103C",
-    u: "\u1021\u102C\u100F\u102C\u1015\u102D\u102F\u1004\u103A\u1010" +
-    "\u103D\u1031"
+  z: "\u1021\u102C\u100F\u102C\u1015\u102D\u102F\u1004\u1039\u1031" +
+      "\u1010\u103C",
+  u: "\u1021\u102C\u100F\u102C\u1015\u102D\u102F\u1004\u103A\u1010" +
+      "\u103D\u1031"
 },
 {
     z: "\u1018\u101A\u1039\u1031\u101C\u102C\u1000\u1039\u1010\u102C" +
@@ -222,10 +223,10 @@ var zawygi_unicode_convert_data = [
 
     u: "\u1010\u1000\u103A\u101D\u1004\u103A\u101B\u1031\u102C"
 },
-{
+{ //  #32
     z: "\u1031\u1014\u0020\u1037\u1005\u1025\u1039",
 
-    u: "\u1014\u1031\u1037\u1005\u1009\u103A"
+    u: "\u1014\u1031\u1037\u0020\u1005\u1025\u103A"
 },
 {
     z: "\u1000\u1019\u107B\u102C\u1037\u1031\u1005\u103A\u1038\u1021",
@@ -288,13 +289,13 @@ var zawygi_unicode_convert_data = [
 
     u: "\u1000\u103B\u0020\u1001\u1031"
 },
-{
+{  // NOT REALLY ZAWGYI
     z: "\u1000\u103b\u103a\u0020\u1031\u1001\u102c",
 
     u: "\u1000\u103b\u103c\u0020\u1001\u1031\u102c"
 },
-{
-    z: "\u1000\u103b\u107d\u0020\u1031\u1001",
+{ // #46.
+    z: "\u1000\u103a\u103b\u0020\u1031\u1001",
 
     u: "\u1000\u103b\u103c\u0020\u1001\u1031"
 },
@@ -303,20 +304,20 @@ var zawygi_unicode_convert_data = [
 
     u: "\u1000\u103b\u103c\u0020\u1001\u1031"
 },
-{
-    z: "\u1000\u0020\u103b\u0020\u103a\u0020\u1031\u1001",
+{ // # 48
+    z: "\u107e\u1000\u1033 \u1031\u103b\u1001",
 
-    u: "\u1000\u103b\u103c\u0020\u1001\u1031"
+    u: "\u1000\u103c\u102f\u0020\u1001\u103c\u1031"
 },
 {
     z: "\u1000\u200b\u103a\u2060\u103d\u0020\u1031\u1001",
 
     u: "\u1000\u103b\u103e\u0020\u1001\u1031"
 },
-{
-    z: "\u1000\u103b\u0020\u103a\u0020\u1031\u1001",
+{  // # 50
+    z: "\u1000\u0020\u00a0\u103a\u0020\u1031\u103b\u1001",
 
-    u: "\u1000\u103b\u103c\u0020\u1001\u1031"
+    u: "\u1000\u103b\u0020\u1001\u103c\u1031"
 },
 {
     z: "\u1000\u200b\u103a\u0020\u103b\u0020\u1031\u1001",
@@ -381,9 +382,9 @@ var zawygi_unicode_convert_data = [
     z: "ခ‍ှဘယ်",
     u: "ခှဘယျ"
 },
-{
-    z: "ဃ ၠဃၠဃ ႓ဃ‍႓ဃ⁠႔",
-    u: "ဃ္ကဃ္ကဃ္ဘဃ္ဘဃ့"
+{  // #66
+    z: "ဃ ၠဃၠဃ ႓ဃ‍႓ဃ⁠႔\u1006",
+    u: "ဃ္ကဃ္ကဃ္ဘဃ္ဘဃ့\u2060\u1006"
 },
 {
     z: "\u1001\u0020\u1031\u1018\u101a\u1039",
@@ -400,7 +401,7 @@ var zawygi_unicode_convert_data = [
 {
     z: "၁၉၄၈ ခုႏွစ​္၊ ဒီဇင​္သာလ ၁၀ ရက​္ေန႔တ​ြင္ ကဓၻာ​့ကုလသမဂအဖဲြ႔",
 
-    u: "၁၉၄၈ ခုနှစ်၊ ဒီဇင်သာလ ၁၀ ရက်နေ့တွင် ကဓ္ဘာ့ကုလသမဂအဖွဲ့"
+    u: "၁၉၄၈ ခုနှစ်၊ ဒီဇင်သာလ ၁၀ ရက်နေ့တွင် ကဓ္ဘာ့​ကုလသမဂအဖွဲ့"  // ၁၉၄၈ ခုနှစ်၊ ဒီဇင်သာလ ၁၀ ရက်နေ့တွင် ကဓ္ဘာ့ကုလသမဂအဖွဲ့"
 },
 {
     z: "\u103b\u103b\u1000",
@@ -457,8 +458,8 @@ var zawygi_unicode_convert_data = [
 
     u: "\u1005\u102f"
 },
-{
-    z: "\u1005\u1034\u1034",
+{ // #81
+    z: "\u1005\u1030\u1030", //   z: "\u1005\u1034\u1034",
 
     u: "\u1005\u1030"
 },
@@ -483,7 +484,7 @@ var zawygi_unicode_convert_data = [
     u: "\u100a\u103b"
 },
 {
-    z: "\u100b\u103b\u103b",
+    z: "\u103b\u100b\u103b\u103b",
 
     u: "\u100b\u103c"
 },
@@ -498,7 +499,7 @@ var zawygi_unicode_convert_data = [
     u: "\u100e\u103e"
 },
 {
-    z: "\u103b\u107f\u1080\u1081\u100f\u103b",
+    z: "\u103b\u107f\u1080\u1081\u100f",
 
     u: "\u100f\u103c"
 },
@@ -518,16 +519,30 @@ var zawygi_unicode_convert_data = [
 {
     z: "ျမန္္မာကို",
     u: "မြန်မာကို"
-}
-,
-  {  // For reorder of 1031 and 103b
-    z: "လယၱီေ်မ",
-    u: "လယ္တျီမေ"
-  }
- , {
+},
+{
    z: "တာ ့မိမိရဲ့",
    u: "တာ့ မိမိရဲ့",
- }
+},
+// Odd spacing and strange combinations, for more testing later.
+/*
+{
+    z: "ညီနဲ ့်",
+    u: "ညီနျဲ့"
+},
+{
+   z: "တာ ့မိမိရဲ့",
+   u: "တာ့ မိမိရဲ့",
+},
+  {
+    z: "ထားေပး်ခင္းအား်ဖင္ ့",
+    u: "ထားပျေးခင်းအျားဖင့်"
+},
+{
+  z: "လယၱီေ်မ",  // Found in searches
+  u: "လယ္တျီမေ"
+}
+*/
 ];
 
 // It would be nice to use preprocessor flags here, but that would require
@@ -549,7 +564,7 @@ describe("ZawgyiConverter Z2U", function () {
             var test_case = zawygi_unicode_convert_data[i];
             var expected = test_case.u;
             var actual = converter.zawgyiToUnicode(test_case.z);
-            expect(actual).toEqual(expected);
+            expect(i+" "+actual).toEqual(i+" "+expected);
         }
     });
 });
