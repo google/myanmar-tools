@@ -82,7 +82,7 @@ public final class CompileTranslitToJavascript {
         }
 
         // Change ":Wspace:" to the Unicode white spaces.
-        rulePattern = rulePattern.replace(":WSpace:", "\u0020\u00a0\u1680\u2000-\u200d\u2060\u202f\u205f\u3000\ufeff");
+        rulePattern = rulePattern.replace(":WSpace:", " \u00a0\u1680\u2000-\u200d\u2060\u202f\u205f\u3000\ufeff");
 
         atStart = false;
         // Special case for matching at first position
@@ -226,12 +226,14 @@ public final class CompileTranslitToJavascript {
             jsOutput.add("    {\n");
 
             if (rule.afterContext.length() == 0) {
-              jsOutput.add("      p: RegExp('^' + '" + rule.rulePattern + "', 'u'),\n");
+              // REMOVE jsOutput.add("      p: RegExp('^' + '" + rule.rulePattern + "', 'u'),\n");
+              jsOutput.add("      p: RegExp('^' + '" + rule.rulePattern + "'),\n");
               jsOutput.add("      s: '" + rule.ruleResult + "',\n");
             } else {
               // Add after context as another unnamed group.
               jsOutput.add("      p: RegExp('^' + '" + rule.rulePattern +
-                  "(" + rule.afterContext + ")" + "', 'u'),\n");
+                  "(" + rule.afterContext + ")" + "'),\n");
+              // REMOVE "(" + rule.afterContext + ")" + "', 'u'),\n");
               jsOutput.add("      s: " +
                   "'" + rule.ruleResult + "$" + (rule.numGroups+1) + "',\n");
             }
@@ -303,9 +305,9 @@ public final class CompileTranslitToJavascript {
       jsOutput.add(" */\n");
       jsOutput.add("\n");
       jsOutput.add("// local imports\n");
-      jsOutput.add("import Transliterate;\n");
-      jsOutput.add("import Phase;\n");
-      jsOutput.add("import Rule;\n");
+      jsOutput.add("import com.google.myanmartools.Transliterate;\n");
+      jsOutput.add("import com.google.myanmartools.Phase;\n");
+      jsOutput.add("import com.google.myanmartools.Rule;\n");
       jsOutput.add("\n");
 
       String className = "Transliterate" + nameSuffix;
@@ -362,7 +364,6 @@ public final class CompileTranslitToJavascript {
               // Only have revisit.
               out.add("      " + phaseName + ".addRule(new Rule(" +
                   "\"" + rule.rulePattern + "\", \"" + rule.ruleResult + "\"" +
-                  ", " + rule.afterContext +
                   ", " + rule.revisitPosition +
                   "));  // REVISIT\n");
             }
@@ -374,7 +375,6 @@ public final class CompileTranslitToJavascript {
       }
 
     // TODO: complete the java class.
-      out.add("    }\n");
       out.add("  }\n");
       out.add("}\n");
 

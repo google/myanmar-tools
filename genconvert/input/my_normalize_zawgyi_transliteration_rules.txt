@@ -50,7 +50,6 @@ $zmedialra = [\u103b\u107e-\u1084];
 \u103b \u103a > \u103a \u103b ;
 \u103d \u102f > \u1088 ;
 \u103d \u1088 > \u1088 ;
-\u1037 \u1039 \u1037 > \u1037 \u1039 ;
 \u103b ($consonant) \u103b $ > \u103b $1 ;
 
 # Phase 3. Do not distinguish among various medial ra forms, at least for testing.
@@ -64,6 +63,12 @@ $zmedialra+ > \u103b;
 # Phase 5. Handle variant for
 ::Null;
 \u1033 > \u102f ;
+
+# Phase 6: More visually similar
+::Null;
+\u1036 \u102f > \u102f \u1036;
+\u1037 \u1039 \u1037 > \u1037 \u1039 ;
+[\u106a|\u106b] > \u100a;
 
 # Phase N. Remove spaces.
 ::Null;

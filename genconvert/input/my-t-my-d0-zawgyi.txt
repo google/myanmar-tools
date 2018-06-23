@@ -87,8 +87,6 @@ $ukinzi ($consonant) > $1 \u1064 ;
 
 \u102B \u103A > \u105A ;
 
-\u1025 \u1079 > \u1009 \u1039 \u1016 ;
-
 \u1039 \u1010 \u103d > \u1096 ; # Very special case
 
 \u1039 \u1000 > \u1060 ;
@@ -167,7 +165,7 @@ $ukinzi ($consonant) > $1 \u1064 ;
 
 ($nondigits) \u1040 ([\u102B-\u103F]) > $1 \u101D $2;
 \u1031 \u1040 ($nondigits) > \u1031 \u101D $1;
-\u1025 \u103A > \u1009 \u103A;
+# TODO: examine \u1025 \u103A > \u1009 \u103A;
 \u1025 \u102E > \u1026;
 \u1037 \u103A > \u103A \u1037;
 
