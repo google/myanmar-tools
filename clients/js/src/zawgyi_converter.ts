@@ -67,14 +67,11 @@ function runAllPhases(allRules: TranslitRule[][], inString: string): string {
 }
 
 
-declare function getAllRulesZ2U(): TranslitRule[][];
-// <Z2U_CONVERSION_RULES_PLACEHOLDER>
+declare function getAllRulesZ2U(): TranslitRule[][]; // PLACEHOLDER
 
-declare function getAllRulesU2Z(): TranslitRule[][];
-// <U2Z_CONVERSION_RULES_PLACEHOLDER>
+declare function getAllRulesU2Z(): TranslitRule[][]; // PLACEHOLDER
 
-declare function getAllRulesZNorm(): TranslitRule[][];
-// <ZNORM_CONVERSION_RULES_PLACEHOLDER>
+declare function getAllRulesZNorm(): TranslitRule[][]; // PLACEHOLDER
 
 
 export class ZawgyiConverter {
