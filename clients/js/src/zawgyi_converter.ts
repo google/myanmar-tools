@@ -13,7 +13,8 @@
  * limitations under the License.
  */
 
-//
+
+// tslint:disable-next-line:interface-over-type-literal This is an object literal type that cannot be extended.
 type TranslitRule = {
     p: RegExp;
     s: string;
@@ -28,15 +29,15 @@ function runPhase(rules: TranslitRule[], inString: string): string {
     let startOfString = true;
     while (midString.length > 0) {
         let foundRule = false;
-        for (let rule of rules) {
+        for (const rule of rules) {
             if (rule.matchOnStart == null || startOfString) {
-                let m = midString.match(rule.p);
+                const m = midString.match(rule.p);
                 // Matching uses only unnamed groups
                 if (m != null) {
                     foundRule = true;
-                    let rightPartSize = midString.length - m[0].length;
+                    const rightPartSize = midString.length - m[0].length;
                     midString = midString.replace(rule.p, rule.s);
-                    let newStart = midString.length - rightPartSize;
+                    const newStart = midString.length - rightPartSize;
 
                     if (rule.revisit == null) {
                         // New location is reset unless "revisit" is set to beginning of replacement.
@@ -59,37 +60,37 @@ function runPhase(rules: TranslitRule[], inString: string): string {
 
 function runAllPhases(allRules: TranslitRule[][], inString: string): string {
     let outString = inString;
-    for (let rules of allRules) {
+    for (const rules of allRules) {
         outString = runPhase(rules, outString);
     }
     return outString;
 }
 
 
-// declare function getAllRulesZ2U(): TranslitRule[][];
-<Z2U_CONVERSION_RULES_PLACEHOLDER>
+declare function getAllRulesZ2U(): TranslitRule[][];
+// <Z2U_CONVERSION_RULES_PLACEHOLDER>
 
-// declare function getAllRulesU2Z(): TranslitRule[][];
-<U2Z_CONVERSION_RULES_PLACEHOLDER>
+declare function getAllRulesU2Z(): TranslitRule[][];
+// <U2Z_CONVERSION_RULES_PLACEHOLDER>
 
-// declare function getAllRulesZNorm(): TranslitRule[][];
-<ZNORM_CONVERSION_RULES_PLACEHOLDER>
+declare function getAllRulesZNorm(): TranslitRule[][];
+// <ZNORM_CONVERSION_RULES_PLACEHOLDER>
 
 
 export class ZawgyiConverter {
 
-    public constructor() {
+    constructor() {
     }
 
-    public zawgyiToUnicode(inString: string) {
+    zawgyiToUnicode(inString: string) {
         return runAllPhases(getAllRulesZ2U(), inString);
     }
 
-    public unicodeToZawgyi(inString: string) {
+    unicodeToZawgyi(inString: string) {
         return runAllPhases(getAllRulesU2Z(), inString);
     }
 
-    public normalizeZawgyi(inString: string) {
+    normalizeZawgyi(inString: string) {
         return runAllPhases(getAllRulesZNorm(), inString);
     }
 }
