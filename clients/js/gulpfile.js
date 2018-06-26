@@ -50,15 +50,15 @@ function typescriptToJavascript() {
             fs.readFileSync("resources/zawgyiUnicodeModel.dat", "base64")
         ))
         .pipe(replace(
-            "<Z2U_CONVERSION_RULES_PLACEHOLDER>",
+            "declare function getAllRulesZ2U(): TranslitRule[][]; // PLACEHOLDER",
             fs.readFileSync("resources/Z2U.js", "utf8")
         ))
         .pipe(replace(
-            "<U2Z_CONVERSION_RULES_PLACEHOLDER>",
+            "declare function getAllRulesU2Z(): TranslitRule[][]; // PLACEHOLDER",
             fs.readFileSync("resources/U2Z.js", "utf8")
         ))
         .pipe(replace(
-            "<ZNORM_CONVERSION_RULES_PLACEHOLDER>",
+            "declare function getAllRulesZNorm(): TranslitRule[][]; // PLACEHOLDER",
             fs.readFileSync("resources/ZNorm.js", "utf8")
         ))
         .pipe(tsProject())
