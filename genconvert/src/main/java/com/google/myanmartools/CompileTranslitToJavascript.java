@@ -325,9 +325,6 @@ public final class CompileTranslitToJavascript {
 
       out.add("\n");
 
-      // TODO: Add structure for Java data.
-      // TODO: Write runPhases for Java.
-
       int phaseNum = 0;
       for (TranslitPhase phase: phases) {
         String phaseName = "phase" + phaseNum;
@@ -338,7 +335,11 @@ public final class CompileTranslitToJavascript {
           // phase0.addRule(new Rule("patternA", "substA"));
           if (rule.rulePattern != null && rule.rulePattern.substring(0,1) != "\n") {
 
-            if (rule.afterContext.length() == 0 && rule.revisitPosition < 0) {
+            // TODO: make sure that AFTER CONTEXT IS SET.
+            if (rule.atStart) {
+              out.add("      " + phaseName + ".addRule(new Rule(" +
+                "\"" + rule.rulePattern + "\", \"" + rule.ruleResult + "\", true));  // AtStart \n");
+            } else  if (rule.afterContext.length() == 0 && rule.revisitPosition < 0) {
             out.add("      " + phaseName + ".addRule(new Rule(" +
                 "\"" + rule.rulePattern + "\", \"" + rule.ruleResult + "\"" +
                 "));\n");
@@ -374,7 +375,6 @@ public final class CompileTranslitToJavascript {
         phaseNum += 1;
       }
 
-    // TODO: complete the java class.
       out.add("  }\n");
       out.add("}\n");
 
