@@ -1,4 +1,4 @@
-/* Copyright 2017 Google LLC
+/* Copyright 2018 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,43 +31,40 @@ public class Rule {
   public Boolean matchOnStart = false;
   public int revisitPosition = -1;
   public String info = "";  // Id number or other information.
+  public String contextBefore = "";
+  public String contextAfter = "";
 
-  private void setPatternSubst(String patternString, String substitutionString) {
-    // Set up to Match only at the beginning of a string.
+  public Rule(String patternString, String substitutionString) {
     pattern = Pattern.compile("^" + patternString);
     substitution = substitutionString;
   }
 
-  public Rule(String patternString, String substitutionString) {
-    setPatternSubst(patternString, substitutionString);
-  }
-
-  public Rule(String patternString, String substitutionString, Boolean matchStart) {
-    setPatternSubst(patternString, substitutionString);
-    matchOnStart = matchStart;
-  }
-
-  public Rule(String patternString, String substitutionString, int revisitPos) {
-    setPatternSubst(patternString, substitutionString);
-    revisitPosition = revisitPos;
-  }
-
-  public Rule(String patternString, String substitutionString, Boolean matchStart, int revisitPos) {
-    setPatternSubst(patternString, substitutionString);
-    matchOnStart = matchStart;
-    revisitPosition = revisitPos;
-  }
-
-  private void setPattern(String patternString, String substitutionString, String ruleInfo) {
-    setPatternSubst(patternString, substitutionString);
+  public Rule setInfo(String ruleInfo) {
     info = ruleInfo;
+    return this;
   }
 
-  public void setInfo(String ruleInfo) {
-    info = ruleInfo;
+  public Rule setMatchOnStart() {
+    matchOnStart = true;
+    return this;
   }
 
- public String printRule() {
+  public Rule setRevisitPosition(int newPos) {
+    revisitPosition = newPos;
+    return this;
+  }
+
+  public Rule setBeforeContext(String before) {
+    contextBefore = before;
+    return this;
+  }
+
+  public Rule setAfterContext(String after) {
+    contextAfter = after;
+    return this;
+  }
+
+  public String printRule() {
     String result = "    R " + info + " p: " + pattern + " s: " + substitution;
     if (matchOnStart) {
       result += " matchOnStart=True ";
@@ -75,10 +72,20 @@ public class Rule {
     if (revisitPosition >= 0) {
       result += " revisitPosition= " + revisitPosition;
     }
+
+    if (matchOnStart) {
+      result += " matchOnStart = true" ;
+    }
+
+    if (contextBefore != "") {
+      result += " contextAfter = " + contextBefore ;
+    }
+
+    if (contextAfter != "") {
+      result += " contextAfter = " + contextAfter ;
+    }
+
     return result + "\n";
   }
 
-  // Apply the rule here rather than in Phase?
-
-  // TODO: Other functions to set some of the fields?
 }
