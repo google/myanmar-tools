@@ -4,33 +4,25 @@ import com.ibm.icu.text.Transliterator;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintStream;
 
-import java.lang.Exception;
-import java.lang.StringBuilder;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 
-/** A Java binary to generate Javascript transliteration from an ICU4J
- * transliteration file. The output is a Javascript code that takes
- * text and performs the transliterations specified.
+/** A Java binary to generate Javascript transliteration from an ICU4J transliteration file. The
+ * output is a Javascript code that takes text and performs the transliterations specified.
  *
- * Note: this does not implement many features of ICU Transliteration, but
- * does support conversions such as Zawgyi to Unicode for Burmese language.
+ * <p>Note: this does not implement many features of ICU Transliteration, but does support
+ * conversions such as Zawgyi to Unicode for Burmese language.
  */
 
 public final class CompileTranslitToJavascript {
@@ -68,9 +60,9 @@ public final class CompileTranslitToJavascript {
     }
 
     public void AddRule(String rule) {
-      String[] ruleParts = rule.split(" > ");
+      String[] ruleParts = rule.split(" > ", -1);
 
-      String [] patternParts = ruleParts[0].split("\n");
+      String [] patternParts = ruleParts[0].split("\n", -1);
 
       // TODO: Look for literal |, {, and } within single quote.
 
@@ -437,7 +429,7 @@ public final class CompileTranslitToJavascript {
           StandardCharsets.UTF_8);
     } catch (IOException e) {
       System.out.println("Error: cannot open output file " + args[1]);
-      System.out.println(e.toString());
+      System.out.println(e);
       System.exit(-2);
     }
 
@@ -450,7 +442,6 @@ public final class CompileTranslitToJavascript {
     }
     output.write("// END OF TRANSLITERATION RULES");
     output.newLine();
-    output.flush();
     output.close();
 
     if (javaOutputPath != null) {
@@ -464,7 +455,7 @@ public final class CompileTranslitToJavascript {
             StandardCharsets.UTF_8);
       } catch (IOException e) {
         System.out.println("Error: cannot open output file " + javaOutputPath);
-        System.out.println(e.toString());
+        System.out.println(e);
         System.exit(-2);
       }
       for (String javaLine : javaOutput) {
@@ -472,7 +463,6 @@ public final class CompileTranslitToJavascript {
       }
       javaOutputFile.write("// END OF TRANSLITERATION RULES");
       javaOutputFile.newLine();
-      javaOutputFile.flush();
       javaOutputFile.close();
     }
   }
