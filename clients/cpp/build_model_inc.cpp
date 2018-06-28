@@ -20,7 +20,7 @@
 int main(int argc, char* argv[]) {
   if (argc != 3) {
     std::cerr << "Expected 2 arguments, the paths to the input "
-      << "(zawgyiUnicodeModel.dat) and output (zawgyi_model_data.h)"
+      << "(zawgyiUnicodeModel.dat) and output (zawgyi_model_data.inc)"
       << std::endl;
     return 1;
   }
