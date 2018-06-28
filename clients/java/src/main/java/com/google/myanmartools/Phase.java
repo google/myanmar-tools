@@ -19,25 +19,18 @@ package com.google.myanmartools;
  * Class implementing a transliteration phase as an array of rules.
  */
 
-import com.google.myanmartools.Rule;
-
-import java.lang.StringBuilder;
-
 import java.util.ArrayList;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
-
 
 public class Phase {
 
-  private ArrayList<Rule> phaseRules;
+  private final ArrayList<Rule> phaseRules;
   private String info;
   private Boolean debugMode;
 
   public Phase() {
     // Initialize the rules for the phase.
-    phaseRules = new ArrayList<Rule>();
+    phaseRules = new ArrayList<>();
     info = "";
     debugMode = false;
   }
@@ -58,7 +51,10 @@ public class Phase {
 
   public String printPhase() {
     StringBuilder sb = new StringBuilder();
-    sb.append("  Phase " + info + " has " + phaseRules.size() + " rules\n");
+    sb.append("  Phase ").append(info)
+        .append(" has ").
+        append(phaseRules.size()).
+        append(" rules\n");
 
     for (Rule rule : phaseRules) {
       sb.append(rule.printRule());

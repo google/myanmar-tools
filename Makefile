@@ -55,19 +55,19 @@ copy-resources:
 
 train: zawgyiUnicodeModel.dat compatibility.tsv testData.tsv copy-resources
 
-jscompile-target: $(wildcard genconvert/src/**/*)
+transcompile-target: $(wildcard genconvert/src/**/*)
 	$(MVN) -f genconvert/pom.xml compile
 
-jscompile-norm: jscompile-target
-	TMP=`mktemp`; $(MVN) -f genconvert/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.CompileTranslitToJavascript -Dexec.args="genconvert/input/my_normalize_zawgyi_transliteration_rules.txt $$TMP ZNorm clients/java/src/main/java/com/google/myanmartools/TransliterateZNorm.java"; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP clients/js/resources/ZNorm.js; exit 0; fi
+transcompile-norm: transcompile-target
+	TMP=`mktemp`; $(MVN) -f genconvert/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.CompileTranslit -Dexec.args="genconvert/input/my_normalize_zawgyi_transliteration_rules.txt $$TMP ZNorm clients/java/src/main/java/com/google/myanmartools/TransliterateZNorm.java"; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP clients/js/resources/ZNorm.js; exit 0; fi
 
-jscompile-Z2U: jscompile-target
-	TMP=`mktemp`; $(MVN) -f genconvert/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.CompileTranslitToJavascript -Dexec.args="genconvert/input/my-t-my-s0-zawgyi.txt $$TMP Z2U clients/java/src/main/java/com/google/myanmartools/TransliterateZ2U.java"; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP clients/js/resources/Z2U.js; exit 0; fi
+transcompile-Z2U: transcompile-target
+	TMP=`mktemp`; $(MVN) -f genconvert/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.CompileTranslit -Dexec.args="genconvert/input/my-t-my-s0-zawgyi.txt $$TMP Z2U clients/java/src/main/java/com/google/myanmartools/TransliterateZ2U.java"; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP clients/js/resources/Z2U.js; exit 0; fi
 
-jscompile-U2Z: jscompile-target
-	TMP=`mktemp`; $(MVN) -f genconvert/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.CompileTranslitToJavascript -Dexec.args="genconvert/input/my-t-my-d0-zawgyi.txt $$TMP U2Z clients/java/src/main/java/com/google/myanmartools/TransliterateU2Z.java"; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP clients/js/resources/U2Z.js; exit 0; fi
+transcompile-U2Z: transcompile-target
+	TMP=`mktemp`; $(MVN) -f genconvert/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.CompileTranslit -Dexec.args="genconvert/input/my-t-my-d0-zawgyi.txt $$TMP U2Z clients/java/src/main/java/com/google/myanmartools/TransliterateU2Z.java"; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP clients/js/resources/U2Z.js; exit 0; fi
 
-jscompile: jscompile-norm jscompile-Z2U jscompile-U2Z
+transcompile: transcompile-norm transcompile-Z2U transcompile-U2Z
 
 clients: $(wildcard clients/**/*)
 

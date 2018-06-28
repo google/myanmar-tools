@@ -15,14 +15,7 @@
 
 package com.google.myanmartools;
 
-// local imports
-import com.google.myanmartools.Phase;
-import com.google.myanmartools.Rule;
-
-import java.lang.StringBuilder;
-
 import java.util.ArrayList;
-
 
 /**
  * A Java engine for running the phases of transliteration, similar to the ICU4J
@@ -31,20 +24,20 @@ import java.util.ArrayList;
 
 public class Transliterate {
 
-  private ArrayList<Phase> translitPhases;
-  private String name;  // For identification
+  private final ArrayList<Phase> translitPhases;
+  private final String name;  // For identification
 
   private Boolean debugMode;  // Print details of execution.
 
   // Creates a new transliterator.
   public Transliterate() {
-    translitPhases = new ArrayList<Phase>();
+    translitPhases = new ArrayList<>();
     name = "";
     debugMode = false;
   }
 
   public Transliterate(String id) {
-    translitPhases = new ArrayList<Phase>();
+    translitPhases = new ArrayList<>();
     name = id;
   }
 
@@ -69,8 +62,8 @@ public class Transliterate {
 
   public String printAll() {
     StringBuilder sb = new StringBuilder();
-    sb.append("Transliterator name = " + name + "\n");
-    sb.append("  Phase count: " + translitPhases.size() + "\n");
+    sb.append("Transliterator name = ").append(name).append("\n");
+    sb.append("  Phase count: ").append(translitPhases.size()).append("\n");
     for (Phase p : translitPhases) {
       sb.append(p.printPhase());
     }

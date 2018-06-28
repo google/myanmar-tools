@@ -15,29 +15,19 @@
 
 package com.google.myanmartools;
 
-import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 
-import com.google.myanmartools.TransliterateU2Z;
-import com.google.myanmartools.TransliterateZNorm;
-import com.google.myanmartools.TransliterateZ2U;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-
 @RunWith(JUnit4.class)
 public class TransliterateTest {
 
-  private static TransliterateU2Z u2Z = new TransliterateU2Z();
-  private static TransliterateZNorm zNorm = new TransliterateZNorm();
-  private static TransliterateZ2U z2U = new TransliterateZ2U();
+  private static final TransliterateU2Z u2Z = new TransliterateU2Z();
+  private static final TransliterateZNorm zNorm = new TransliterateZNorm();
+  private static final TransliterateZ2U z2U = new TransliterateZ2U();
 
   // Test cases of {Zawgyi, Unicode} pairs, expected to interconvert.
   private String[][] testCases = {
@@ -693,8 +683,8 @@ public class TransliterateTest {
   public void z2UTestsSelected() {
     int i = 0;
     for (String[] testCase : testCase69_68) {
-      String zIn = (String)testCase[0];
-      String expected = (String)testCase[1];
+      String zIn = testCase[0];
+      String expected = testCase[1];
       String actual = z2U.convert(zIn);
 
       String line = " !!!! Z2U Test " + i + "\n" +
@@ -715,8 +705,8 @@ public class TransliterateTest {
     System.out.println("********* U2Z Tests **********");
     int i = 0;
     for (String[] testCase : testCases) {
-      String uIn = (String)testCase[1];
-      String expected = (String)testCase[0];
+      String uIn = testCase[1];
+      String expected = testCase[0];
       String actual = u2Z.convert(uIn);
 
       String line = " !!!! U2Z Test " + i + "\n" +

@@ -20,7 +20,6 @@ import com.ibm.icu.text.Transliterator;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,14 +32,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-/** A Java binary to generate Javascript transliteration from an ICU4J transliteration file. The
- * output is a Javascript code that takes text and performs the transliterations specified.
+/** A Java binary to generate Javascript and Java transliterators from an ICU4J transliteration file. The
+ * output is a) Javascript code, and b) Java code that take text and perform the transliterations specified.
  *
  * <p>Note: this does not implement many features of ICU Transliteration, but does support
  * conversions such as Zawgyi to Unicode for Burmese language.
  */
 
-public final class CompileTranslitToJavascript {
+public final class CompileTranslit {
 
   // String from a transliteration file.
   static private String getTranslitFile(String filepath) {
@@ -79,7 +78,7 @@ public final class CompileTranslitToJavascript {
 
       String [] patternParts = ruleParts[0].split("\n", -1);
 
-      // TODO: Look for literal |, {, and } within single quote.
+      // TODO: Look for literal {, and } within single quote.
 
       if (ruleParts.length > 1) {
         if (patternParts.length <= 1) {
@@ -101,7 +100,6 @@ public final class CompileTranslitToJavascript {
         // Clean up the spaces in the output.
         ruleResult = ruleParts[1].replace(" ", "");
 
-        // TODO: handle literal | for positions other than 0.
         // Handle revisit location in the output.
         revisitPosition = -1;
         int vBarPos = ruleResult.indexOf('|');
@@ -332,15 +330,16 @@ public final class CompileTranslitToJavascript {
       for (TranslitPhase phase: phases) {
         String phaseName = "phase" + phaseNum;
         out.add("\n    // Rules for phase " + phaseNum + "\n");
-        out.add("    Phase " + phaseName + " = addPhase();\n");  // TODO: id for phase?
+        out.add("    Phase " + phaseName + " = addPhase();\n");
 
         for (TranslitRule rule: phase.phaseRules) {
           // phase0.addRule(new Rule("patternA", "substA"));
-          if (rule.rulePattern != null && rule.rulePattern.substring(0,1) != "\n") {
-            out.add("    " + phaseName +
-                ".addRule(new Rule(\"" +
-                rule.rulePattern + "\", \"" +
-                rule.ruleResult + "\")");
+          if (rule.rulePattern != null && !"\n".equals(rule.rulePattern.substring(0, 1))) {
+            out.add("    " +  phaseName + ".addRule(new Rule(\"");
+            out.add(rule.rulePattern);
+            out.add("\", \"");
+            out.add(rule.ruleResult);
+            out.add("\")");
 
             if (rule.atStart) {
               out.add("\n          .setMatchOnStart()");
@@ -409,7 +408,6 @@ public final class CompileTranslitToJavascript {
       System.exit(-1);
     }
 
-    // TODO: add runtime flag for JS or Java output (or ...)
     ArrayList<String> jsOutput = translitInfo.generateJS(args[0], nameSuffix);
 
     ArrayList<String> javaOutput = translitInfo.generateJava(args[0], nameSuffix);
