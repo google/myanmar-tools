@@ -15,8 +15,6 @@
 
 package com.google.myanmartools;
 
-import java.lang.StringBuilder;
-
 import java.util.regex.Pattern;
 
 /**

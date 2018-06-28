@@ -186,7 +186,6 @@ $vowelsAndConsonants = [\u1000-\u102a];
 ([\u102b-\u103f]) \u1044 ($nondigits) → $1 \u104E $2;
 
 # Simpler replacements for Zawgyi 1025
-# TODO: REMOVE \u1025 \u103A → \u1025 \u103A;
 \u1025 \u102E → \u1026;
 
 # Asat and dot below reordering, to Unicode NFC.
