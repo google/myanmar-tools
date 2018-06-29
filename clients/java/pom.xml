@@ -127,5 +127,18 @@ limitations under the License.
       <version>0.36</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.caliper/caliper -->
+    <dependency>
+      <groupId>com.google.caliper</groupId>
+      <artifactId>caliper</artifactId>
+      <version>1.0-beta-2</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- version 18 of Guava is required for Caliper -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>18.0</version>
+    </dependency>
   </dependencies>
 </project>
