@@ -21,12 +21,12 @@ import java.util.regex.Pattern;
  * Class implementing a rule as part of a transliteration phase.
  */
 
-public class Rule {
+class Rule {
 
   // Fields of the rule
   public Pattern pattern;
   public String substitution;
-  public Boolean matchOnStart = false;
+  public boolean matchOnStart = false;
   public int revisitPosition = -1;
   public String info = "";  // Id number or other information.
   public String contextBefore = "";
@@ -75,11 +75,11 @@ public class Rule {
       result += " matchOnStart = true" ;
     }
 
-    if (contextBefore != "") {
+    if (!"".equals(contextBefore)) {
       result += " contextAfter = " + contextBefore ;
     }
 
-    if (contextAfter != "") {
+    if (!"".equals(contextAfter)) {
       result += " contextAfter = " + contextAfter ;
     }
 

@@ -20,28 +20,30 @@ import java.util.ArrayList;
 /**
  * A Java engine for running the phases of transliteration, similar to the ICU4J
  * transliterator.
+ * This class is thread-safe and has immutable behavior."
  */
 
-public class Transliterate {
+
+public abstract class Transliterate {
 
   private final ArrayList<Phase> translitPhases;
   private final String name;  // For identification
 
-  private Boolean debugMode;  // Print details of execution.
+  private boolean debugMode;  // Print details of execution.
 
   // Creates a new transliterator.
-  public Transliterate() {
+  Transliterate() {
     translitPhases = new ArrayList<>();
     name = "";
     debugMode = false;
   }
 
-  public Transliterate(String id) {
+  Transliterate(String id) {
     translitPhases = new ArrayList<>();
     name = id;
   }
 
-  public Phase addPhase() {
+  Phase addPhase() {
     Phase newPhase = new Phase();
     newPhase.setInfo(" " + translitPhases.size());
     translitPhases.add(newPhase);
@@ -49,18 +51,18 @@ public class Transliterate {
     return newPhase;
   }
 
-  public void setDebugMode(Boolean newMode) {
+  void setDebugMode(boolean newMode) {
     debugMode = newMode;
     for (Phase phase :translitPhases) {
       phase.setDebugMode(debugMode);
     }
   }
 
-  public Boolean getDebugMode() {
+  public boolean getDebugMode() {
     return debugMode;
   }
 
-  public String printAll() {
+  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("Transliterator name = ").append(name).append("\n");
     sb.append("  Phase count: ").append(translitPhases.size()).append("\n");

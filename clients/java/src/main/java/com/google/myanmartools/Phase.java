@@ -22,11 +22,11 @@ package com.google.myanmartools;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
-public class Phase {
+class Phase {
 
   private final ArrayList<Rule> phaseRules;
   private String info;
-  private Boolean debugMode;
+  private boolean debugMode;
 
   public Phase() {
     // Initialize the rules for the phase.
@@ -39,11 +39,11 @@ public class Phase {
     info = newInfo;
   }
 
-  public void setDebugMode(Boolean newMode) {
+  public void setDebugMode(boolean newMode) {
     debugMode = newMode;
   }
 
-  public void addRule(Rule newRule) {
+  void addRule(Rule newRule) {
     phaseRules.add(newRule);
     // Put the rule number within the phase.
     newRule.setInfo("" + phaseRules.size());
@@ -66,7 +66,7 @@ public class Phase {
     // Run all the rules of this phase.
     String outString = "";
     String midString = inString;
-    Boolean startOfString = true;
+    boolean startOfString = true;
 
     if (debugMode) {
       System.out.println("Phase " + info + ", input= " + inString + "  (" + inString.length() + ")");
@@ -74,7 +74,7 @@ public class Phase {
 
     while (midString.length() > 0) {
       // Move through the string, matching / applying rules .
-      Boolean foundRule = false;
+      boolean foundRule = false;
 
       for (Rule rule : phaseRules) {
         // Check if the rule applies.
@@ -90,7 +90,6 @@ public class Phase {
             }
             foundRule = true;
             int rightPartSize = midString.length() - m.group(0).length();
-
 
             midString = m.replaceFirst(rule.substitution);
 

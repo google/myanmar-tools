@@ -30,7 +30,7 @@ public class TransliterateTest {
   private static final TransliterateZ2U z2U = new TransliterateZ2U();
 
   // Test cases of {Zawgyi, Unicode} pairs, expected to interconvert.
-  private String[][] testCases = {
+  private final String[][] testCases = {
     {
       " ",
       " "
@@ -412,7 +412,7 @@ public class TransliterateTest {
       "၁၉၄၈ ခုႏွစ္​၊ ဒီဇင္​သာလ ၁၀ ရက္​​ေန႔တြင္​ ကဓၻာ့ကုလသမဂအဖဲြ႔ အတည္​ျပဳ၍ ​ေၾကညာလိုက္​ရာ",
      "၁၉၄၈ ခုနှစ်​၊ ဒီဇင်​သာလ ၁၀ ရက်​​နေ့တွင်​ ကဓ္ဘာ့ကုလသမဂအဖွဲ့ အတည်​ပြု၍ ​ကြေညာလိုက်​ရာ"
     },
-    {
+    {  // #69
       "၁၉၄၈ ခုႏွစ​္၊ ဒီဇင​္သာလ ၁၀ ရက​္ေန႔တ​ြင္ ကဓၻာ​့ကုလသမဂအဖဲြ႔",
 
       "၁၉၄၈ ခုနှစ်၊ ဒီဇင်သာလ ၁၀ ရက်နေ့တွင် ကဓ္ဘာ့​ကုလသမဂအဖွဲ့"
@@ -561,19 +561,6 @@ public class TransliterateTest {
   };
 
 
-  // Special cases with digits at the beginning of input.
-  private String[][] testCase69_68 = {
-    {  // #69
-      "၁၉၄၈ ခုႏွစ​္၊ ဒီဇင​္သာလ ၁၀ ရက​္ေန႔တ​ြင္ ကဓၻာ​့ကုလသမဂအဖဲြ႔",
-
-      "၁၉၄၈ ခုနှစ်၊ ဒီဇင်သာလ ၁၀ ရက်နေ့တွင် ကဓ္ဘာ့​ကုလသမဂအဖွဲ့"
-    },
-    {  // #68
-      "၁၉၄၈ ခုႏွစ္​၊ ဒီဇင္​သာလ ၁၀ ရက္​​ေန႔တြင္​ ကဓၻာ့ကုလသမဂအဖဲြ႔ အတည္​ျပဳ၍ ​ေၾကညာလိုက္​ရာ",
-     "၁၉၄၈ ခုနှစ်​၊ ဒီဇင်​သာလ ၁၀ ရက်​​နေ့တွင်​ ကဓ္ဘာ့ကုလသမဂအဖွဲ့ အတည်​ပြု၍ ​ကြေညာလိုက်​ရာ"
-    },
-  };
-
   @BeforeClass
   public static void setup() {
     /*
@@ -584,7 +571,7 @@ public class TransliterateTest {
   }
 
   // Service function to get hex values.
-  public String unicodeToHex(String s) {
+  public static String unicodeToHex(String s) {
     String output = "";
     char[] chars = s.toCharArray();
 
@@ -627,20 +614,19 @@ public class TransliterateTest {
                   "  output = " + unicodeToHex(r1);
     System.out.println("  expect = " + unicodeToHex(z1));
 
-    assertWithMessage("!!!!!!!!!!! Simple U->Z").that(r1).isEqualTo(z1);
+    assertWithMessage("line").that(r1).isEqualTo(z1);
   }
 
   @Test
   public void zNormTests() {
     String z1 = "အကာင္ ့";
-    zNorm.setDebugMode(false);
     String z1NormExpected = "အကာင့္";
     String result = zNorm.convert(z1);
 
     String line = " !!!! zNorm: z1\n" +
                   "  input  = " + unicodeToHex(z1) + "\n" +
                   "  output = " + unicodeToHex(result);
-    assertWithMessage(line).that(z1NormExpected).isEqualTo(result);
+    assertWithMessage(line).that(result).isEqualTo(z1NormExpected);
   }
 
   @Test
@@ -662,27 +648,6 @@ public class TransliterateTest {
   public void z2UTests() {
     int i = 0;
     for (String[] testCase : testCases) {
-      String zIn = (String)testCase[0];
-      String expected = (String)testCase[1];
-      String actual = z2U.convert(zIn);
-
-      String line = " !!!! Z2U Test " + i + "\n" +
-                  "  input  = " + unicodeToHex(zIn) + "\n" +
-                  "  expect = " + unicodeToHex(expected) + "\n" +
-                  "  actual = " + unicodeToHex(actual) + "\n";
-
-      assertWithMessage(line).that(actual).isEqualTo(expected);
-      i += 1;
-    }
-  }
-
-    @Test
-  /**
-   * All Zawgyi -> Unicode tests.
-   */
-  public void z2UTestsSelected() {
-    int i = 0;
-    for (String[] testCase : testCase69_68) {
       String zIn = testCase[0];
       String expected = testCase[1];
       String actual = z2U.convert(zIn);
