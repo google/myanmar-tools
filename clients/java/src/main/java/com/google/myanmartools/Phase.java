@@ -21,6 +21,7 @@ package com.google.myanmartools;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class Phase {
 
@@ -64,26 +65,35 @@ class Phase {
 
   public String runPhase(Phase phase, String inString) {
     // Run all the rules of this phase.
-    String outString = "";
+    StringBuilder outString = new StringBuilder();
     String midString = inString;
     boolean startOfString = true;
+    boolean changed = false;
 
     if (debugMode) {
       System.out.println("Phase " + info + ", input= " + inString + "  (" + inString.length() + ")");
+    }
+
+    Matcher[] matchers = new Matcher[phaseRules.size()];
+    for (int ruleIndex = 0; ruleIndex < phaseRules.size(); ruleIndex++) {
+      Pattern pattern = phaseRules.get(ruleIndex).pattern;
+      matchers[ruleIndex] = pattern.matcher("");
     }
 
     while (midString.length() > 0) {
       // Move through the string, matching / applying rules .
       boolean foundRule = false;
 
-      for (Rule rule : phaseRules) {
+      for (int ruleIndex = 0; ruleIndex < phaseRules.size(); ruleIndex++) {
+        Rule rule = phaseRules.get(ruleIndex);
+
         // Check if the rule applies.
         if (!rule.matchOnStart || startOfString) {
-          Matcher m = rule.pattern.matcher(midString);
+          Matcher m = matchers[ruleIndex];
+          m.reset(midString);
           if (m.find()) {
 
             if (debugMode) {
-              // Debug
               System.out.println("  Matched rule " + rule.info + " = " + rule.pattern + " --> " +
                   rule.substitution);
               System.out.println("    m.group(0):  " + m.group(0) + " (" + m.group(0).length() +")");
@@ -92,15 +102,13 @@ class Phase {
             int rightPartSize = midString.length() - m.group(0).length();
 
             midString = m.replaceFirst(rule.substitution);
+            changed = true;
 
             if (rule.revisitPosition < 0) {
               // Reset the new position to the end of the subsitution.
               int newStart = midString.length() - rightPartSize;
-              outString = outString + midString.substring(0, newStart);
+              outString.append(midString.substring(0, newStart));
               midString = midString.substring(newStart);
-              if (debugMode) {
-                System.out.println("  outString:  " + outString);
-              }
             }
           }
         }
@@ -108,15 +116,15 @@ class Phase {
       // All rules applied at this position.
       if (!foundRule) {
         // Move forward by 1.
-        outString = outString + midString.substring(0,1);
+        outString.append(midString.substring(0, 1));
         midString = midString.substring(1);
       }
       startOfString = false;
     }
-    if (debugMode && !outString.equals(inString)) {
+    if (debugMode && changed) {
       System.out.println("  Return changed result = " + outString + "  (" + outString.length() + ")");
     }
-    return outString;
+    return outString.toString();
   }
 
 }
