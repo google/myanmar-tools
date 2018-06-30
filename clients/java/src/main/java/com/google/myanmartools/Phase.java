@@ -91,7 +91,7 @@ class Phase {
         if (!rule.matchOnStart || startOfString) {
           Matcher m = matchers[ruleIndex];
           m.reset(midString);
-          if (m.matches()) {
+          if (m.find()) {
 
             if (debugMode) {
               System.out.println("  Matched rule " + rule.info + " = " + rule.pattern + " --> " +
