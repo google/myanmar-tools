@@ -612,7 +612,6 @@ public class TransliterateTest {
     String line = "test U2Z\n" +
                   "  input  = " + unicodeToHex(u1) + "\n" +
                   "  output = " + unicodeToHex(r1);
-    System.out.println("  expect = " + unicodeToHex(z1));
 
     assertWithMessage("line").that(r1).isEqualTo(z1);
   }
@@ -667,7 +666,6 @@ public class TransliterateTest {
    * All Zawgyi -> Unicode tests.
    */
   public void u2ZTests() {
-    System.out.println("********* U2Z Tests **********");
     int i = 0;
     for (String[] testCase : testCases) {
       String uIn = testCase[1];
