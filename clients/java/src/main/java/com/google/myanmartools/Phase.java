@@ -91,7 +91,7 @@ class Phase {
         if (!rule.matchOnStart || startOfString) {
           Matcher m = matchers[ruleIndex];
           m.reset(midString);
-          if (m.find()) {
+          if (m.matches()) {
 
             if (debugMode) {
               System.out.println("  Matched rule " + rule.info + " = " + rule.pattern + " --> " +
@@ -116,7 +116,7 @@ class Phase {
       // All rules applied at this position.
       if (!foundRule) {
         // Move forward by 1.
-        outString.append(midString.substring(0, 1));
+        outString.append(midString.charAt(0));
         midString = midString.substring(1);
       }
       startOfString = false;
