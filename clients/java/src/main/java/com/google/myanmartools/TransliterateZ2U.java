@@ -26,7 +26,9 @@ import com.google.myanmartools.Phase;
 import com.google.myanmartools.Rule;
 
 public class TransliterateZ2U extends Transliterate {
-  public TransliterateZ2U() {
+  public TransliterateZ2U(String id) {
+    // Set identifier for this instance
+    super(id);
 
     // Rules for phase 0
     Phase phase0 = addPhase();

@@ -29,18 +29,18 @@ class Phase {
   private String info;
   private boolean debugMode;
 
-  public Phase() {
+  Phase() {
     // Initialize the rules for the phase.
     phaseRules = new ArrayList<>();
     info = "";
     debugMode = false;
   }
 
-  public void setInfo(String newInfo) {
+  void setInfo(String newInfo) {
     info = newInfo;
   }
 
-  public void setDebugMode(boolean newMode) {
+  void setDebugMode(boolean newMode) {
     debugMode = newMode;
   }
 
@@ -50,7 +50,7 @@ class Phase {
     newRule.setInfo("" + phaseRules.size());
   }
 
-  public String printPhase() {
+  String printPhase() {
     StringBuilder sb = new StringBuilder();
     sb.append("  Phase ").append(info)
         .append(" has ").
@@ -63,7 +63,7 @@ class Phase {
     return sb.toString();
   }
 
-  public String runPhase(Phase phase, String inString) {
+  String runPhase(Phase phase, String inString) {
     // Run all the rules of this phase.
     StringBuilder outString = new StringBuilder();
     String midString = inString;

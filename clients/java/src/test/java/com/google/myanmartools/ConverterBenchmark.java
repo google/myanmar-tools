@@ -30,7 +30,7 @@ public class ConverterBenchmark {
 
   @Benchmark
   public int udhr_u2z(long reps) {
-    TransliterateU2Z converter = new TransliterateU2Z();
+    TransliterateU2Z converter = new TransliterateU2Z("U-->Z");
     int dummy = 0; // prevent loop from being optimized out
     for (long i = 0; i < reps; i++) {
       String output = converter.convert(unicodeInput);
@@ -41,7 +41,7 @@ public class ConverterBenchmark {
 
   @Benchmark
   public int udhr_z2u(long reps) {
-    TransliterateZ2U converter = new TransliterateZ2U();
+    TransliterateZ2U converter = new TransliterateZ2U("Z-->U");
     int dummy = 0; // prevent loop from being optimized out
     for (long i = 0; i < reps; i++) {
       String output = converter.convert(zawgyiInput);
