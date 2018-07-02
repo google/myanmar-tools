@@ -39,7 +39,7 @@ public class LoadTest {
 
   @Test
   public void udhr_u2z() {
-    TransliterateU2Z converter = new TransliterateU2Z();
+    TransliterateU2Z converter = new TransliterateU2Z("U-->Z");
     for (long i = 0; i < 1000; i++) {
       converter.convert(unicodeInput);
     }

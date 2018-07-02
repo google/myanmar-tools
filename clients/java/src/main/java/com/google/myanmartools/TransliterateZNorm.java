@@ -26,7 +26,9 @@ import com.google.myanmartools.Phase;
 import com.google.myanmartools.Rule;
 
 public class TransliterateZNorm extends Transliterate {
-  public TransliterateZNorm() {
+  public TransliterateZNorm(String id) {
+    // Set identifier for this instance
+    super(id);
 
     // Rules for phase 0
     Phase phase0 = addPhase();

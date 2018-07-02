@@ -25,9 +25,9 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class TransliterateTest {
 
-  private static final TransliterateU2Z u2Z = new TransliterateU2Z();
-  private static final TransliterateZNorm zNorm = new TransliterateZNorm();
-  private static final TransliterateZ2U z2U = new TransliterateZ2U();
+  private static final TransliterateU2Z u2Z = new TransliterateU2Z("Unicode to Zawgyi");
+  private static final TransliterateZNorm zNorm = new TransliterateZNorm("Normalize Zawgyi");
+  private static final TransliterateZ2U z2U = new TransliterateZ2U("Zawgyi to Unicode");
 
   // Test cases of {Zawgyi, Unicode} pairs, expected to interconvert.
   private final String[][] testCases = {

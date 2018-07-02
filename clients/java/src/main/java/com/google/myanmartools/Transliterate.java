@@ -31,13 +31,6 @@ public abstract class Transliterate {
 
   private boolean debugMode;  // Print details of execution.
 
-  // Creates a new transliterator.
-  Transliterate() {
-    translitPhases = new ArrayList<>();
-    name = "";
-    debugMode = false;
-  }
-
   Transliterate(String id) {
     translitPhases = new ArrayList<>();
     name = id;
@@ -56,10 +49,6 @@ public abstract class Transliterate {
     for (Phase phase :translitPhases) {
       phase.setDebugMode(debugMode);
     }
-  }
-
-  public boolean getDebugMode() {
-    return debugMode;
   }
 
   public String toString() {

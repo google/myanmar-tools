@@ -24,45 +24,45 @@ import java.util.regex.Pattern;
 class Rule {
 
   // Fields of the rule
-  public Pattern pattern;
-  public String substitution;
-  public boolean matchOnStart = false;
-  public int revisitPosition = -1;
-  public String info = "";  // Id number or other information.
-  public String contextBefore = "";
-  public String contextAfter = "";
+  Pattern pattern;
+  String substitution;
+  boolean matchOnStart = false;
+  int revisitPosition = -1;
+  String info = "";  // Id number or other information.
+  String contextBefore = "";
+  String contextAfter = "";
 
-  public Rule(String patternString, String substitutionString) {
+  Rule(String patternString, String substitutionString) {
     pattern = Pattern.compile("^" + patternString);
     substitution = substitutionString;
   }
 
-  public Rule setInfo(String ruleInfo) {
+  Rule setInfo(String ruleInfo) {
     info = ruleInfo;
     return this;
   }
 
-  public Rule setMatchOnStart() {
+  Rule setMatchOnStart() {
     matchOnStart = true;
     return this;
   }
 
-  public Rule setRevisitPosition(int newPos) {
+  Rule setRevisitPosition(int newPos) {
     revisitPosition = newPos;
     return this;
   }
 
-  public Rule setBeforeContext(String before) {
+  Rule setBeforeContext(String before) {
     contextBefore = before;
     return this;
   }
 
-  public Rule setAfterContext(String after) {
+  Rule setAfterContext(String after) {
     contextAfter = after;
     return this;
   }
 
-  public String printRule() {
+  String printRule() {
     String result = "    R " + info + " p: " + pattern + " s: " + substitution;
     if (matchOnStart) {
       result += " matchOnStart=True ";
