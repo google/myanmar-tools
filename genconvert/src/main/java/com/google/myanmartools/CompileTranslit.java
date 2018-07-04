@@ -393,7 +393,7 @@ public final class CompileTranslit {
     // Get the Unicode data input:
     String translitText = getTranslitFile(args[0]);
 
-    /* Use the ICU4J tra31nsliterator to preprocess rules, removing defines. */
+    /* Use the ICU4J transliterator to preprocess rules, removing defines. */
     String labelForTranslit = "label for transliterator";
     Transliterator transliterator =
         Transliterator.createFromRules(labelForTranslit,
