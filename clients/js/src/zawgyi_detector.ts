@@ -76,7 +76,7 @@ function checkMagicNumberAndVersion(stream: DataView, offset: number, expectedBi
     expectedBinaryTagTrail: number, expectedBinaryVersion: number): number {
     const binaryTagLead = stream.getUint32(offset);
     offset += 4;
-    if (binaryTagLead != expectedBinaryTagLead) {
+    if (binaryTagLead !== expectedBinaryTagLead) {
         throw new Error("Unexpected magic number lead; expected "
             + expectedBinaryTagLead.toString(16)
             + " but got "
@@ -84,7 +84,7 @@ function checkMagicNumberAndVersion(stream: DataView, offset: number, expectedBi
     }
     const binaryTagTrail = stream.getUint32(offset);
     offset += 4;
-    if (binaryTagTrail != expectedBinaryTagTrail) {
+    if (binaryTagTrail !== expectedBinaryTagTrail) {
         throw new Error("Unexpected magic number trail; expected "
             + expectedBinaryTagTrail.toString(16)
             + " but got "
@@ -92,7 +92,7 @@ function checkMagicNumberAndVersion(stream: DataView, offset: number, expectedBi
     }
     const binaryVersion = stream.getUint32(offset);
     offset += 4;
-    if (binaryVersion != expectedBinaryVersion) {
+    if (binaryVersion !== expectedBinaryVersion) {
         throw new Error("Unexpected serial version number; expected "
             + expectedBinaryVersion.toString(16)
             + " but got "
@@ -102,32 +102,32 @@ function checkMagicNumberAndVersion(stream: DataView, offset: number, expectedBi
 }
 
 // This is different on Node vs Browser.
-var getArrayBuffer: () => ArrayBuffer;
+let getArrayBuffer: () => ArrayBuffer;
 
 // @if NODEJS
-getArrayBuffer = function () {
+getArrayBuffer = () => {
     // Buffer is defined on Node
     // @ts-ignore
-    let nodeBuffer = new Buffer(DATA, "base64");
-    let arrayBuffer = new ArrayBuffer(nodeBuffer.length);
-    let u8view = new Uint8Array(arrayBuffer);
+    const nodeBuffer = new Buffer(DATA, "base64");
+    const arrayBuffer = new ArrayBuffer(nodeBuffer.length);
+    const u8view = new Uint8Array(arrayBuffer);
     for (let i = 0; i < nodeBuffer.length; i++) {
         u8view[i] = nodeBuffer[i];
     }
     return arrayBuffer;
-}
+};
 // @endif
 
 // @if !NODEJS
-getArrayBuffer = function () {
-    let binaryString = atob(DATA);
-    let arrayBuffer = new ArrayBuffer(binaryString.length);
-    let u8view = new Uint8Array(arrayBuffer);
+getArrayBuffer = () => {
+    const binaryString = atob(DATA);
+    const arrayBuffer = new ArrayBuffer(binaryString.length);
+    const u8view = new Uint8Array(arrayBuffer);
     for (let i = 0; i < binaryString.length; i++) {
         u8view[i] = binaryString.charCodeAt(i);
     }
     return arrayBuffer;
-}
+};
 // @endif
 
 class BinaryMarkov {
@@ -141,7 +141,7 @@ class BinaryMarkov {
 
     private logProbabilityDifferences: number[][];
 
-    public constructor(stream: DataView, offset: number) {
+    constructor(stream: DataView, offset: number) {
         // @if NODEJS
         offset = checkMagicNumberAndVersion(stream,
             offset,
@@ -162,7 +162,7 @@ class BinaryMarkov {
             let entries = stream.getInt16(offset);
             offset += 2;
             let fallback: number;
-            if (entries == 0) {
+            if (entries === 0) {
                 fallback = 0.0;
             } else {
                 fallback = stream.getFloat32(offset);
@@ -175,7 +175,7 @@ class BinaryMarkov {
                     offset += 2;
                     entries--;
                 }
-                if (next == i2) {
+                if (next === i2) {
                     logProbabilityDifferences[i1][i2] = stream.getFloat32(offset);
                     offset += 4;
                 } else {
@@ -186,7 +186,7 @@ class BinaryMarkov {
         this.logProbabilityDifferences = logProbabilityDifferences;
     }
 
-    public getLogProbabilityDifference(i1: number, i2: number): number {
+    getLogProbabilityDifference(i1: number, i2: number): number {
         return this.logProbabilityDifferences[i1][i2];
     }
 }
@@ -202,7 +202,7 @@ class ZawgyiUnicodeMarkovModel {
 
     private classifier: BinaryMarkov;
 
-    public constructor(stream: DataView, offset: number) {
+    constructor(stream: DataView, offset: number) {
         // @if NODEJS
         offset = checkMagicNumberAndVersion(stream,
             offset,
@@ -226,16 +226,16 @@ class ZawgyiUnicodeMarkovModel {
         let seenTransition = false;
         for (let offset = 0; offset <= input.length; offset++) {
             let currState;
-            if (offset == input.length) {
+            if (offset === input.length) {
                 currState = 0;
             } else {
                 // Note: All interesting characters are in the BMP.
-                let cp = input.charCodeAt(offset);
+                const cp = input.charCodeAt(offset);
                 currState = getIndexForCodePoint(cp);
             }
             // Ignore 0-to-0 transitions
-            if (prevState != 0 || currState != 0) {
-                let delta = this.classifier.getLogProbabilityDifference(prevState, currState);
+            if (prevState !== 0 || currState !== 0) {
+                const delta = this.classifier.getLogProbabilityDifference(prevState, currState);
                 totalDelta += delta;
                 seenTransition = true;
             }
@@ -260,9 +260,9 @@ export class ZawgyiDetector {
     private model: ZawgyiUnicodeMarkovModel;
 
     /** Loads the model from the resource and returns a ZawgyiDetector instance. */
-    public constructor() {
+    constructor() {
         // Convert the Base64 to an ArrayBuffer.
-        let arrayBuffer = getArrayBuffer();
+        const arrayBuffer = getArrayBuffer();
         this.model = new ZawgyiUnicodeMarkovModel(new DataView(arrayBuffer, 0), 0);
     }
 
@@ -277,7 +277,7 @@ export class ZawgyiDetector {
      * @return The probability that the string is Zawgyi (between 0 and 1), or -Infinity if the string
      *     contains no Myanmar range code points.
      */
-    public getZawgyiProbability(input: string): number {
+    getZawgyiProbability(input: string): number {
         return this.model.predict(input);
     }
 }
