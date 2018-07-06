@@ -162,12 +162,12 @@ public final class CompileTranslit {
   }
 
   static private class TranslitPhase {
-    private List<TranslitRule> phaseRules;
+    private final List<TranslitRule> phaseRules;
 
     public TranslitPhase(String phaseStrings) {
-      phaseRules = new ArrayList<TranslitRule>();
+      phaseRules = new ArrayList<>();
 
-      String rules[] = phaseStrings.split(";");
+      String[] rules = phaseStrings.split(";", -1);
 
       for (String rule : rules) {
         TranslitRule newRule = new TranslitRule();
@@ -178,17 +178,17 @@ public final class CompileTranslit {
   }
 
   static private class AllPhases {
-    private ArrayList<TranslitPhase> phases;
+    private final ArrayList<TranslitPhase> phases;
 
     private String description;
 
     public AllPhases(String allPhases) {
-      phases = new ArrayList<TranslitPhase>();
+      phases = new ArrayList<>();
 
       // Handle each phase string
       //   a. split into rules with " > "
       //   b. remove extra spaces in output.
-      String inPhases[] = allPhases.split("::Null;");
+      String[] inPhases = allPhases.split("::Null;", -1);
 
       for (String phase : inPhases) {
         // Add phase object.
@@ -204,7 +204,7 @@ public final class CompileTranslit {
 
     // The functions reused in the JS implementation.
     public ArrayList<String> javascriptBasicStuff(String inputFilename, String nameSuffix) {
-      ArrayList<String> jsOutput = new ArrayList<String>();
+      ArrayList<String> jsOutput = new ArrayList<>();
 
       jsOutput.add("// Input path: " + inputFilename + "\n");
       jsOutput.add("function getAllRules" + nameSuffix + "() {\n");
@@ -224,7 +224,7 @@ public final class CompileTranslit {
         jsOutput.add("  var rules" + phaseNum + " = [\n");
 
         for (TranslitRule rule: phase.phaseRules) {
-          if (rule.rulePattern != null && rule.rulePattern.substring(0,1) != "\n") {
+          if (rule.rulePattern != null && !"\n".equals(rule.rulePattern.substring(0,1))) {
             jsOutput.add("    {\n");
 
             if (rule.afterContext.length() == 0) {
@@ -268,7 +268,7 @@ public final class CompileTranslit {
       StringBuilder sb = new StringBuilder();
       sb.append("  return [");
       for (int phaseId = 0; phaseId < phaseNum; phaseId ++) {
-        sb.append("rules" + phaseId);
+        sb.append("rules").append(phaseId);
         if (phaseId < phaseNum - 1) {
           sb.append(", ");
         }
@@ -283,7 +283,7 @@ public final class CompileTranslit {
     }
 
     public ArrayList<String> javaBasicStuff(String inputFilename, String nameSuffix) {
-      ArrayList<String> jsOutput = new ArrayList<String>();
+      ArrayList<String> jsOutput = new ArrayList<>();
 
       jsOutput.add("/* Copyright 2018 Google LLC\n");
       jsOutput.add(" *\n");
