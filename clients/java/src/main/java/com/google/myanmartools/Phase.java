@@ -107,7 +107,7 @@ class Phase {
             if (rule.revisitPosition < 0) {
               // Reset the new position to the end of the subsitution.
               int newStart = midString.length() - rightPartSize;
-              outString.append(midString.substring(0, newStart));
+              outString.append(midString, 0, newStart);
               midString = midString.substring(newStart);
             }
           }
