@@ -180,8 +180,6 @@ public final class CompileTranslit {
   static private class AllPhases {
     private final ArrayList<TranslitPhase> phases;
 
-    private String description;
-
     public AllPhases(String allPhases) {
       phases = new ArrayList<>();
 
