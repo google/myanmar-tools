@@ -198,10 +198,6 @@ public final class CompileTranslit {
 
     }
 
-    public void SetDescription(String desc) {
-      description = desc;
-    }
-
     // The functions reused in the JS implementation.
     public ArrayList<String> javascriptBasicStuff(String inputFilename, String nameSuffix) {
       ArrayList<String> jsOutput = new ArrayList<>();
