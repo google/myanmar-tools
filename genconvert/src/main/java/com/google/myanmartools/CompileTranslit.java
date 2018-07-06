@@ -350,10 +350,10 @@ public final class CompileTranslit {
               out.add("\n          .setRevisitPosition(" + rule.revisitPosition + ")");
             }
             if (rule.beforeContext.length() > 0) {
-              out.add("\n          .setBeforeContext(" + rule.beforeContext + ")");
+              out.add("\n          .setBeforeContext(\"" + rule.beforeContext + "\")");
             }
             if (rule.afterContext.length() > 0) {
-              out.add("\n          .setAfterContext(" + rule.afterContext + ")");
+              out.add("\n          .setAfterContext(\"" + rule.afterContext + "\")");
             }
             out.add(");\n");
           }
