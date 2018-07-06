@@ -51,6 +51,7 @@ public abstract class Transliterate {
     }
   }
 
+  @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("Transliterator name = ").append(name).append("\n");
@@ -65,8 +66,8 @@ public abstract class Transliterate {
    * Apply the transliteration to the input string,
    * returning the converted result.
    */
-  public String convert(String inString) {
-    return runAllPhases(inString);
+  public String convert(CharSequence inString) {
+    return runAllPhases(inString.toString());
   }
 
   private String runAllPhases(String inString) {
