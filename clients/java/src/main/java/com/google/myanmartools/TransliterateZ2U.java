@@ -25,7 +25,7 @@ import com.google.myanmartools.Transliterate;
 import com.google.myanmartools.Phase;
 import com.google.myanmartools.Rule;
 
-public class TransliterateZ2U extends Transliterate {
+public final class TransliterateZ2U extends Transliterate {
   public TransliterateZ2U(String id) {
     // Set identifier for this instance
     super(id);
