@@ -15,9 +15,16 @@
 
 package com.google.myanmartools;
 
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
-public class DummyTest {
+public class PlaceholderTest {
+  @Test
+  @Ignore
+  public void test() {
+    // TODO: Implement a test that runs CompileTranslit.
+  }
 }

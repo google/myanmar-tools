@@ -10,6 +10,15 @@ matrix:
       script:
         - mvn test
 
+    # Generate-Converter Project
+    - language: java
+      jdk: openjdk8  # minimum supported version
+      before_script:
+        - cd training
+        - mvn compile
+      script:
+        - mvn test
+
     # C++ Client
     - language: cpp
       compiler: gcc
