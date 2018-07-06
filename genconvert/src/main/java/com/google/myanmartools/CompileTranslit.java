@@ -314,7 +314,7 @@ public final class CompileTranslit {
       jsOutput.add("\n");
 
       String className = "Transliterate" + nameSuffix;
-      jsOutput.add("public class " + className + " extends Transliterate {\n");
+      jsOutput.add("public final class " + className + " extends Transliterate {\n");
 
       jsOutput.add("  public " + className + "(String id) {\n");
       jsOutput.add("    // Set identifier for this instance\n");

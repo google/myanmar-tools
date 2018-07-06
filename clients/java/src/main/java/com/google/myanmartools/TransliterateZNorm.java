@@ -25,7 +25,7 @@ import com.google.myanmartools.Transliterate;
 import com.google.myanmartools.Phase;
 import com.google.myanmartools.Rule;
 
-public class TransliterateZNorm extends Transliterate {
+public final class TransliterateZNorm extends Transliterate {
   public TransliterateZNorm(String id) {
     // Set identifier for this instance
     super(id);
