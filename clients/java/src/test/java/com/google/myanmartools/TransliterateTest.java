@@ -613,7 +613,7 @@ public class TransliterateTest {
                   "  input  = " + unicodeToHex(u1) + "\n" +
                   "  output = " + unicodeToHex(r1);
 
-    assertWithMessage("line").that(r1).isEqualTo(z1);
+    assertWithMessage(line).that(r1).isEqualTo(z1);
   }
 
   @Test
