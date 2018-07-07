@@ -210,7 +210,7 @@ class ZawgyiUnicodeMarkovModel
 
     public static function ord_utf8($c)
     {
-        if (empty($c))
+        if (is_null($c) || $c === "")
             return;
 
         $u32 = mb_convert_encoding($c, "UTF-32BE");
