@@ -44,6 +44,18 @@ const SPC_OFFSET = EXB_OFFSET + EXB_CP1 - EXB_CP0 + 1;
 const NUM_STATES = SPC_OFFSET + SPC_CP1 - SPC_CP0 + 1;
 
 /**
+ * SSV: An ID representing which Unicode code points to include in the model:
+ *
+ * <p>SSV_STD_EXA_EXB_SPC - include Myanmar, Extended A, Extended B, and space-like
+ * <p>STD_EXA_EXB - same as above but no space-like code points
+ *
+ * <p>"SSV" originally stands for State Set Version.
+ */
+const SSV_STD_EXA_EXB_SPC = 0;
+const SSV_STD_EXA_EXB = 1;
+const SSV_COUNT = 2;
+
+/**
  * Returns the index of the state in the Markov chain corresponding to the given code point.
  *
  * <p>Code points in the standard Myanmar range, Myanmar Extended A, Myanmar Extended B, and
@@ -53,7 +65,7 @@ const NUM_STATES = SPC_OFFSET + SPC_CP1 - SPC_CP0 + 1;
  * @param cp The code point to convert to a state index.
  * @return The index of the state in the Markov chain. 0 <= state < getSize()
  */
-function getIndexForCodePoint(cp: number): number {
+function getIndexForCodePoint(cp: number, ssv: number): number {
     if (STD_CP0 <= cp && cp <= STD_CP1) {
         return cp - STD_CP0 + STD_OFFSET;
     }
@@ -66,7 +78,7 @@ function getIndexForCodePoint(cp: number): number {
     if (EXB_CP0 <= cp && cp <= EXB_CP1) {
         return cp - EXB_CP0 + EXB_OFFSET;
     }
-    if (SPC_CP0 <= cp && cp <= SPC_CP1) {
+    if (ssv == SSV_STD_EXA_EXB_SPC && SPC_CP0 <= cp && cp <= SPC_CP1) {
         return cp - SPC_CP0 + SPC_OFFSET;
     }
     return 0;
@@ -90,13 +102,16 @@ function checkMagicNumberAndVersion(stream: DataView, offset: number, expectedBi
             + " but got "
             + binaryTagTrail.toString(16));
     }
-    const binaryVersion = stream.getUint32(offset);
-    offset += 4;
-    if (binaryVersion !== expectedBinaryVersion) {
-        throw new Error("Unexpected serial version number; expected "
-            + expectedBinaryVersion.toString(16)
-            + " but got "
-            + binaryVersion.toString(16));
+    // If expectedBinaryVersion is -1, don't check or consume it.
+    if (expectedBinaryVersion !== -1) {
+        const binaryVersion = stream.getUint32(offset);
+        offset += 4;
+        if (binaryVersion !== expectedBinaryVersion) {
+            throw new Error("Unexpected serial version number; expected "
+                + expectedBinaryVersion.toString(16)
+                + " but got "
+                + binaryVersion.toString(16));
+        }
     }
     return offset;
 }
@@ -197,10 +212,8 @@ class ZawgyiUnicodeMarkovModel {
     private static BINARY_TAG_LEAD = 0x555A4D4F;
     private static BINARY_TAG_TRAIL = 0x44454C20;
 
-    // Current serial format version number, used in association with the magic number.
-    private static BINARY_VERSION = 1;
-
     private classifier: BinaryMarkov;
+    private ssv: number;
 
     constructor(stream: DataView, offset: number) {
         // @if NODEJS
@@ -208,12 +221,25 @@ class ZawgyiUnicodeMarkovModel {
             offset,
             ZawgyiUnicodeMarkovModel.BINARY_TAG_LEAD,
             ZawgyiUnicodeMarkovModel.BINARY_TAG_TRAIL,
-            ZawgyiUnicodeMarkovModel.BINARY_VERSION);
+            -1);
         // @endif
         // @if !NODEJS
         // Don't include the magic number checking code in a minified build
-        offset += 12;
+        offset += 8;
         // @endif
+
+        const binaryVersion = stream.getUint32(offset);
+        offset += 4;
+        if (binaryVersion === 1) {
+            // No SSV field
+            this.ssv = 0;
+        } else if (binaryVersion === 2) {
+            this.ssv = stream.getUint32(offset);
+            offset += 4;
+        } else {
+            throw new Error("Serial version: expected 1 or 2 but got "
+                + binaryVersion.toString(16));
+        }
 
         this.classifier = new BinaryMarkov(stream, offset);
     }
@@ -231,7 +257,7 @@ class ZawgyiUnicodeMarkovModel {
             } else {
                 // Note: All interesting characters are in the BMP.
                 const cp = input.charCodeAt(offset);
-                currState = getIndexForCodePoint(cp);
+                currState = getIndexForCodePoint(cp, this.ssv);
             }
             // Ignore 0-to-0 transitions
             if (prevState !== 0 || currState !== 0) {
