@@ -103,79 +103,83 @@ public final class TransliterateZ2U extends Transliterate {
 
     // Rules for phase 1
     Phase phase1 = addPhase();
-    phase1.addRule(new Rule("([    -‍⁠  　﻿])\u1037", "\u1037$1"));
-    phase1.addRule(new Rule("([    -‍⁠  　﻿]+)([\u102B-\u1030\u1032-\u103B\u103D\u103E])", "$2"));
-    phase1.addRule(new Rule("\u1037+", "\u1037"));
-    phase1.addRule(new Rule("\u1031+\u1004\u103A\u1039([\u1000-\u1021])", "\u1004\u103A\u1039$1\u1031"));
-    phase1.addRule(new Rule("\u1031+\u1037+([\u1000-\u1021])", "$1\u1031\u1037"));
-    phase1.addRule(new Rule("\u1031+\u103C([\u1000-\u1021])", "$1\u103C\u1031"));
-    phase1.addRule(new Rule("\u1031+([\u1000-\u1021])([\u103B-\u103E]+)", "$1$2\u1031"));
-    phase1.addRule(new Rule("\u1031+([\u1000-\u102A])", "$1\u1031"));
+    phase1.addRule(new Rule("\u1040([^\u1040-\u1049])", "\u101D$1")
+          .setMatchOnStart());
+    phase1.addRule(new Rule("\u1044([^\u1040-\u1049])", "\u104E$1")
+          .setMatchOnStart()
+          .setRevisitPosition(0));
+    phase1.addRule(new Rule("([\u102B-\u103F])\u1040([^\u1040-\u1049])", "$1\u101D$2"));
+    phase1.addRule(new Rule("([\u102B-\u103F])\u1044([^\u1040-\u1049])", "$1\u104E$2"));
 
     // Rules for phase 2
     Phase phase2 = addPhase();
-    phase2.addRule(new Rule("\u103B\u103A", "\u103A\u103B"));
-    phase2.addRule(new Rule("\u1040([^\u1040-\u1049])", "\u101D$1")
-          .setMatchOnStart());
-    phase2.addRule(new Rule("([\u102B-\u103F])\u1040([^\u1040-\u1049])", "$1\u101D$2"));
-    phase2.addRule(new Rule("\u1044([^\u1040-\u1049])", "\u104E$1")
-          .setMatchOnStart()
-          .setRevisitPosition(0));
-    phase2.addRule(new Rule("([\u102B-\u103F])\u1044([^\u1040-\u1049])", "$1\u104E$2"));
-    phase2.addRule(new Rule("\u1025\u102E", "\u1026"));
-    phase2.addRule(new Rule("\u103A\u1037", "\u1037\u103A"));
-    phase2.addRule(new Rule("\u1036([\u103B-\u103E]*)([\u102B-\u1030\u1032]+)", "$1$2\u1036"));
-    phase2.addRule(new Rule("([\u102B\u102C\u102F\u1030])([\u102D\u102E\u1032])", "$2$1"));
-    phase2.addRule(new Rule("\u103C([\u1000-\u1021])", "$1\u103C"));
-    phase2.addRule(new Rule("\u1005\u103B", "\u1008"));
+    phase2.addRule(new Rule("([    -‍⁠  　﻿])\u1037", "\u1037$1"));
+    phase2.addRule(new Rule("([    -‍⁠  　﻿]+)([\u102B-\u1030\u1032-\u103B\u103D\u103E])", "$2"));
+    phase2.addRule(new Rule("\u1037+", "\u1037"));
+    phase2.addRule(new Rule("\u1031+\u1004\u103A\u1039([\u1000-\u1021])", "\u1004\u103A\u1039$1\u1031"));
+    phase2.addRule(new Rule("\u1031+\u1037+([\u1000-\u1021])", "$1\u1031\u1037"));
+    phase2.addRule(new Rule("\u1031+\u103C([\u1000-\u1021])", "$1\u103C\u1031"));
+    phase2.addRule(new Rule("\u1031+([\u1000-\u1021])([\u103B\u103D\u103E]+)", "$1$2\u1031"));
+    phase2.addRule(new Rule("\u1031+([\u1000-\u102A])", "$1\u1031"));
 
     // Rules for phase 3
     Phase phase3 = addPhase();
-    phase3.addRule(new Rule("([\u103B-\u103E])\u1039([\u1000-\u1021])", "\u1039$2$1"));
-    phase3.addRule(new Rule("\u103C\u103A\u1039([\u1000-\u1021])", "\u103A\u1039$1\u103C"));
-    phase3.addRule(new Rule("\u1036([\u103B-\u103E]+)", "$1\u1036"));
+    phase3.addRule(new Rule("\u103B\u103A", "\u103A\u103B"));
+    phase3.addRule(new Rule("\u1025\u102E", "\u1026"));
+    phase3.addRule(new Rule("\u103A\u1037", "\u1037\u103A"));
+    phase3.addRule(new Rule("\u1036([\u103B-\u103E]*)([\u102B-\u1030\u1032]+)", "$1$2\u1036"));
+    phase3.addRule(new Rule("([\u102B\u102C\u102F\u1030])([\u102D\u102E\u1032])", "$2$1"));
+    phase3.addRule(new Rule("\u103C([\u1000-\u1021])", "$1\u103C"));
+    phase3.addRule(new Rule("\u1005\u103B", "\u1008"));
 
     // Rules for phase 4
     Phase phase4 = addPhase();
-    phase4.addRule(new Rule("([\u103C-\u103E]+)\u103B", "\u103B$1"));
-    phase4.addRule(new Rule("([\u103D\u103E]+)\u103C", "\u103C$1"));
-    phase4.addRule(new Rule("\u103E\u103D", "\u103D\u103E"));
-    phase4.addRule(new Rule("([\u1031]+)([\u102B-\u1030\u1032]*)\u1039([\u1000-\u1021])", "\u1039$3$1$2"));
-    phase4.addRule(new Rule("([\u102B-\u1030\u1032]+)\u1039([\u1000-\u1021])", "\u1039$2$1"));
-    phase4.addRule(new Rule("([\u103B-\u103E]*)([\u1031]+)([\u103B-\u103E]*)", "$1$3$2"));
-    phase4.addRule(new Rule("\u1037([\u102D-\u1030\u1032\u1036\u103B-\u103E]+)", "$1\u1037"));
-    phase4.addRule(new Rule("([\u102B-\u1030\u1032]+)([\u103B-\u103E]+)", "$2$1"));
-    phase4.addRule(new Rule("([\u1000-\u1021])([\u102B-\u1032\u1036\u103B-\u103E])\u103A([\u1000-\u1021])", "$1\u103A$2$3"));
+    phase4.addRule(new Rule("([\u103B-\u103E])\u1039([\u1000-\u1021])", "\u1039$2$1"));
+    phase4.addRule(new Rule("\u103C\u103A\u1039([\u1000-\u1021])", "\u103A\u1039$1\u103C"));
+    phase4.addRule(new Rule("\u1036([\u103B-\u103E]+)", "$1\u1036"));
 
     // Rules for phase 5
     Phase phase5 = addPhase();
-    phase5.addRule(new Rule("([\u102B-\u1032])([\u103B-\u103E])", "$2$1"));
-    phase5.addRule(new Rule("([\u103C-\u103E])\u103B", "\u103B$1"));
-    phase5.addRule(new Rule("([\u103D\u103E])\u103C", "\u103C$1"));
+    phase5.addRule(new Rule("([\u103C-\u103E]+)\u103B", "\u103B$1"));
+    phase5.addRule(new Rule("([\u103D\u103E]+)\u103C", "\u103C$1"));
     phase5.addRule(new Rule("\u103E\u103D", "\u103D\u103E"));
-    phase5.addRule(new Rule("\u1038([\u000136u\u102B-\u1030\u1032\u1037\u103A-\u103F])", "$1\u1038"));
-    phase5.addRule(new Rule("\u1036\u102F", "\u102F\u1036"));
+    phase5.addRule(new Rule("([\u1031]+)([\u102B-\u1030\u1032]*)\u1039([\u1000-\u1021])", "\u1039$3$1$2"));
+    phase5.addRule(new Rule("([\u102B-\u1030\u1032]+)\u1039([\u1000-\u1021])", "\u1039$2$1"));
+    phase5.addRule(new Rule("([\u103B-\u103E]*)([\u1031]+)([\u103B-\u103E]*)", "$1$3$2"));
+    phase5.addRule(new Rule("\u1037([\u102D-\u1030\u1032\u1036\u103B-\u103E]+)", "$1\u1037"));
+    phase5.addRule(new Rule("([\u102B-\u1030\u1032]+)([\u103B-\u103E]+)", "$2$1"));
+    phase5.addRule(new Rule("([\u1000-\u1021])([\u102B-\u1032\u1036\u103B-\u103E])\u103A([\u1000-\u1021])", "$1\u103A$2$3"));
 
     // Rules for phase 6
     Phase phase6 = addPhase();
-    phase6.addRule(new Rule("\u102D\u102D+", "\u102D"));
-    phase6.addRule(new Rule("\u102E\u102E+", "\u102E"));
-    phase6.addRule(new Rule("\u102F\u102F+", "\u102F"));
-    phase6.addRule(new Rule("\u1030\u1030+", "\u1030"));
-    phase6.addRule(new Rule("\u1032\u1032+", "\u1032"));
-    phase6.addRule(new Rule("\u1033\u1033+", "\u1033"));
-    phase6.addRule(new Rule("\u1035\u1035+", "\u1035"));
-    phase6.addRule(new Rule("\u1036\u1036+", "\u1036"));
-    phase6.addRule(new Rule("\u1037\u1037+", "\u1037"));
-    phase6.addRule(new Rule("\u1039\u1039+", "\u1039"));
-    phase6.addRule(new Rule("\u103A\u103A+", "\u103A"));
-    phase6.addRule(new Rule("\u103B\u103B+", "\u103B"));
-    phase6.addRule(new Rule("\u103C\u103C+", "\u103C"));
-    phase6.addRule(new Rule("\u103D\u103D+", "\u103D"));
-    phase6.addRule(new Rule("\u103E\u103E+", "\u103E"));
-    phase6.addRule(new Rule("\u102F[\u1030\u103A]", "\u102F"));
-    phase6.addRule(new Rule("\u102D\u102E", "\u102E"));
-    phase6.addRule(new Rule("[    -‍⁠  　﻿]+([\u102B-\u1032\u1036-\u103E])", "$1"));
+    phase6.addRule(new Rule("([\u102B-\u1032])([\u103B-\u103E])", "$2$1"));
+    phase6.addRule(new Rule("([\u103C-\u103E])\u103B", "\u103B$1"));
+    phase6.addRule(new Rule("([\u103D\u103E])\u103C", "\u103C$1"));
+    phase6.addRule(new Rule("\u103E\u103D", "\u103D\u103E"));
+    phase6.addRule(new Rule("\u1038([\u000136u\u102B-\u1030\u1032\u1037\u103A-\u103F])", "$1\u1038"));
+    phase6.addRule(new Rule("\u1036\u102F", "\u102F\u1036"));
+
+    // Rules for phase 7
+    Phase phase7 = addPhase();
+    phase7.addRule(new Rule("\u102D\u102D+", "\u102D"));
+    phase7.addRule(new Rule("\u102E\u102E+", "\u102E"));
+    phase7.addRule(new Rule("\u102F\u102F+", "\u102F"));
+    phase7.addRule(new Rule("\u1030\u1030+", "\u1030"));
+    phase7.addRule(new Rule("\u1032\u1032+", "\u1032"));
+    phase7.addRule(new Rule("\u1033\u1033+", "\u1033"));
+    phase7.addRule(new Rule("\u1035\u1035+", "\u1035"));
+    phase7.addRule(new Rule("\u1036\u1036+", "\u1036"));
+    phase7.addRule(new Rule("\u1037\u1037+", "\u1037"));
+    phase7.addRule(new Rule("\u1039\u1039+", "\u1039"));
+    phase7.addRule(new Rule("\u103A\u103A+", "\u103A"));
+    phase7.addRule(new Rule("\u103B\u103B+", "\u103B"));
+    phase7.addRule(new Rule("\u103C\u103C+", "\u103C"));
+    phase7.addRule(new Rule("\u103D\u103D+", "\u103D"));
+    phase7.addRule(new Rule("\u103E\u103E+", "\u103E"));
+    phase7.addRule(new Rule("\u102F[\u1030\u103A]", "\u102F"));
+    phase7.addRule(new Rule("\u102D\u102E", "\u102E"));
+    phase7.addRule(new Rule("[    -‍⁠  　﻿]+([\u102B-\u1032\u1036-\u103E])", "$1"));
+    phase7.addRule(new Rule("\u200B+", ""));
   }
 }
 // END OF TRANSLITERATION RULES

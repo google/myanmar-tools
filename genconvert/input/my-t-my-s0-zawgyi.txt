@@ -131,6 +131,20 @@ $zmedialra = [\u103B\u107E-\u1084];
 
 
 ####
+#### STAGE 1.01: Digits 0 and 4 used instead of letters
+# Case of MYANMAR digit being used instead of a letter
+# Lone digit zero and four at start
+::Null;
+^ \u1040 ($nondigits) → \u101D $1;
+^ \u1044 ($nondigits) → | \u104E $1 ;
+
+# Evowel and dependent vowel signs before 0 or 4 only
+#   -> convert to the consonant.
+([\u102b-\u103f]) \u1040 ($nondigits) → $1 \u101d $2;
+([\u102b-\u103f]) \u1044 ($nondigits) → $1 \u104E $2;
+
+
+####
 #### STAGE 1.1: Strip spaces immediately before combining characters.
 ####   Move e-vowel after consonants and medials
 ####   Now every codepoint is Unicode.  This starts conversion
@@ -150,7 +164,9 @@ $zmedialra = [\u103B\u107E-\u1084];
 \u1031+ \u1037+ ($consonant) > $1 \u1031 \u1037 ;
 \u1031+ \u103c ($consonant) > $1 \u103c \u1031;
 
-\u1031+ ($consonant) ($umedial+) > $1 $2 \u1031;
+# Move medials other than 103c before the 1031. Leave 103c for
+# the next consonant.
+\u1031+ ($consonant) ([\u103b\u103d\u103e]+) > $1 $2 \u1031;
 \u1031+ ($vowelsAndConsonants) > $1 \u1031;
 
 
@@ -160,17 +176,6 @@ $zmedialra = [\u103B\u107E-\u1084];
 ::Null;
 
 \u103b \u103a > \u103a \u103b;
-
-# Case of MYANMAR digit being used instead of a letter
-# Lone digit zero at start
-^ \u1040 ($nondigits) → \u101D $1;
-
-# Evowel before 0 only -> convert to the consonant.
-([\u102b-\u103f]) \u1040 ($nondigits) → $1 \u101d $2;
-
-# Lone digit 4
-^ \u1044 ($nondigits) → | \u104E $1 ;
-([\u102b-\u103f]) \u1044 ($nondigits) → $1 \u104E $2;
 
 # Simpler replacements for Zawgyi 1025
 \u1025 \u102E → \u1026;
@@ -279,3 +284,7 @@ $zmedialra = [\u103B\u107E-\u1084];
 
 # Remove space directly before diacritics.
 [:WSpace:]+ ([\u102b-\u1032\u1036-\u103e]) → $1;
+
+# Fix multiple white spaces to a single ASCII space.
+\u200b+ → ;
+

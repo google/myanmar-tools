@@ -277,6 +277,27 @@ function getAllRulesZ2U() {
   ];
   var rules1 = [
     {
+      p: RegExp('^' + '\u1040([^\u1040-\u1049])'),
+      s: '\u101D$1',
+      matchOnStart: 'true',
+    },
+    {
+      p: RegExp('^' + '\u1044([^\u1040-\u1049])'),
+      s: '\u104E$1',
+      matchOnStart: 'true',
+      revisit: 0,
+    },
+    {
+      p: RegExp('^' + '([\u102B-\u103F])\u1040([^\u1040-\u1049])'),
+      s: '$1\u101D$2',
+    },
+    {
+      p: RegExp('^' + '([\u102B-\u103F])\u1044([^\u1040-\u1049])'),
+      s: '$1\u104E$2',
+    },
+  ];
+  var rules2 = [
+    {
       p: RegExp('^' + '([    -‍⁠  　﻿])\u1037'),
       s: '\u1037$1',
     },
@@ -301,7 +322,7 @@ function getAllRulesZ2U() {
       s: '$1\u103C\u1031',
     },
     {
-      p: RegExp('^' + '\u1031+([\u1000-\u1021])([\u103B-\u103E]+)'),
+      p: RegExp('^' + '\u1031+([\u1000-\u1021])([\u103B\u103D\u103E]+)'),
       s: '$1$2\u1031',
     },
     {
@@ -309,29 +330,10 @@ function getAllRulesZ2U() {
       s: '$1\u1031',
     },
   ];
-  var rules2 = [
+  var rules3 = [
     {
       p: RegExp('^' + '\u103B\u103A'),
       s: '\u103A\u103B',
-    },
-    {
-      p: RegExp('^' + '\u1040([^\u1040-\u1049])'),
-      s: '\u101D$1',
-      matchOnStart: 'true',
-    },
-    {
-      p: RegExp('^' + '([\u102B-\u103F])\u1040([^\u1040-\u1049])'),
-      s: '$1\u101D$2',
-    },
-    {
-      p: RegExp('^' + '\u1044([^\u1040-\u1049])'),
-      s: '\u104E$1',
-      matchOnStart: 'true',
-      revisit: 0,
-    },
-    {
-      p: RegExp('^' + '([\u102B-\u103F])\u1044([^\u1040-\u1049])'),
-      s: '$1\u104E$2',
     },
     {
       p: RegExp('^' + '\u1025\u102E'),
@@ -358,7 +360,7 @@ function getAllRulesZ2U() {
       s: '\u1008',
     },
   ];
-  var rules3 = [
+  var rules4 = [
     {
       p: RegExp('^' + '([\u103B-\u103E])\u1039([\u1000-\u1021])'),
       s: '\u1039$2$1',
@@ -372,7 +374,7 @@ function getAllRulesZ2U() {
       s: '$1\u1036',
     },
   ];
-  var rules4 = [
+  var rules5 = [
     {
       p: RegExp('^' + '([\u103C-\u103E]+)\u103B'),
       s: '\u103B$1',
@@ -410,7 +412,7 @@ function getAllRulesZ2U() {
       s: '$1\u103A$2$3',
     },
   ];
-  var rules5 = [
+  var rules6 = [
     {
       p: RegExp('^' + '([\u102B-\u1032])([\u103B-\u103E])'),
       s: '$2$1',
@@ -436,7 +438,7 @@ function getAllRulesZ2U() {
       s: '\u102F\u1036',
     },
   ];
-  var rules6 = [
+  var rules7 = [
     {
       p: RegExp('^' + '\u102D\u102D+'),
       s: '\u102D',
@@ -509,7 +511,11 @@ function getAllRulesZ2U() {
       p: RegExp('^' + '[    -‍⁠  　﻿]+([\u102B-\u1032\u1036-\u103E])'),
       s: '$1',
     },
+    {
+      p: RegExp('^' + '\u200B+'),
+      s: '',
+    },
   ];
-  return [rules0, rules1, rules2, rules3, rules4, rules5, rules6];
+  return [rules0, rules1, rules2, rules3, rules4, rules5, rules6, rules7];
 }
 // END OF TRANSLITERATION RULES
