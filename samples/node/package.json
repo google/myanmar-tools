@@ -4,7 +4,6 @@
   "description": "Sample for how to use myanmar-tools.",
   "main": "index.js",
   "dependencies": {
-    "myanmar-tools": "latest",
-    "rabbit-node": "^1.0.2"
+    "myanmar-tools": "latest"
   }
 }

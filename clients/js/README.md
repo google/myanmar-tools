@@ -19,15 +19,16 @@ const score = detector.getZawgyiProbability("မ္း");
 // score is now 0.999772 (very likely Zawgyi)
 ```
 
-To convert Zawgyi to Unicode, you can look at [third-party packages on npm](https://www.npmjs.com/search?q=zawgyi%20convert).  For example, using the package "rabbit-node":
+Zawgyi can be converted to Unicode as follows:
 
 ```js
-const Rabbit = require("rabbit-node");
-const output = Rabbit.zg2uni("မ္း");
+const google_myanmar_tools = require("myanmar-tools");
+const converter = new google_myanmar_tools.ZawgyiConverter();
+const output = converter.zawgyiToUnicode("မ္း");
 // output is now "မ်း"
 ```
 
-Note: Google does not endorse any of the available third-party packages over any other.
+You can use `converter.unicodeToZawgyi("...")` to convert in the opposite direction when possible.
 
 For a complete working example, see [samples/node/demo.js](../../samples/node/demo.js).
 
@@ -36,7 +37,7 @@ For a complete working example, see [samples/node/demo.js](../../samples/node/de
 Include the file *zawgyi_detector.min.js*.  It is available on [Google Hosted Libraries](https://developers.google.com/speed/libraries/#myanmar-tools):
 
 ```html
-<script src="https://ajax.googleapis.com/ajax/libs/myanmar-tools/1.0.1/zawgyi_detector.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/myanmar-tools/1.1.0/zawgyi_detector.min.js"></script>
 ```
 
 After doing this, the ZawgyiDetector will be available as the global `google_myanmar_tools.ZawgyiDetector`, and you can use it the same way as above:
@@ -45,4 +46,16 @@ After doing this, the ZawgyiDetector will be available as the global `google_mya
 const detector = new google_myanmar_tools.ZawgyiDetector();
 const score = detector.getZawgyiProbability("မ္း");
 // score is now 0.999772 (very likely Zawgyi)
+```
+
+Likewise for the converter:
+
+```html
+<script src="https://ajax.googleapis.com/ajax/libs/myanmar-tools/1.1.0/zawgyi_converter.min.js"></script>
+```
+
+```js
+const converter = new google_myanmar_tools.ZawgyiConverter();
+const output = converter.zawgyiToUnicode("မ္း");
+// output is now "မ်း"
 ```
