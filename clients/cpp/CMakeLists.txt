@@ -20,7 +20,7 @@ file(
         DOWNLOAD "https://raw.githubusercontent.com/hunter-packages/gate/v0.8.1/cmake/HunterGate.cmake" CMakeFiles/HunterGate.cmake
         EXPECTED_HASH SHA1=b07c64067aebe94ba07d375c74b1bd1d7a696c67
 )
-include("CMakeFiles/HunterGate.cmake")
+include("${CMAKE_BINARY_DIR}/CMakeFiles/HunterGate.cmake")
 set(HUNTER_TLS_VERIFY ON)
 HunterGate(
         URL "https://github.com/ruslo/hunter/archive/v0.21.19.tar.gz"
@@ -45,11 +45,11 @@ execute_process(COMMAND ${CMAKE_COMMAND} -E chdir _3rdParty tar xfz ../CMakeFile
 add_executable(build_model_h build_model_h.cpp resources/zawgyiUnicodeModel.dat)
 add_custom_command(
         OUTPUT zawgyi_model_data.h
-        COMMAND build_model_h resources/zawgyiUnicodeModel.dat zawgyi_model_data.h
+        COMMAND build_model_h ${CMAKE_SOURCE_DIR}/resources/zawgyiUnicodeModel.dat zawgyi_model_data.h
 )
 
 set(SOURCE_FILES zawgyi_detector.cpp public/myanmartools.h zawgyi_detector-impl.h zawgyi_model_data.h)
-include_directories(myanmartools _3rdParty/icu/source/common)
+include_directories(myanmartools ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/_3rdParty/icu/source/common)
 add_library(myanmartools SHARED ${SOURCE_FILES})
 target_link_libraries(myanmartools glog::glog)
 
