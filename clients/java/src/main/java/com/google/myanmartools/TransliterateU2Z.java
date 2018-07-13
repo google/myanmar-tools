@@ -98,6 +98,8 @@ public final class TransliterateU2Z extends Transliterate {
     phase1.addRule(new Rule("([\u1000-\u1021])\u103B\u1031", "\u1031\u103B$1"));
     phase1.addRule(new Rule("([\u1000-\u1021])\u103B", "\u103B$1"));
     phase1.addRule(new Rule("([\u1000-\u1021])\u103D\u1031\u1037", "\u1031$1\u1094\u103D"));
+    phase1.addRule(new Rule("([\u1000-\u1021])(\u108A)\u1031", "\u1031$1$2"));
+    phase1.addRule(new Rule("([\u1000-\u1021])([\u103A\u103D\u103E]+)\u1031", "\u1031$1$2"));
     phase1.addRule(new Rule("([\u1000-\u1021])\u1064\u103B", "\u103B$1\u1064"));
     phase1.addRule(new Rule("([\u1000-\u1021])([\u103A\u103C\u103D])\u1031", "\u1031$1$2"));
     phase1.addRule(new Rule("([\u1000-\u102A])\u1031", "\u1031$1"));
@@ -105,6 +107,7 @@ public final class TransliterateU2Z extends Transliterate {
     phase1.addRule(new Rule("\u1014([\u102F\u1030\u1037\u103A\u103C\u103D\u1087-\u108A])([\u102D\u102E\u1032\u1036\u1039\u103D\u103E\u1064])\u1037", "\u108F$1$2\u1094"));
     phase1.addRule(new Rule("\u1014([\u102D\u102E\u1032\u1036\u1039\u103D\u103E\u1064])([\u102F\u1030\u1037\u103A\u103C\u103D\u1087-\u108A])\u1037", "\u108F$1$2\u1094"));
     phase1.addRule(new Rule("\u1014([\u102D\u102E\u1032\u1036\u1039\u103D\u103E\u1064])\u1037", "\u1014$1\u1094"));
+    phase1.addRule(new Rule("\u103A\u103C", "\u107D\u103C"));
     phase1.addRule(new Rule("\u1014\u1032\u1037", "\u1014\u1032\u1094"));
     phase1.addRule(new Rule("\u1014\u1037", "\u1014\u1094"));
     phase1.addRule(new Rule("\u1014\u1032([\u102F\u1030\u1037\u103A\u103C\u103D\u1087-\u108A])\u1037", "\u108F$1\u1032\u1094"));
@@ -114,7 +117,9 @@ public final class TransliterateU2Z extends Transliterate {
     phase1.addRule(new Rule("\u1014([\u102F\u1030\u1037\u103A\u103C\u103D\u1087-\u108A])", "\u108F$1"));
     phase1.addRule(new Rule("([\u102F\u1030\u1037\u103A\u103C\u103D\u1087-\u108A])([\u102D\u102E\u1032\u1036\u1039\u103D\u103E\u1064]*)\u1037", "$1$2\u1094"));
     phase1.addRule(new Rule("([^\u1040-\u1049])\u1040([\u102B-\u103F])", "$1\u101D$2"));
+    phase1.addRule(new Rule("([^\u1040-\u1049])\u104E", "$1\u1044"));
     phase1.addRule(new Rule("\u1031\u1040([^\u1040-\u1049])", "\u1031\u101D$1"));
+    phase1.addRule(new Rule("\u1009\u103A", "\u1025\u103A"));
     phase1.addRule(new Rule("\u1025\u102E", "\u1026"));
     phase1.addRule(new Rule("\u1037\u103A", "\u103A\u1037"));
     phase1.addRule(new Rule("([\u102B\u102C\u102F\u1030])([\u102D\u102E\u1032])", "$2$1"));

@@ -132,6 +132,9 @@ $ukinzi ($consonant) > $1 \u1064 ;
 
 ($consonant) \u103d \u1031 \u1037 > \u1031 $1 \u1094 \u103D ;
 
+($consonant) (\u108a) \u1031 > \u1031 $1 $2 ;
+($consonant) ([\u103a\u103d\u103e]+) \u1031 > \u1031 $1 $2 ;
+
 # Ra + kinzi
 ($consonant) \u1064 \u103b > \u103b $1 \u1064 ;
 
@@ -147,6 +150,9 @@ $ukinzi ($consonant) > $1 \u1064 ;
 \u1014 ($lowsignZ) ($highsignZ) \u1037 > \u108f $1 $2 \u1094;
 \u1014 ($highsignZ) ($lowsignZ) \u1037 > \u108f $1 $2 \u1094;
 \u1014 ($highsignZ) \u1037 > \u1014 $1 \u1094;
+
+# Two medials
+\u103a \u103c > \u107d \u103c;
 
 # a special case
 \u1014 \u1032 \u1037 > \u1014 \u1032 \u1094;
@@ -164,8 +170,10 @@ $ukinzi ($consonant) > $1 \u1064 ;
 ($lowsignZ) ($highsignZ*) \u1037 > $1 $2 \u1094;
 
 ($nondigits) \u1040 ([\u102B-\u103F]) > $1 \u101D $2;
+# Handle lack of 104E ၎ MYANMAR SYMBOL AFOREMENTIONED
+($nondigits) \u104e > $1 \u1044;
 \u1031 \u1040 ($nondigits) > \u1031 \u101D $1;
-# TODO: examine \u1025 \u103A > \u1009 \u103A;
+\u1009 \u103A > \u1025 \u103A;
 \u1025 \u102E > \u1026;
 \u1037 \u103A > \u103A \u1037;
 

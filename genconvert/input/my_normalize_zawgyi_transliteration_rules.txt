@@ -22,6 +22,7 @@
 $consonant = [\u1000-\u1021];
 $zmedialra = [\u103b\u107e-\u1084];
 
+\u1009 \u1039 > \u1025 \u1039;
 \u1025 \u102e > \u1026 ;
 \u102f ([\u102d\u1036]) > $1 \u102f ;
 \u1039 ([\u1037\u1094\u1095]) > $1 \u1039 ;
@@ -60,6 +61,7 @@ $zmedialra = [\u103b\u107e-\u1084];
 [\u1037\u1094\u1095]+ > \u1037 ;
 \u1005 \u103a > \u1008 ;
 \u101d > \u1040 ; # Digit zero
+\u104e $ > \u1044 ; # Digit 4 at the end
 \u102f \u1088 > \u1088 ;
 \u103b \u103a > \u103a \u103b ;
 \u103d \u102f > \u1088 ;
@@ -70,11 +72,14 @@ $zmedialra = [\u103b\u107e-\u1084];
 ::Null;
 $zmedialra+ > \u103b;  
 
+# Phase 3.1 Ignore repeated e-vowel
+\u1031 \u1031+ > \u1031 ;
+
 # Phase 4. Normalize medial ra plus U sign
 ::Null;
 ($zmedialra) ($consonant) \u1036 \u102f > $1 $2 \u1033 \u1036;
 
-# Phase 5. Handle variant for
+# Phase 5. Handle variants
 ::Null;
 \u1033 > \u102f ;
 
@@ -87,3 +92,7 @@ $zmedialra+ > \u103b;
 # Phase N. Remove spaces.
 ::Null;
 [:WSpace:]+ ([\u1000-\u109f]) > | $1 ;
+
+# Ignore ZWSP at start and end of string
+^ \u200b+ > ;
+\u200b+ $ > ;

@@ -46,7 +46,7 @@ public final class TransliterateZ2U extends Transliterate {
     phase0.addRule(new Rule("\u108B", "\u1004\u103A\u1039\u102D"));
     phase0.addRule(new Rule("\u108C", "\u1004\u103A\u1039\u102E"));
     phase0.addRule(new Rule("\u108D", "\u1004\u103A\u1039\u1036"));
-    phase0.addRule(new Rule("\u106A", "\u1025"));
+    phase0.addRule(new Rule("\u106A", "\u1009"));
     phase0.addRule(new Rule("\u106B", "\u100A"));
     phase0.addRule(new Rule("\u108F", "\u1014"));
     phase0.addRule(new Rule("\u1090", "\u101B"));
@@ -62,6 +62,7 @@ public final class TransliterateZ2U extends Transliterate {
     phase0.addRule(new Rule("\u1034", "\u1030"));
     phase0.addRule(new Rule("\u1039", "\u103A"));
     phase0.addRule(new Rule("[\u1094\u1095]", "\u1037"));
+    phase0.addRule(new Rule("\u1025\u1039", "\u1009\u103A"));
     phase0.addRule(new Rule("\u1025\u1061", "\u1009\u1039\u1001"));
     phase0.addRule(new Rule("\u1025\u1062", "\u1009\u1039\u1002"));
     phase0.addRule(new Rule("\u1025\u1065", "\u1009\u1039\u1005"));
@@ -108,6 +109,8 @@ public final class TransliterateZ2U extends Transliterate {
     phase1.addRule(new Rule("\u1044([^\u1040-\u1049])", "\u104E$1")
           .setMatchOnStart()
           .setRevisitPosition(0));
+    phase1.addRule(new Rule("([^\u1040-\u1049])\u1040$", "$1\u101D"));
+    phase1.addRule(new Rule("([^\u1040-\u1049])\u1044$", "$1\u104E"));
     phase1.addRule(new Rule("([\u102B-\u103F])\u1040([^\u1040-\u1049])", "$1\u101D$2"));
     phase1.addRule(new Rule("([\u102B-\u103F])\u1044([^\u1040-\u1049])", "$1\u104E$2"));
 
@@ -130,7 +133,6 @@ public final class TransliterateZ2U extends Transliterate {
     phase3.addRule(new Rule("\u1036([\u103B-\u103E]*)([\u102B-\u1030\u1032]+)", "$1$2\u1036"));
     phase3.addRule(new Rule("([\u102B\u102C\u102F\u1030])([\u102D\u102E\u1032])", "$2$1"));
     phase3.addRule(new Rule("\u103C([\u1000-\u1021])", "$1\u103C"));
-    phase3.addRule(new Rule("\u1005\u103B", "\u1008"));
 
     // Rules for phase 4
     Phase phase4 = addPhase();
@@ -152,6 +154,7 @@ public final class TransliterateZ2U extends Transliterate {
 
     // Rules for phase 6
     Phase phase6 = addPhase();
+    phase6.addRule(new Rule("\u1005\u103B", "\u1008"));
     phase6.addRule(new Rule("([\u102B-\u1032])([\u103B-\u103E])", "$2$1"));
     phase6.addRule(new Rule("([\u103C-\u103E])\u103B", "\u103B$1"));
     phase6.addRule(new Rule("([\u103D\u103E])\u103C", "\u103C$1"));
@@ -166,8 +169,6 @@ public final class TransliterateZ2U extends Transliterate {
     phase7.addRule(new Rule("\u102F\u102F+", "\u102F"));
     phase7.addRule(new Rule("\u1030\u1030+", "\u1030"));
     phase7.addRule(new Rule("\u1032\u1032+", "\u1032"));
-    phase7.addRule(new Rule("\u1033\u1033+", "\u1033"));
-    phase7.addRule(new Rule("\u1035\u1035+", "\u1035"));
     phase7.addRule(new Rule("\u1036\u1036+", "\u1036"));
     phase7.addRule(new Rule("\u1037\u1037+", "\u1037"));
     phase7.addRule(new Rule("\u1039\u1039+", "\u1039"));
@@ -179,7 +180,10 @@ public final class TransliterateZ2U extends Transliterate {
     phase7.addRule(new Rule("\u102F[\u1030\u103A]", "\u102F"));
     phase7.addRule(new Rule("\u102D\u102E", "\u102E"));
     phase7.addRule(new Rule("[    -‍⁠  　﻿]+([\u102B-\u1032\u1036-\u103E])", "$1"));
-    phase7.addRule(new Rule("\u200B+", ""));
+    phase7.addRule(new Rule("\u200B+", "")
+          .setMatchOnStart());
+    phase7.addRule(new Rule("\u200B+$", ""));
+    phase7.addRule(new Rule("[    -‍⁠  　﻿]*\u200B[    -‍⁠  　﻿]*", "\u200B"));
   }
 }
 // END OF TRANSLITERATION RULES

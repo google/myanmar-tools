@@ -32,6 +32,7 @@ public final class TransliterateZNorm extends Transliterate {
 
     // Rules for phase 0
     Phase phase0 = addPhase();
+    phase0.addRule(new Rule("\u1009\u1039", "\u1025\u1039"));
     phase0.addRule(new Rule("\u1025\u102E", "\u1026"));
     phase0.addRule(new Rule("\u102F([\u102D\u1036])", "$1\u102F"));
     phase0.addRule(new Rule("\u1039([\u1037\u1094\u1095])", "$1\u1039"));
@@ -68,6 +69,7 @@ public final class TransliterateZNorm extends Transliterate {
     phase2.addRule(new Rule("[\u1037\u1094\u1095]+", "\u1037"));
     phase2.addRule(new Rule("\u1005\u103A", "\u1008"));
     phase2.addRule(new Rule("\u101D", "\u1040"));
+    phase2.addRule(new Rule("\u104E$", "\u1044"));
     phase2.addRule(new Rule("\u102F\u1088", "\u1088"));
     phase2.addRule(new Rule("\u103B\u103A", "\u103A\u103B"));
     phase2.addRule(new Rule("\u103D\u102F", "\u1088"));
@@ -77,6 +79,7 @@ public final class TransliterateZNorm extends Transliterate {
     // Rules for phase 3
     Phase phase3 = addPhase();
     phase3.addRule(new Rule("[\u103B\u107E-\u1084]+", "\u103B"));
+    phase3.addRule(new Rule("\u1031\u1031+", "\u1031"));
 
     // Rules for phase 4
     Phase phase4 = addPhase();
@@ -96,6 +99,9 @@ public final class TransliterateZNorm extends Transliterate {
     Phase phase7 = addPhase();
     phase7.addRule(new Rule("[    -‍⁠  　﻿]+([\u1000-\u109F])", "$1")
           .setRevisitPosition(0));
+    phase7.addRule(new Rule("\u200B+", "")
+          .setMatchOnStart());
+    phase7.addRule(new Rule("\u200B+$", ""));
   }
 }
 // END OF TRANSLITERATION RULES

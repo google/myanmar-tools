@@ -3,6 +3,10 @@
 function getAllRulesZNorm() {
   var rules0 = [
     {
+      p: RegExp('^' + '\u1009\u1039'),
+      s: '\u1025\u1039',
+    },
+    {
       p: RegExp('^' + '\u1025\u102E'),
       s: '\u1026',
     },
@@ -127,6 +131,10 @@ function getAllRulesZNorm() {
       s: '\u1040',
     },
     {
+      p: RegExp('^' + '\u104E$'),
+      s: '\u1044',
+    },
+    {
       p: RegExp('^' + '\u102F\u1088'),
       s: '\u1088',
     },
@@ -151,6 +159,10 @@ function getAllRulesZNorm() {
     {
       p: RegExp('^' + '[\u103B\u107E-\u1084]+'),
       s: '\u103B',
+    },
+    {
+      p: RegExp('^' + '\u1031\u1031+'),
+      s: '\u1031',
     },
   ];
   var rules4 = [
@@ -184,6 +196,15 @@ function getAllRulesZNorm() {
       p: RegExp('^' + '[    -‍⁠  　﻿]+([\u1000-\u109F])'),
       s: '$1',
       revisit: 0,
+    },
+    {
+      p: RegExp('^' + '\u200B+'),
+      s: '',
+      matchOnStart: 'true',
+    },
+    {
+      p: RegExp('^' + '\u200B+$'),
+      s: '',
     },
   ];
   return [rules0, rules1, rules2, rules3, rules4, rules5, rules6, rules7];
