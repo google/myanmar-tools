@@ -13,14 +13,22 @@
 // limitations under the License.
 
 #include <cmath>
-#include <limits>
+#include <cstddef>
+#include <cstdint>
 #include <cstring>
+#include <limits>
 #include <glog/logging.h>
 #include <unicode/utf8.h>
 
 #include "public/myanmartools.h"
 #include "zawgyi_detector-impl.h"
+
+namespace {
+const uint8_t kModelData[] = {
 #include "zawgyi_model_data.inc"
+};
+constexpr size_t kModelSize = sizeof kModelData;
+}  // namespace
 
 using namespace google_myanmar_tools;
 
