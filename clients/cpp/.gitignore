@@ -9,11 +9,11 @@ Testing/
 *.so
 *.dylib
 
-build_model_h
+build_model_inc
 cmake_install.cmake
 CMakeCache.txt
 CTestTestfile.cmake
 install_manifest.txt
 Makefile
 myanmartools_test
-zawgyi_model_data.h
+zawgyi_model_data.inc

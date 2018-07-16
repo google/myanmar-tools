@@ -42,13 +42,13 @@ file(
 )
 execute_process(COMMAND ${CMAKE_COMMAND} -E chdir _3rdParty tar xfz ../CMakeFiles/icu4c-61_1-src.tgz)
 
-add_executable(build_model_h build_model_h.cpp resources/zawgyiUnicodeModel.dat)
+add_executable(build_model_inc build_model_inc.cpp resources/zawgyiUnicodeModel.dat)
 add_custom_command(
-        OUTPUT zawgyi_model_data.h
-        COMMAND build_model_h ${CMAKE_SOURCE_DIR}/resources/zawgyiUnicodeModel.dat zawgyi_model_data.h
+        OUTPUT zawgyi_model_data.inc
+        COMMAND build_model_inc ${CMAKE_SOURCE_DIR}/resources/zawgyiUnicodeModel.dat zawgyi_model_data.inc
 )
 
-set(SOURCE_FILES zawgyi_detector.cpp public/myanmartools.h zawgyi_detector-impl.h zawgyi_model_data.h)
+set(SOURCE_FILES zawgyi_detector.cpp public/myanmartools.h zawgyi_detector-impl.h zawgyi_model_data.inc)
 include_directories(myanmartools ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/_3rdParty/icu/source/common)
 add_library(myanmartools SHARED ${SOURCE_FILES})
 target_link_libraries(myanmartools glog::glog)

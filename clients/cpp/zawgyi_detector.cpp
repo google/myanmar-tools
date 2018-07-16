@@ -20,7 +20,7 @@
 
 #include "public/myanmartools.h"
 #include "zawgyi_detector-impl.h"
-#include "zawgyi_model_data.h"
+#include "zawgyi_model_data.inc"
 
 using namespace google_myanmar_tools;
 
