@@ -227,6 +227,10 @@ function getAllRulesU2Z() {
       s: '\u1085',
     },
     {
+      p: RegExp('^' + '\u100D\u1039\u100D'),
+      s: '\u106E',
+    },
+    {
       p: RegExp('^' + '\u100F\u1039\u100D'),
       s: '\u1091',
     },

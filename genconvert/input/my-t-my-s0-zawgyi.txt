@@ -26,6 +26,8 @@ $ukinzi = \u1004\u103A\u1039;  # Codepoints representing kinzi in Unicode
 # Zawgyi medial ra has multiple representations
 $zmedialra = [\u103B\u107E-\u1084];
 
+$wspace = [\u0020\u00a0\u1680\u2000-\u200d\u2060\u202f\u205f\u3000\ufeff];
+
 
 ####
 #### STAGE 1: CODEPOINT MAPPING FROM ZAWGYI TO UNICODE
@@ -124,8 +126,9 @@ $zmedialra = [\u103B\u107E-\u1084];
 \u108E → \u102D \u1036 ;
 
 # Pre-defined ligatures
-[\u106E\u1091] → \u100D\u1039\u100D ;
+\u106E → \u100D\u1039\u100D ;
 \u106F → \u100D\u1039\u100E ;
+\u1091 → \u100F\u1039\u100D ;
 \u1092 → \u100B\u1039\u100C ;
 \u1097 → \u100B\u1039\u100B ;
 \u104E → \u104E\u1004\u103A\u1038 ;
@@ -152,14 +155,14 @@ $zmedialra = [\u103B\u107E-\u1084];
 ####
 #### STAGE 1.1: Strip spaces immediately before combining characters.
 ####   Move e-vowel after consonants and medials
-####   Now every codepoint is Unicode.  This starts conversion
-####  from semi-visual order to logical order.
+####   Now every codepoint is Unicode. This starts conversion
+####   from semi-visual order to logical order.
 ####
 ::Null;
 
 # Don't remove spaces before E vowel or medial Ra at this stage
-([:WSpace:]) \u1037 > \u1037 $1;
-([:WSpace:]+) ([\u102b-\u1030\u1032-\u103b\u103d\u103e]) → $2;
+($wspace) \u1037 > \u1037 $1;
+($wspace+) ([\u102b-\u1030\u1032-\u103b\u103d\u103e]) → $2;
 
 # Remove a duplicate early
 \u1037+ → \u1037;
@@ -285,12 +288,11 @@ $zmedialra = [\u103B\u107E-\u1084];
 \u102D \u102E → \u102E;
 
 # Remove space directly before diacritics.
-[:WSpace:]+ ([\u102b-\u1032\u1036-\u103e]) → $1;
+($wspace)+ ([\u102b-\u1032\u1036-\u103e]) → $2;
 
 # Remove ZWSP at start and end
 ^ \u200b+ → ;
 \u200b+ $ → ;
 
 # Fix multiple spaces around ZWSP to single ZWSP.
-[:WSpace:]* \u200b [:WSpace:]* → \u200b;
-
+$wspace* \u200b $wspace* → \u200b;

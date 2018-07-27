@@ -88,6 +88,7 @@ public final class TransliterateU2Z extends Transliterate {
     phase0.addRule(new Rule("\u1039\u1018", "\u1093"));
     phase0.addRule(new Rule("\u1039\u1019", "\u107C"));
     phase0.addRule(new Rule("\u1039\u101C", "\u1085"));
+    phase0.addRule(new Rule("\u100D\u1039\u100D", "\u106E"));
     phase0.addRule(new Rule("\u100F\u1039\u100D", "\u1091"));
     phase0.addRule(new Rule("\u100B\u1039\u100C", "\u1092"));
     phase0.addRule(new Rule("\u100B\u1039\u100B", "\u1097"));

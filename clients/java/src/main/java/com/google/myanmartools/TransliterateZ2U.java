@@ -96,8 +96,9 @@ public final class TransliterateZ2U extends Transliterate {
     phase0.addRule(new Rule("\u107C", "\u1039\u1019"));
     phase0.addRule(new Rule("\u1085", "\u1039\u101C"));
     phase0.addRule(new Rule("\u108E", "\u102D\u1036"));
-    phase0.addRule(new Rule("[\u106E\u1091]", "\u100D\u1039\u100D"));
+    phase0.addRule(new Rule("\u106E", "\u100D\u1039\u100D"));
     phase0.addRule(new Rule("\u106F", "\u100D\u1039\u100E"));
+    phase0.addRule(new Rule("\u1091", "\u100F\u1039\u100D"));
     phase0.addRule(new Rule("\u1092", "\u100B\u1039\u100C"));
     phase0.addRule(new Rule("\u1097", "\u100B\u1039\u100B"));
     phase0.addRule(new Rule("\u104E", "\u104E\u1004\u103A\u1038"));
@@ -116,8 +117,8 @@ public final class TransliterateZ2U extends Transliterate {
 
     // Rules for phase 2
     Phase phase2 = addPhase();
-    phase2.addRule(new Rule("([    -‍⁠  　﻿])\u1037", "\u1037$1"));
-    phase2.addRule(new Rule("([    -‍⁠  　﻿]+)([\u102B-\u1030\u1032-\u103B\u103D\u103E])", "$2"));
+    phase2.addRule(new Rule("([\ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF])\u1037", "\u1037$1"));
+    phase2.addRule(new Rule("([\ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF]+)([\u102B-\u1030\u1032-\u103B\u103D\u103E])", "$2"));
     phase2.addRule(new Rule("\u1037+", "\u1037"));
     phase2.addRule(new Rule("\u1031+\u1004\u103A\u1039([\u1000-\u1021])", "\u1004\u103A\u1039$1\u1031"));
     phase2.addRule(new Rule("\u1031+\u1037+([\u1000-\u1021])", "$1\u1031\u1037"));
@@ -179,11 +180,11 @@ public final class TransliterateZ2U extends Transliterate {
     phase7.addRule(new Rule("\u103E\u103E+", "\u103E"));
     phase7.addRule(new Rule("\u102F[\u1030\u103A]", "\u102F"));
     phase7.addRule(new Rule("\u102D\u102E", "\u102E"));
-    phase7.addRule(new Rule("[    -‍⁠  　﻿]+([\u102B-\u1032\u1036-\u103E])", "$1"));
+    phase7.addRule(new Rule("([\ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF])+([\u102B-\u1032\u1036-\u103E])", "$2"));
     phase7.addRule(new Rule("\u200B+", "")
           .setMatchOnStart());
     phase7.addRule(new Rule("\u200B+$", ""));
-    phase7.addRule(new Rule("[    -‍⁠  　﻿]*\u200B[    -‍⁠  　﻿]*", "\u200B"));
+    phase7.addRule(new Rule("[\ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF]*\u200B[\ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF]*", "\u200B"));
   }
 }
 // END OF TRANSLITERATION RULES
