@@ -698,7 +698,7 @@ public class TransliterateTest {
   @Test
   public void zNormTests() {
     String z1 = "အကာင္ ့";
-    String z1NormExpected = "အကာင့္";
+    String z1NormExpected = "\u1021\u1000\u102c\u1004\u1039\u1037";  // "အကာင္";
     String result = zNorm.convert(z1);
 
     String line = " !!!! zNorm: z1\n" +

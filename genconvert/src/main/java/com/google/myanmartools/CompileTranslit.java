@@ -88,7 +88,11 @@ public final class CompileTranslit {
         }
 
         // Change ":Wspace:" to the Unicode white spaces.
-        rulePattern = rulePattern.replace(":WSpace:", " \u00a0\u1680\u2000-\u200d\u2060\u202f\u205f\u3000\ufeff");
+        rulePattern = rulePattern.replace(":WSpace:",
+            " \u00a0\u1680\u2000-\u200d\u2060\u202f\u205f\u3000\ufeff");
+
+        // Avoid escaping the ASCII space character.
+        rulePattern = rulePattern.replace("\\ ", " ");
 
         atStart = false;
         // Special case for matching at first position

@@ -117,8 +117,8 @@ public final class TransliterateZ2U extends Transliterate {
 
     // Rules for phase 2
     Phase phase2 = addPhase();
-    phase2.addRule(new Rule("([\ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF])\u1037", "\u1037$1"));
-    phase2.addRule(new Rule("([\ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF]+)([\u102B-\u1030\u1032-\u103B\u103D\u103E])", "$2"));
+    phase2.addRule(new Rule("([ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF])\u1037", "\u1037$1"));
+    phase2.addRule(new Rule("([ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF]+)([\u102B-\u1030\u1032-\u103B\u103D\u103E])", "$2"));
     phase2.addRule(new Rule("\u1037+", "\u1037"));
     phase2.addRule(new Rule("\u1031+\u1004\u103A\u1039([\u1000-\u1021])", "\u1004\u103A\u1039$1\u1031"));
     phase2.addRule(new Rule("\u1031+\u1037+([\u1000-\u1021])", "$1\u1031\u1037"));
@@ -180,11 +180,11 @@ public final class TransliterateZ2U extends Transliterate {
     phase7.addRule(new Rule("\u103E\u103E+", "\u103E"));
     phase7.addRule(new Rule("\u102F[\u1030\u103A]", "\u102F"));
     phase7.addRule(new Rule("\u102D\u102E", "\u102E"));
-    phase7.addRule(new Rule("([\ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF])+([\u102B-\u1032\u1036-\u103E])", "$2"));
+    phase7.addRule(new Rule("([ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF])+([\u102B-\u1032\u1036-\u103E])", "$2"));
     phase7.addRule(new Rule("\u200B+", "")
           .setMatchOnStart());
     phase7.addRule(new Rule("\u200B+$", ""));
-    phase7.addRule(new Rule("[\ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF]*\u200B[\ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF]*", "\u200B"));
+    phase7.addRule(new Rule("[ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF]*\u200B[ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF]*", "\u200B"));
   }
 }
 // END OF TRANSLITERATION RULES

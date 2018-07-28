@@ -314,11 +314,11 @@ function getAllRulesZ2U() {
   ];
   var rules2 = [
     {
-      p: RegExp('^' + '([\ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF])\u1037'),
+      p: RegExp('^' + '([ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF])\u1037'),
       s: '\u1037$1',
     },
     {
-      p: RegExp('^' + '([\ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF]+)([\u102B-\u1030\u1032-\u103B\u103D\u103E])'),
+      p: RegExp('^' + '([ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF]+)([\u102B-\u1030\u1032-\u103B\u103D\u103E])'),
       s: '$2',
     },
     {
@@ -516,7 +516,7 @@ function getAllRulesZ2U() {
       s: '\u102E',
     },
     {
-      p: RegExp('^' + '([\ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF])+([\u102B-\u1032\u1036-\u103E])'),
+      p: RegExp('^' + '([ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF])+([\u102B-\u1032\u1036-\u103E])'),
       s: '$2',
     },
     {
@@ -529,7 +529,7 @@ function getAllRulesZ2U() {
       s: '',
     },
     {
-      p: RegExp('^' + '[\ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF]*\u200B[\ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF]*'),
+      p: RegExp('^' + '[ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF]*\u200B[ \u00A0\u1680\u2000-\u200D\u202F\u205F\u2060\u3000\uFEFF]*'),
       s: '\u200B',
     },
   ];

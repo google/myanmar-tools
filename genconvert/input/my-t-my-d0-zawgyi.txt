@@ -27,7 +27,7 @@
 # Modern Burmese digits & Unicode code points.
 $nondigits = [^\u1040-\u1049];
 $consonant = [\u1000-\u1021];
-$narrowconsonant = [\u1001\u1002\u1004\u1005\u1007\u100b-\u100e\u1012\u1013\u1015-\u1017\u1019\u101d\u1020\u1025\u1026];
+$narrowconsonant = [\u1001\u1002\u1004\u1005\u1007\u100b-\u100e\u1012\u1013\u1015-\u1017\u1019\u101d\u1020\u1025\u1026\u108f];
 $wideconsonant = [\u1000\u1003\u1006\u1009\u100a\u100f\u1010\u1011\u1018\u101c\u101e\u101f\u1021];
 $widenya = [\u100a\u106b];
 $othernya = [\u1009\u106a];
@@ -185,6 +185,12 @@ $ukinzi ($consonant) > $1 \u1064 ;
 
 ## Phase 2: Further adjustments
 ::Null;
+
+# Handle consonant, subscripted consonant, medial ra
+($narrowconsonant) ($subscriptitem) ($highsignZ) $medialraZ > \u1083 $1 $2 $3 ;
+($wideconsonant) ($subscriptitem) ($highsignZ) $medialraZ > \u1084 $1 $2 ;
+($narrowconsonant) ($subscriptitem) $medialraZ > \u1081 $1 $2 ;
+($wideconsonant) ($subscriptitem) $medialraZ > \u1082 $1 $2 ;
 
 \u103c \u1094 > \u103c \u1095 ;
 

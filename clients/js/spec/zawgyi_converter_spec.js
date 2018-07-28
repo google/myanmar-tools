@@ -594,17 +594,30 @@ var zawygi_unicode_convert_data = [
     z: "\u200b\u200b\u200bေရႊေစ်း\u200b\u200b\u200b",
     u: "ရွှေဈေး"
   },
+  {  // z+1063 and z+1091
+    z: "က႑ခၮး",
+    u: "\u1000\u100f\u1039\u100d\u1001\u100d\u1039\u100d\u1038"
+  },
+  {  // Consonant, subscripted consonant, medial
+    z: "\u103b\u108f\u1075\u102c\u1082\u1000\u1075\u102c",
+    u: "\u1014\u1039\u1012\u103c\u102c\u1000\u1039\u1012\u103c\u102c"
+  },
+  {  // Consonant, subscripted consonant, upper mark, medial
+    z: "\u103b\u108f\u1075\u102e\u102c\u1082\u1000\u1075\u1039\u102c",
+    u: "\u1014\u1039\u1012\u103c\u102e\u102c\u1000\u1039\u1012\u103c\u103a\u102c"
+  },
 
+  // Spacing.
+  {
+    z: "တာ ့မိမိရဲ့",
+    u: "တာ့ မိမိရဲ့",
+  },
 
 // Odd spacing and strange combinations, for more testing later.
 /*
 {
     z: "ညီနဲ ့်",
     u: "ညီနျဲ့"
-},
-{
-   z: "တာ ့မိမိရဲ့",
-   u: "တာ့ မိမိရဲ့",
 },
   {
     z: "ထားေပး်ခင္းအား်ဖင္ ့",
