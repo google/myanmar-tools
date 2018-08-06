@@ -69,6 +69,14 @@ transcompile-U2Z: transcompile-target
 
 transcompile: transcompile-norm transcompile-Z2U transcompile-U2Z
 
+compatibility: compatU2Z compatZ2U
+
+compatU2Z:
+	$(MVN) -f genconvert/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.TransliterateFile -Dexec.args="genconvert/input/my-t-my-d0-zawgyi.txt genconvert/input/udhr_mya.txt genconvert/output/udhr_mya_zawygyi.txt"
+
+compatZ2U:
+	$(MVN) -f genconvert/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.TransliterateFile -Dexec.args="genconvert/input/my-t-my-s0-zawgyi.txt genconvert/input/z_3022.txt genconvert/output/u_3022.txt"
+
 clients: $(wildcard clients/**/*)
 
 client-cpp: $(wildcard clients/cpp/**/*)
