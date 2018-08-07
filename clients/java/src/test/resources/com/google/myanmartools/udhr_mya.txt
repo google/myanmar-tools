@@ -1,7 +1,14 @@
+# Location: https://unicode.org/udhr/d/udhr_mya.txt (Unicode text)
+# Genre: News
+# Publication-Date: 4-September-2006
+# Status: https://unicode.org/udhr/s/status_mya.html
+
+
 Universal Declaration of Human Rights - Burmese
 © 1996 – 2009 The Office of the High Commissioner for Human Rights
 This plain text version prepared by the “UDHR in Unicode”
 project, https://www.unicode.org/udhr.
+
 ---
 
 အပြည်ပြည်ဆိုင်ရာ လူ့အခွင့်အရေး ကြေညာစာတမ်း
