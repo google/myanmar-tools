@@ -79,12 +79,12 @@ public final class TransliterateFile {
   }
 
   public static void main(String[] args) throws IOException {
-    if (args.length < 2) {
+    if (args.length < 3) {
       // Require an input file.
       System.out.println(
-          "  Error: Input file path and output file path are required.\n  Optional suffix for function");
+          "  Error: transform rules file, input file path and output file path are required.\n");
       System.out.println(
-          "   in_path js_out_path [nameSuffix [java_out_path]]");
+          "   transform_rules_file in_path js_out_path");
       return;
     }
 
@@ -101,7 +101,7 @@ public final class TransliterateFile {
     // Get the Unicode data input:
     String translitText = getTranslitFile(args[0]);
 
-    /* Use the ICU4J transliterator to preprocess rules, removing defines. */
+    /* Use the ICU4J transliterator to read the rules, creating a transliterator. */
     String labelForTranslit = "label for transliterator";
     Transliterator transliterator =
         Transliterator.createFromRules(labelForTranslit,
@@ -121,17 +121,11 @@ public final class TransliterateFile {
                     StandardOpenOption.CREATE,
                     StandardOpenOption.WRITE)) {
 
-      // long linesConverted = 0;
-      // for (String line : input.lines()) {
-      //   linesConverted ++;
-      //   String outline = transliterator.transliterate(line);
-      //   output.write(outline);
-      // }
       long linesConverted = input.lines()
                             .map(transliterator::transliterate)
                             .map(line -> TransliterateFile.writeLine(output, line))
                             .count();
-      System.out.println("Number lines converted = " + linesConverted);
+      System.err.println("Number lines converted = " + linesConverted);
     }
   }
 }
