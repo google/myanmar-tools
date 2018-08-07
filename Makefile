@@ -53,14 +53,14 @@ copy-resources:
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/ruby/lib/myanmar-tools/resources
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/php/resources
 
-	cp genconvert/input/udhr_mya.txt clients/js/resources
-	cp genconvert/input/z_3022.txt clients/js/resources
-	cp genconvert/output/udhr_mya_zawygyi.txt clients/js/resources
-	cp genconvert/output/u_3022.txt clients/js/resources
-	cp genconvert/input/udhr_mya.txt clients/java/src/test/resources/com/google/myanmartools
-	cp genconvert/input/z_3022.txt clients/java/src/test/resources/com/google/myanmartools
-	cp genconvert/output/udhr_mya_zawygyi.txt clients/java/src/test/resources/com/google/myanmartools
-	cp genconvert/output/u_3022.txt clients/java/src/test/resources/com/google/myanmartools
+	cp genconvert/input/mmgov_zawgyi_src.txt clients/java/src/test/resources/com/google/myanmartools
+	cp genconvert/input/mmgov_zawgyi_src.txt clients/js/resources
+	cp genconvert/input/udhr_mya_unicode_src.txt clients/js/resources
+	cp genconvert/input/udhr_mya_unicode_src.txt clients/java/src/test/resources/com/google/myanmartools
+	cp genconvert/output/mmgov_unicode_out.txt clients/java/src/test/resources/com/google/myanmartools
+	cp genconvert/output/mmgov_unicode_out.txt clients/js/resources
+	cp genconvert/output/udhr_mya_zawygyi_out.txt clients/java/src/test/resources/com/google/myanmartools
+	cp genconvert/output/udhr_mya_zawygyi_out.txt clients/js/resources
 
 train: zawgyiUnicodeModel.dat compatibility.tsv testData.tsv copy-resources
 
@@ -81,10 +81,10 @@ transcompile: transcompile-norm transcompile-Z2U transcompile-U2Z
 transliterate-compatibility: compatU2Z compatZ2U
 
 compatU2Z:
-	$(MVN) -f genconvert/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.TransliterateFile -Dexec.args="genconvert/input/my-t-my-d0-zawgyi.txt genconvert/input/udhr_mya.txt genconvert/output/udhr_mya_zawygyi.txt"
+	$(MVN) -f genconvert/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.TransliterateFile -Dexec.args="genconvert/input/my-t-my-d0-zawgyi.txt genconvert/input/udhr_mya_unicode_src.txt genconvert/output/udhr_mya_zawygyi_out.txt"
 
 compatZ2U:
-	$(MVN) -f genconvert/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.TransliterateFile -Dexec.args="genconvert/input/my-t-my-s0-zawgyi.txt genconvert/input/z_3022.txt genconvert/output/u_3022.txt"
+	$(MVN) -f genconvert/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.TransliterateFile -Dexec.args="genconvert/input/my-t-my-s0-zawgyi.txt genconvert/input/mmgov_zawgyi_src.txt genconvert/output/mmgov_unicode_out.txt"
 
 clients: $(wildcard clients/**/*)
 
