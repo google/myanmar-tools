@@ -53,6 +53,15 @@ copy-resources:
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/ruby/lib/myanmar-tools/resources
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/php/resources
 
+	cp genconvert/input/udhr_mya.txt clients/js/resources
+	cp genconvert/input/z_3022.txt clients/js/resources
+	cp genconvert/output/udhr_mya_zawygyi.txt clients/js/resources
+	cp genconvert/output/u_3022.txt clients/js/resources
+	cp genconvert/input/udhr_mya.txt clients/java/src/test/resources/com/google/myanmartools
+	cp genconvert/input/z_3022.txt clients/java/src/test/resources/com/google/myanmartools
+	cp genconvert/output/udhr_mya_zawygyi.txt clients/java/src/test/resources/com/google/myanmartools
+	cp genconvert/output/u_3022.txt clients/java/src/test/resources/com/google/myanmartools
+
 train: zawgyiUnicodeModel.dat compatibility.tsv testData.tsv copy-resources
 
 transcompile-target: $(wildcard genconvert/src/**/*)
