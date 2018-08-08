@@ -17,6 +17,18 @@ package com.google.myanmartools;
 
 import static com.google.common.truth.Truth.assertWithMessage;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -642,11 +654,6 @@ public class TransliterateTest {
 
   @BeforeClass
   public static void setup() {
-    /*
-       System.out.println("zNorm: " + zNorm.printAll());
-       System.out.println("Z-->U :" + z2U.printAll());
-       System.out.println("U-->Z: " + u2Z.printAll());
-    */
   }
 
   // Service function to get hex values.
@@ -758,6 +765,71 @@ public class TransliterateTest {
 
       assertWithMessage(line).that(zNorm.convert(actual)).isEqualTo(zNorm.convert(expected));
       i += 1;
+    }
+  }
+
+  @Test
+  /**
+   * Compatibility test for Z->U conversion using golden file.
+   */
+  public void z2UCompatibilityTest() {
+    String fileInputPath = "src/test/resources/com/google/myanmartools/mmgov_zawgyi_src.txt";
+    String goldenInputPath = "src/test/resources/com/google/myanmartools/mmgov_unicode_out.txt";
+
+    // Open input files.
+    try {
+        BufferedReader input = Files.newBufferedReader(Paths.get(fileInputPath), UTF_8);
+        BufferedReader golden = Files.newBufferedReader(Paths.get(goldenInputPath), UTF_8);
+
+        int lineNum = 0;
+        String zLine  = input.readLine();
+        while (zLine != null) {
+          String convertedLine = z2U.convert(zLine);
+          String goldenLine = golden.readLine();
+          assertWithMessage(
+              "Difference in line " + lineNum + "\n" +
+              "  expected = " + goldenLine + "\n" +
+              "  actual   = " + convertedLine + "\n").
+              that(convertedLine).isEqualTo(goldenLine);
+          zLine  = input.readLine();
+          lineNum ++;
+        }
+    }
+    catch (IOException ex) {
+      org.junit.Assert.fail("** Error in file open/read in z2UCompatibiityTest: " + ex.getMessage());
+    }
+  }
+
+    @Test
+  /**
+   * Compatibility test for U->Z conversion using golden file.
+   * Note that normalization of Zawgyi is needed for comparison.
+   */
+  public void u2ZCompatibilityTest() {
+    String fileInputPath = "src/test/resources/com/google/myanmartools/udhr_mya_unicode_src.txt";
+    String goldenInputPath = "src/test/resources/com/google/myanmartools/udhr_mya_zawgyi_out.txt";
+
+    // Open input files.
+    try {
+        BufferedReader input = Files.newBufferedReader(Paths.get(fileInputPath), UTF_8);
+        BufferedReader golden = Files.newBufferedReader(Paths.get(goldenInputPath), UTF_8);
+
+        int lineNum = 0;
+        String uLine  = input.readLine();
+        while (uLine != null) {
+          String convertedLine = zNorm.convert(u2Z.convert(uLine));
+          String goldenLine = zNorm.convert(golden.readLine());
+          assertWithMessage(
+              "Difference in line " + lineNum + "\n" +
+              "  expected = " + goldenLine + "\n" +
+              "  actual   = " + convertedLine + "\n").
+              that(convertedLine).isEqualTo(goldenLine);
+          uLine  = input.readLine();
+          lineNum ++;
+        }
+    }
+    catch (IOException ex) {
+      org.junit.Assert.fail("** Error in file open/read in z2UCompatibiityTest: " + ex.getMessage());
     }
   }
 
