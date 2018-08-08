@@ -634,12 +634,37 @@ var zawygi_unicode_convert_data = [
 // building this file before Jasmine can run it.
 
 var ZawgyiConverter;
+var CompatTestZ2Usource, CompatTestZ2Uoutput, CompatTestU2Zsource, CompatTestU2Zoutput;
 if (typeof process !== "undefined") {
     // NodeJS
     ZawgyiConverter = require("../build_node/zawgyi_converter").ZawgyiConverter;
+
+    // Get resources for compatibility testing
+    CompatTestZ2Usource = require("fs").readFileSync("resources/mmgov_zawgyi_src.txt", "utf-8");
+    CompatTestZ2Uoutput = require("fs").readFileSync("resources/mmgov_unicode_out.txt", "utf-8");
+    CompatTestU2Zsource = require("fs").readFileSync("resources/udhr_mya_unicode_src.txt", "utf-8");
+    CompatTestU2Zoutput = require("fs").readFileSync("resources/udhr_mya_zawgyi_out.txt", "utf-8");
 } else {
     // Browser
     ZawgyiConverter = window.google_myanmar_tools.ZawgyiConverter;
+
+    // Get resources for compatibility testing
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "mmgov_zawgyi_src.txt", false);
+    xhr.send(null);
+    CompatTestZ2Usource = xhr.responseText;
+
+    xhr.open("GET", "mmgov_unicode_out.txt", false);
+    xhr.send(null);
+    CompatTestZ2Uoutput = xhr.responseText;
+
+    xhr.open("GET", "udhr_mya_unicode_src.txt", false);
+    xhr.send(null);
+    CompatTestU2Zsource = xhr.responseText;
+
+    xhr.open("GET", "udhr_mya_zawgyi_out.txt", false);
+    xhr.send(null);
+    CompatTestU2Zoutput = xhr.responseText;
 }
 
 describe("ZawgyiConverter Z2U", function () {
@@ -666,4 +691,33 @@ describe("ZawgyiConverter U2Z", function () {
             expect(i+" "+actual).toEqual(i+" "+expected);
         }
     });
+});
+
+describe("Zawgyi to Unicode Conversion Compatibility Test", function() {
+    it("should convert input Zawgyi to exact Unicode out as expected", function() {
+        const expected = CompatTestZ2Uoutput.split("\n");
+        var index = 0;
+        const converter = new ZawgyiConverter();
+        CompatTestZ2Usource.split("\n").forEach(function (line) {
+            var actual = converter.zawgyiToUnicode(line);
+            expect(actual).toEqual(expected[index]);
+            index += 1;
+        }, this);
+    });
+
+});
+
+describe("Unicode to Zawgyi Conversion Compatibility Test", function() {
+    it("should convert input Unicode to normalized Zawgyi output as expected", function() {
+        const expected = CompatTestU2Zoutput.split("\n");
+        var index = 0;
+        const converter = new ZawgyiConverter();
+        // Normalization is required for exact match.
+        CompatTestU2Zsource.split("\n").forEach(function (line) {
+            var actual = converter.normalizeZawgyi(converter.unicodeToZawgyi(line));
+            expect(actual).toEqual(converter.normalizeZawgyi(expected[index]));
+            index += 1;
+        }, this);
+    });
+
 });
