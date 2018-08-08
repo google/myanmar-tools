@@ -87,7 +87,7 @@ In languages without full ICU support, like JavaScript in the browser, there are
 
 ## Contributing New Programming Language Support
 
-We will happilly consider pull requests that add clients in other programming languages.  To add support for a new programming language, here are some tips:
+We will happily consider pull requests that add clients in other programming languages.  To add support for a new programming language, here are some tips:
 
 - Add a new directory underneath `clients`.  This will be the root of your new package.
 - Use a build system customary to your language.
