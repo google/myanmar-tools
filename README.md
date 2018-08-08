@@ -87,11 +87,12 @@ In languages without full ICU support, like JavaScript in the browser, there are
 
 ## Contributing New Programming Language Support
 
-We will hapilly consider pull requests that add clients in other programming languages.  To add support for a new programming language, here are some tips:
+We will happilly consider pull requests that add clients in other programming languages.  To add support for a new programming language, here are some tips:
 
 - Add a new directory underneath `clients`.  This will be the root of your new package.
 - Use a build system customary to your language.
 - Add your language to the `copy-resources` and `test` rules in the top-level Makefile.
 - At a minimum, your package should automatically consume `zawgyiUnicodeModel.dat` and test against `compatibility.tsv`.
+- Implementations of converters should run compatibility tests for both Z<->U directions using the provide resources.
 - See the other clients for examples.  Most clients are only a couple hundred lines of code.
 - When finished, add your client to the *.travis.yml* file.
