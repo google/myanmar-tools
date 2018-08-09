@@ -15,9 +15,9 @@
 
 package com.google.myanmartools;
 
-import com.ibm.icu.text.Transliterator;
-
 import static java.nio.charset.StandardCharsets.UTF_8;
+
+import com.ibm.icu.text.Transliterator;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -27,22 +27,16 @@ import java.io.OutputStreamWriter;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Function;
 
-
-/** A Java binary to using ICU4J's transliteration on input file, producing
- * output file.
+/** A Java binary to using ICU4J's transliteration on input file, producing output file.
  *
- * This is used to generate tests for compatibility of conversion among
- * languages and platforms, e.g., Java, JavaScript, C++.
+ * <p>This is used to generate tests for compatibility of conversion among languages and platforms,
+ *  e.g., Java, JavaScript, C++.
  *
- * Command line: translitRulesFile inputPath outputPath
+ * <p>Command line: translitRulesFile inputPath outputPath
  */
 
 public final class TransliterateFile {

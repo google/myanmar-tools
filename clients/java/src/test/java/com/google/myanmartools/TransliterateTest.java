@@ -17,19 +17,9 @@ package com.google.myanmartools;
 
 import static com.google.common.truth.Truth.assertWithMessage;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
-
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -778,10 +768,12 @@ public class TransliterateTest {
     String sourceResourcePath = "/com/google/myanmartools/mmgov_zawgyi_src.txt";
     String goldenResourcePath = "/com/google/myanmartools/mmgov_unicode_out.txt";
 
-    BufferedReader input = new BufferedReader(new InputStreamReader(
-        TransliterateU2Z.class.getResourceAsStream(sourceResourcePath)));
-    BufferedReader golden = new BufferedReader(new InputStreamReader(
-        TransliterateU2Z.class.getResourceAsStream(goldenResourcePath)));
+    BufferedReader input = new BufferedReader(
+        new InputStreamReader(
+            TransliterateU2Z.class.getResourceAsStream(sourceResourcePath), UTF_8));
+    BufferedReader golden = new BufferedReader(
+        new InputStreamReader(
+            TransliterateU2Z.class.getResourceAsStream(goldenResourcePath), UTF_8));
 
     int lineNum = 0;
     String zLine  = input.readLine();
@@ -804,10 +796,12 @@ public class TransliterateTest {
     String sourceResourcePath = "/com/google/myanmartools/udhr_mya_unicode_src.txt";
     String goldenResourcePath = "/com/google/myanmartools/udhr_mya_zawgyi_out.txt";
 
-    BufferedReader input = new BufferedReader(new InputStreamReader(
-        TransliterateU2Z.class.getResourceAsStream(sourceResourcePath)));
-    BufferedReader golden = new BufferedReader(new InputStreamReader(
-        TransliterateU2Z.class.getResourceAsStream(goldenResourcePath)));
+    BufferedReader input = new BufferedReader(
+        new InputStreamReader(
+            TransliterateU2Z.class.getResourceAsStream(sourceResourcePath), UTF_8));
+    BufferedReader golden = new BufferedReader(
+        new InputStreamReader(
+            TransliterateU2Z.class.getResourceAsStream(goldenResourcePath), UTF_8));
 
     int lineNum = 0;
     String uLine  = input.readLine();
