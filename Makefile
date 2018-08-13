@@ -53,6 +53,15 @@ copy-resources:
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/ruby/lib/myanmar-tools/resources
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/php/resources
 
+	cp genconvert/input/mmgov_zawgyi_src.txt clients/java/src/test/resources/com/google/myanmartools
+	cp genconvert/input/mmgov_zawgyi_src.txt clients/js/resources
+	cp genconvert/input/udhr_mya_unicode_src.txt clients/js/resources
+	cp genconvert/input/udhr_mya_unicode_src.txt clients/java/src/test/resources/com/google/myanmartools
+	cp genconvert/output/mmgov_unicode_out.txt clients/java/src/test/resources/com/google/myanmartools
+	cp genconvert/output/mmgov_unicode_out.txt clients/js/resources
+	cp genconvert/output/udhr_mya_zawgyi_out.txt clients/java/src/test/resources/com/google/myanmartools
+	cp genconvert/output/udhr_mya_zawgyi_out.txt clients/js/resources
+
 train: zawgyiUnicodeModel.dat compatibility.tsv testData.tsv copy-resources
 
 transcompile-target: $(wildcard genconvert/src/**/*)
@@ -68,6 +77,14 @@ transcompile-U2Z: transcompile-target
 	TMP=`mktemp`; $(MVN) -f genconvert/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.CompileTranslit -Dexec.args="genconvert/input/my-t-my-d0-zawgyi.txt $$TMP U2Z clients/java/src/main/java/com/google/myanmartools/TransliterateU2Z.java"; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP clients/js/resources/U2Z.js; exit 0; fi
 
 transcompile: transcompile-norm transcompile-Z2U transcompile-U2Z
+
+transliterate-compatibility: compatU2Z compatZ2U
+
+compatU2Z:
+	$(MVN) -f genconvert/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.TransliterateFile -Dexec.args="genconvert/input/my-t-my-d0-zawgyi.txt genconvert/input/udhr_mya_unicode_src.txt genconvert/output/udhr_mya_zawgyi_out.txt"
+
+compatZ2U:
+	$(MVN) -f genconvert/pom.xml -q -e exec:java -Dexec.mainClass=com.google.myanmartools.TransliterateFile -Dexec.args="genconvert/input/my-t-my-s0-zawgyi.txt genconvert/input/mmgov_zawgyi_src.txt genconvert/output/mmgov_unicode_out.txt"
 
 clients: $(wildcard clients/**/*)
 
