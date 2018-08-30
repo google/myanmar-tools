@@ -20,11 +20,11 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 import com.google.myanmartools.ZawgyiDetector;
-import com.ibm.icu.text.Transliterator;
+import com.google.myanmartools.TransliterateZ2U;
 
 public class demo {
     private static final ZawgyiDetector detector = new ZawgyiDetector();
-    private static final Transliterator converter = Transliterator.getInstance("Zawgyi-my");
+    private static final TransliterateZ2U converter = new TransliterateZ2U("Zawgyi to Unicode");
 
     public static void main(String[] args) {
         // Unicode string:
@@ -41,7 +41,7 @@ public class demo {
         System.out.format("Zawgyi Score: %.6f%n", score2);
 
         // Convert the second string to Unicode:
-        String input2converted = converter.transliterate(input2);
+        String input2converted = converter.convert(input2);
         assert input1.equals(input2converted);
         System.out.format("Converted Text: %s%n", input2converted);
     }
