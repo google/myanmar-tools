@@ -2,6 +2,8 @@
 
 This documentation is for Java specific usage of *Myanmar Tools*.  For general documentation, see [the top-level README](../../README.md).
 
+The project is available on [Maven Central](https://mvnrepository.com/artifact/com.google.myanmartools/myanmar-tools).
+
 Add this project as a dependency in your build.gradle file in Android Studio:
 
 ```
@@ -12,7 +14,7 @@ allprojects {
 }
 
 dependencies {
-    compile 'com.google.myanmartools:myanmar-tools:1.0.1'
+    compile 'com.google.myanmartools:myanmar-tools:1.1.1'
 }
 ```
 
@@ -24,7 +26,7 @@ If you are using a pom.xml:
 <dependency>
   <groupId>com.google.myanmartools</groupId>
   <artifactId>myanmar-tools</artifactId>
-  <version>1.0.1</version>
+  <version>1.1.1</version>
 </dependency>
 ```
 
@@ -36,11 +38,11 @@ double score = detector.getZawgyiProbability("မ္း");
 // score is now 0.999772 (very likely Zawgyi)
 ```
 
-To convert Zawgyi to Unicode, create a singleton instance of ICU Transliterator with the transform ID "Zawgyi-my", and call `transliterate` with your string.
+To convert between Zawgyi and Unicode, use the classes TransliterateZ2U and TransliterateU2Z as shown below.
 
 ```java
-private static final Transliterator converter = Transliterator.getInstance("Zawgyi-my");
-String output = converter.transliterate("မ္း");
+private static final TransliterateZ2U z2U = new TransliterateZ2U("Zawgyi to Unicode");
+String output = z2U.convert("မ္း");
 // output is now "မ်း"
 ```
 
