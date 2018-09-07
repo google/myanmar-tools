@@ -4,12 +4,16 @@
 
 This project includes tools for processing font encodings used in Myanmar, currently with support for the widespread Zawgyi-One font encoding.  For more information on font encodings in Myanmar, read [the Unicode Myanmar FAQ](http://www.unicode.org/faq/myanmar.html).
 
+[Demo Page](http://zawgyi-unicode-test.appspot.com/convertui/)
+
 Features:
 
 - Detect whether a string is Zawgyi or Unicode.
-- Support for C++, Java, JavaScript (both Node.js and browser), PHP, and Ruby.
+  - Supported in C++, Java, JavaScript (both Node.js and browser), PHP, and Ruby
+- Convert a string from Zawgyi to Unicode or from Unicode to Zawgyi
+  - Supported in Java and JavaScript
 
-Conversion from Zawgyi to Unicode is provided with the help of the CLDR Zawgyi conversion rules (see "Zawgyi-to-Unicode Conversion" below).
+Conversion is also available via ICU in languages without support via Myanmar Tools; see "Zawgyi-to-Unicode Conversion" below.
 
 This is not an official Google product, but we hope that you’ll find *Myanmar Tools* useful to better support the languages of Myanmar.
 
@@ -76,14 +80,12 @@ $ make train CORPUS=$HOME/corpuscrawler_output
 
 Once determining that a piece of text is Unicode or Zawgyi, it's often useful to convert from one encoding to the other.
 
-Although this package does not support conversion on its own, the Common Locale Data Repository (CLDR) publishes a Zawgyi-to-Unicode converter in the form of transliteration rules.  This functionality is available in [ICU](http://site.icu-project.org/) 58+ with the transform ID "Zawgyi-my":
+This package supports conversion in Java and JavaScript.  The rules are the same as the transliteration rules published in the Common Locale Data Repository (CLDR).  In other languages, therefore, conversion functionality is available in [ICU](http://site.icu-project.org/).  Versions 58+ have this built-in with the transform ID "Zawgyi-my":
 
 - Java: [ICU4J Transliterator](http://icu-project.org/apiref/icu4j/com/ibm/icu/text/Transliterator.html)
 - C++: [ICU4C Transliterator](http://icu-project.org/apiref/icu4c/classicu_1_1Transliterator.html)
 
 Many other languages, including Python, Ruby, and PHP, have wrapper libraries over ICU4C, which means you can use the Zawgyi converter in those languages, too.  See the samples directory for examples on using the ICU Transliterator.
-
-In languages without full ICU support, like JavaScript in the browser, there are other open-source Zawgyi converters available.  The [Rabbit](https://github.com/Rabbit-Converter/Rabbit) converter is available in several different languages, including JavaScript.  See [the JavaScript README](clients/js/README.md) for more details.
 
 ## Contributing New Programming Language Support
 
