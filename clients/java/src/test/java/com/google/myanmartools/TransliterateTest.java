@@ -50,8 +50,8 @@ public class TransliterateTest {
       "abc"
     },
     {
-      ".!@",
-      ".!@"
+      ".!@|",
+      ".!@|"
     },
     {
       "\u1021\u102C\u100F\u102C\u1015\u102D\u102F\u1004\u1039\u1031" +
