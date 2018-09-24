@@ -568,7 +568,7 @@ public class TransliterateTest {
           "ဝေသစ်လွင် about"
           },
     {  // #101 From case #134: Other
-      "ျပန္လမ္းမဲ့ကၽြန္းအပိုင္း၄",
+      "ျပန္လမ္းမဲ့ကြၽန္းအပိုင္း၄",
           "ပြန်လမ်းမဲ့ကျွန်းအပိုင်း၎"
           },
     {  // #102 From case #173: Other
@@ -616,6 +616,18 @@ public class TransliterateTest {
      "\u200b\u200b\u200bေရႊေစ်း\u200b\u200b\u200b",
      "ရွှေဈေး"
   },
+  { // #113
+    "အ‌ေႂကြး",
+    "အ‌ကြွေး"
+  },
+  { // #114
+    "ေကြၽးေမြး",
+    "ကျွေးမွေး"
+  },
+  { // #115
+    "ဆႏၵႀကီး",
+    "ဆန္ဒကြီး"
+  }
     // to be resolved
     /*
     {  // Frome case #152: "The Chinese city of Beijing Public Republic"
