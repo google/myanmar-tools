@@ -628,7 +628,14 @@ var zawygi_unicode_convert_data = [
     z: "ေက်းကြၽန္",
     u: "ကျေးကျွန်"
   },
-
+  {  // #121  test https://github.com/googlei18n/myanmar-tools/issues/21
+    z: "\u1000\u103c\u107d",
+    u: "\u1000\u103b\u103d"
+  },
+  {  // # 122 test https://github.com/googlei18n/myanmar-tools/issues/21
+    z: "\u108f\u103c\u1036\u1031\u1010\u103a\u1038",
+    u: "\u1014\u103d\u1036\u1010\u103b\u1031\u1038"
+  },
 // Odd spacing and strange combinations, for more testing later.
 /*
 {
