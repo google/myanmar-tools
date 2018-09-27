@@ -632,6 +632,14 @@ public class TransliterateTest {
     "ေက်းကြၽန္",
     "ကျေးကျွန်"
   },
+  {  // #121 test https://github.com/googlei18n/myanmar-tools/issues/21
+    "\u1000\u103c\u107d",
+    "\u1000\u103b\u103d",
+  },
+  {  // #122 test https://github.com/googlei18n/myanmar-tools/issues/21
+    "\u108f\u103c\u1036\u1031\u1010\u103a\u1038",
+    "\u1014\u103d\u1036\u1010\u103b\u1031\u1038",
+  },
     // to be resolved
     /*
     {  // Frome case #152: "The Chinese city of Beijing Public Republic"
