@@ -79,7 +79,7 @@ function getAllRulesZ2U() {
       s: '\u103F',
     },
     {
-      p: RegExp('^' + '[|\u103A\u107D]'),
+      p: RegExp('^' + '[\u103A\u107D]'),
       s: '\u103B',
     },
     {
@@ -95,7 +95,7 @@ function getAllRulesZ2U() {
       s: '\u103D',
     },
     {
-      p: RegExp('^' + '[|\u103D\u1087]'),
+      p: RegExp('^' + '[\u103D\u1087]'),
       s: '\u103E',
     },
     {

@@ -51,11 +51,11 @@ public final class TransliterateZ2U extends Transliterate {
     phase0.addRule(new Rule("\u108F", "\u1014"));
     phase0.addRule(new Rule("\u1090", "\u101B"));
     phase0.addRule(new Rule("\u1086", "\u103F"));
-    phase0.addRule(new Rule("[|\u103A\u107D]", "\u103B"));
+    phase0.addRule(new Rule("[\u103A\u107D]", "\u103B"));
     phase0.addRule(new Rule("([\u103B\u107E-\u1084])+", "\u103C"));
     phase0.addRule(new Rule("\u103C*\u108A", "\u103D\u103E"));
     phase0.addRule(new Rule("\u103C", "\u103D"));
-    phase0.addRule(new Rule("[|\u103D\u1087]", "\u103E"));
+    phase0.addRule(new Rule("[\u103D\u1087]", "\u103E"));
     phase0.addRule(new Rule("\u1088", "\u103E\u102F"));
     phase0.addRule(new Rule("\u1089", "\u103E\u1030"));
     phase0.addRule(new Rule("\u1033", "\u102F"));
