@@ -625,9 +625,13 @@ public class TransliterateTest {
     "ကျွေးမွေး"
   },
   { // #115
-    "ဆႏၵႀကီး",
-    "ဆန္ဒကြီး"
-  }
+    "ဆႏၵႀကီး ေႂကြးေၾကာ္",
+    "ဆန္ဒကြီး ကြွေးကြော်"
+  },
+  { // #120
+    "ေက်းကြၽန္",
+    "ကျေးကျွန်"
+  },
     // to be resolved
     /*
     {  // Frome case #152: "The Chinese city of Beijing Public Republic"
