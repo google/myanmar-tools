@@ -126,6 +126,10 @@ $ukinzi ($consonant) > $1 \u1064 ;
 #### PHASE 1: Everything is now in Zawgyi code points. REORDERING RULES.
 ::Null;
 
+# Handle Na with lower modifiers, medial ra.
+\u1014 ($subscriptitem) ($highsignZ*) \u103b > \u103b \u108f $1 $2;
+\u1014 \u103b ([\u103c\u103d]*) (\u1031*) > $2 \u103b \u108f $1;
+
 # E Vowel + medial ra. Move the e vowel
 ($consonant) \u103b ([\u103c\u103d]*) \u1031 > \u1031 \u103b $1 $2;
 
@@ -142,14 +146,12 @@ $ukinzi ($consonant) > $1 \u1064 ;
 ($consonant) ([\u103a\u103c-\u103d]+) \u1031 > \u1031 $1 $2 ;
 
 # Handle consonant, subscripted consonant, medial ra
-($narrowconsonant) ($subscriptitem) ($highsignZ*) \u103b > \u103b $1 $2 $3 ;
-($wideconsonant) ($subscriptitem) ($highsignZ*) \u103b > \u103b $1 $2 $3;
+($consonant) ($subscriptitem) ($highsignZ*) \u103b > \u103b $1 $2 $3 ;
 
 # No medials intervening.
 ($vowelsAndConsonants) \u1031 > \u1031 $1 ;
 
-# Handle Na with lower modifiers, medial ra.
-\u1014 ($subscriptitem) ($highsignZ*) \u103b > \u103b \u108f $1 $2;
+# Handle Na with lower modifiers.
 \u1014 ($subscriptitem) > \u108f $1 ;
 
 \u1014 ($lowsignZ) ($highsignZ) \u1037 > \u108f $1 $2 \u1094;
@@ -181,9 +183,6 @@ $ukinzi ($consonant) > $1 \u1064 ;
 
 ([\u102B\u102C\u102F\u1030]) ([\u102D\u102E\u1032]) > $2 $1;
 
-# Medial plus vowel sign U
-($medialraZ) ($consonant) \u102f > $1 $2 \u1033;
-
 ## Phase 2: Further adjustments
 ::Null;
 
@@ -193,28 +192,37 @@ $ukinzi ($consonant) > $1 \u1064 ;
 \u103c \u1094 > \u103c \u1095 ;
 
 # Medial ra variations, context dependent
-$medialraZ ($narrowconsonant) \u102d \u103d \u102f > \u107f $1 \u102d \u1087 \u1083 ;
-$medialraZ ($wideconsonant) \u102d \u103d \u102f > \u1080 $1 \u102d \u1087 \u1083 ;
-
 $medialraZ ($narrowconsonant) ($subscriptitem) ($highsignZ) > \u1083 $1 $2 $3 ;
 $medialraZ ($wideconsonant) ($subscriptitem) ($highsignZ) > \u1084 $1 $2 $3;
 $medialraZ ($narrowconsonant) ($subscriptitem) > \u1081 $1 $2 ;
 $medialraZ ($wideconsonant) ($subscriptitem) > \u1082 $1 $2 ;
 
-$medialraZ ($narrowconsonant) ($lowsignZ) ($highsignZ) > \u1083 $1 $2 $3 ;
-$medialraZ ($wideconsonant) ($lowsignZ) ($highsignZ) > \u1084 $1 $2 $3 ;
+$medialraZ ($narrowconsonant) ([\u103c\u108a]) ($highsignZ) > \u1083 $1 $2 $3 ;
+$medialraZ ($wideconsonant) ([\u103c\u108a]) ($highsignZ) > \u1084 $1 $2 $3 ;
 
-$medialraZ ($narrowconsonant) ($highsignZ) > \u107f $1 $2 ;
-$medialraZ ($wideconsonant) ($highsignZ) > \u1080 $1 $2 ;
+$medialraZ ($narrowconsonant) \u103d ($highsignZ) > \u107f $1 \u1087 $2;
+$medialraZ ($wideconsonant) \u103d ($highsignZ) > \u1080 $1 \u1087 $2;
 
-$medialraZ ($narrowconsonant) \u1030 > \u103b $1 \u1034 ;
-$medialraZ ($wideconsonant) \u1030 > \u107e $1 \u1034 ;
+$medialraZ ($narrowconsonant) \u102f ($highsignZ) > \u107f $1 \u1033 $2;
+$medialraZ ($wideconsonant) \u102f ($highsignZ) > \u1080 $1 \u1033 $2;
 
-$medialraZ ($narrowconsonant) (\u102f) > \u103b $1 \u1033 ;
-$medialraZ ($wideconsonant) (\u102f) > \u107e $1 \u1033 ;
+$medialraZ ($narrowconsonant) \u1030 ($highsignZ) > \u107f $1 \u1034 $2;
+$medialraZ ($wideconsonant) \u1030 ($highsignZ) > \u1080 $1 \u1034 $2;
 
-$medialraZ ($narrowconsonant) ($lowsignZ) > \u1081 $1 $2 ;
-$medialraZ ($wideconsonant) ($lowsignZ) > \u1082 $1 $2 ;
+$medialraZ ($narrowconsonant) ($lowsignZ*) ($highsignZ) > \u107f $1 $2 $3;
+$medialraZ ($wideconsonant) ($lowsignZ*) ($highsignZ) > \u1080 $1 $2 $3;
+
+$medialraZ ($narrowconsonant) ([\u103c\u108a]) > \u1081 $1 $2 ;
+$medialraZ ($wideconsonant) ([\u103c\u108a]) > \u1082 $1 $2 ;
+
+$medialraZ ($narrowconsonant) \u103d > \u103b $1 \u1087;
+$medialraZ ($wideconsonant) \u103d > \u107e $1 \u1087;
+
+$medialraZ ($narrowconsonant) \u102f > \u103b $1 \u1033;
+$medialraZ ($wideconsonant) \u102f > \u107e $1 \u1033;
+
+$medialraZ ($narrowconsonant) \u1030 > \u103b $1 \u1034;
+$medialraZ ($wideconsonant) \u1030 > \u107e $1 \u1034;
 
 $medialraZ ($widenya) > \u1082 $1 ;
 $medialraZ ($othernya) > \u103b \u106a ;
@@ -246,7 +254,11 @@ $medialraZ ($wideconsonant) > \u107e $1 ;
 
 \u1033 \u1094 > \u1033 \u1095; # Wider spacing on lower dot
 
-($medialraZ) ($consonant) ($highsignZ) \u102f > $1 $2 $3 \u1033;
+($medialraZ) ($narrowconsonant) ($lowsignZ*) ($highsignZ*) \u102f > $1 $2 $3 $4 \u1033;
+($medialraZ) ($wideconsonant) ($lowsignZ*) ($highsignZ*) \u102f > $1 $2 $3 $4 \u1033;
+
+($medialraZ) ($narrowconsonant) ($lowsignZ*) ($highsignZ*) \u1030 > $1 $2 $3 $4 \u1034;
+($medialraZ) ($wideconsonant) ($lowsignZ*) ($highsignZ*) \u1030 > $1 $2 $3 $4 \u1034;
 
 ##### Phase 4.  More reorderings of medials
 ::Null;
@@ -256,7 +268,6 @@ $medialraZ ($wideconsonant) > \u107e $1 ;
 \u1038 ($vowelmedial) > $1 \u1038;
 \u1038 ([\u1036\u1037\u103A]) > $1 \u1038;
 
-\u1036 \u102f > \u102f \u1036;
 \u103a ([\u1064\u108b-\u108e]) \u102d \u102f > \u103a $1 \u102d \u1033;
 \u103a \u102d \u102f > \u103a \u102d \u1033;
 
@@ -288,10 +299,10 @@ $medialraZ ($wideconsonant) > \u107e $1 ;
 \u103E \u103E+ > \u103E;
 
 # Visually identical orderings - standardize
-\u102f \u102D > \u102D \u102f ;
-\u102f \u1036 > \u1036 \u102f ;
-\u1039 \u1037 > \u1037 \u1039 ;
-\u103c \u1032 > \u1032 \u103c ;
-\u103c \u102e > \u102e \u103c ;
+([\u102f\u1033]) \u102D > \u102D $1 ;
+([\u102f\u1033]) \u1036 > \u1036 $1 ;
+\u1037 \u1039 > \u1039 \u1037;
+\u1032 \u103c > \u103c \u1032 ;
+\u102e \u103c > \u103c \u102e ;
 
 \u103d \u1088 > \u1088 ;
