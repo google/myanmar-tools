@@ -19,6 +19,14 @@ matrix:
       script:
         - mvn test
 
+    # Check consistency between genconvert and compiled converters
+    - language: java
+      jdk: openjdk8
+      script:
+        - make transcompile
+        # There should not be any dirty files:
+        - git diff-index --quiet HEAD
+
     # C++ Client
     - language: cpp
       compiler: gcc
