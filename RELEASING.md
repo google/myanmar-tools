@@ -21,6 +21,10 @@ You must have write access to the Github repo, and you must also have write acce
 4. Run `npm publish` in the `clients/js` directory.
 5. All done; make sure that the package got updated by visiting https://www.npmjs.com/package/myanmar-tools.
 
+## Releasing to Google Hosted Libraries (Browser JS)
+
+A Google engineer needs to perform this task.  For more details, see go/zawgyi/releasing.
+
 ## Releasing to Maven Central (Java)
 
 ### Requesting Access to Maven Central
