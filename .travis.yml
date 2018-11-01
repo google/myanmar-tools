@@ -25,7 +25,8 @@ matrix:
       script:
         - make transcompile
         # There should not be any dirty files:
-        - git diff-index --quiet HEAD
+        - git update-index --refresh
+        - git diff-index HEAD
 
     # C++ Client
     - language: cpp
