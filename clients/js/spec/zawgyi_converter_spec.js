@@ -655,6 +655,14 @@ var zawygi_unicode_convert_data = [
     "\u1014\u103c\u103d\u1032" +
     "\u1014\u103c\u103d\u1031\u102f"
   },
+  { // #123 test https://github.com/googlei18n/myanmar-tools/issues/26
+    z: "\u1091",
+    u: "\u100f\u1039\u100d",
+  },
+  { // #124 test https://github.com/googlei18n/myanmar-tools/issues/26
+    z: "\u106e",
+    u: "\u100d\u1039\u100d",
+  },
 // Odd spacing and strange combinations, for more testing later.
 /*
 {

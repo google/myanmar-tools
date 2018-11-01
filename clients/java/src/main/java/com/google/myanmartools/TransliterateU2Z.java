@@ -73,9 +73,6 @@ public final class TransliterateU2Z extends Transliterate {
     phase0.addRule(new Rule("\u1039\u1008", "\u1069"));
     phase0.addRule(new Rule("\u1039\u100B", "\u106C"));
     phase0.addRule(new Rule("\u1039\u100C", "\u106D"));
-    phase0.addRule(new Rule("\u1039\u100D", "\u106E"));
-    phase0.addRule(new Rule("\u100D\u1039\u100E", "\u106F"));
-    phase0.addRule(new Rule("\u1039\u100E", "\u106F"));
     phase0.addRule(new Rule("\u1039\u100F", "\u1070"));
     phase0.addRule(new Rule("\u1039\u1010", "\u1072"));
     phase0.addRule(new Rule("\u1039\u1011", "\u1074"));
@@ -89,6 +86,7 @@ public final class TransliterateU2Z extends Transliterate {
     phase0.addRule(new Rule("\u1039\u1019", "\u107C"));
     phase0.addRule(new Rule("\u1039\u101C", "\u1085"));
     phase0.addRule(new Rule("\u100D\u1039\u100D", "\u106E"));
+    phase0.addRule(new Rule("\u100D\u1039\u100E", "\u106F"));
     phase0.addRule(new Rule("\u100F\u1039\u100D", "\u1091"));
     phase0.addRule(new Rule("\u100B\u1039\u100C", "\u1092"));
     phase0.addRule(new Rule("\u100B\u1039\u100B", "\u1097"));

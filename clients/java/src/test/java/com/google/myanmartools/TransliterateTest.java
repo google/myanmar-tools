@@ -658,6 +658,14 @@ public class TransliterateTest {
     "\u1014\u103c\u103d\u1032" +
     "\u1014\u103c\u103d\u1031\u102f"
   },
+  { // #123 test https://github.com/googlei18n/myanmar-tools/issues/26
+    "\u1091",
+    "\u100f\u1039\u100d",
+  },
+  { // #124 test https://github.com/googlei18n/myanmar-tools/issues/26
+    "\u106e",
+    "\u100d\u1039\u100d",
+  },
     // to be resolved
     /*
     {  // Frome case #152: "The Chinese city of Beijing Public Republic"
