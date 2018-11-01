@@ -24,7 +24,7 @@
 # (1) Map all Unicode codepoints to their Zawgyi counterparts.
 # (2) Perform reordering.
 
-# Modern Burmese digits & Unicode code points.
+# Modern Burmese digits and Unicode code points.
 $nondigits = [^\u1040-\u1049];
 $consonant = [\u1000-\u1021];
 $narrowconsonant = [\u1001\u1002\u1004\u1005\u1007\u100b-\u100e\u1012\u1013\u1015-\u1017\u1019\u101d\u1020\u1025\u1026\u108f];
