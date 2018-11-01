@@ -167,18 +167,6 @@ function getAllRulesU2Z() {
       s: '\u106D',
     },
     {
-      p: RegExp('^' + '\u1039\u100D'),
-      s: '\u106E',
-    },
-    {
-      p: RegExp('^' + '\u100D\u1039\u100E'),
-      s: '\u106F',
-    },
-    {
-      p: RegExp('^' + '\u1039\u100E'),
-      s: '\u106F',
-    },
-    {
       p: RegExp('^' + '\u1039\u100F'),
       s: '\u1070',
     },
@@ -229,6 +217,10 @@ function getAllRulesU2Z() {
     {
       p: RegExp('^' + '\u100D\u1039\u100D'),
       s: '\u106E',
+    },
+    {
+      p: RegExp('^' + '\u100D\u1039\u100E'),
+      s: '\u106F',
     },
     {
       p: RegExp('^' + '\u100F\u1039\u100D'),
