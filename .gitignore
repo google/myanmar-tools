@@ -10,3 +10,4 @@ samples/ruby/Gemfile.lock
 vendor/
 # checking in composer.lock causes failures due to incompatible PHP versions
 composer.lock
+composer.phar
