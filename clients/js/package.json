@@ -1,6 +1,6 @@
 {
   "name": "myanmar-tools",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Tools for handling the Zawgyi font encoding in Myanmar.",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,7 @@
     "gulp-cli": "^2.0.1",
     "gulp-jasmine": "^4.0.0",
     "gulp-jasmine-browser": "^3.0.2",
-    "gulp-preprocess": "^2.0.0",
+    "gulp-preprocess": "^3.0.2",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^1.0.0",
     "gulp-sourcemaps": "^2.6.1",
