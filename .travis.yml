@@ -55,37 +55,54 @@ matrix:
         - mvn compile
         - mvn test
 
-    # JavaScript Client
+    # JavaScript Client (minimum Node version)
     - language: node_js
-      node_js:
-        - "node"
-        - "0.10"  # minimum supported version
+      node_js: 0.10  # minimum supported version
       before_script:
         - cd clients/js
         - npm install
       script:
         - npm run test
 
-    # PHP Client
+    # JavaScript Client (latest Node version)
+    - language: node_js
+      node_js: node
+      before_script:
+        - cd clients/js
+        - npm install
+      script:
+        - npm run test
+
+    # PHP Client (minimum PHP version)
     - language: php
-      php:
-        - 7.0
-        - 7.1
-        - 7.2
+      php: 7.0  # minimum supported version
       before_script:
         - composer install
       script:
         - ./vendor/bin/phpunit --configuration clients/php/phpunit.xml
 
-    # Ruby Client
+    # PHP Client (latest PHP version)
+    - language: php
+      php: nightly
+      before_script:
+        - composer install
+      script:
+        - ./vendor/bin/phpunit --configuration clients/php/phpunit.xml
+
+    # Ruby Client (minimum Ruby version)
     - language: ruby
-      rvm:
-        - 2.0
-        - jruby
-        - "2.0.0-p0"  # minimum supported version
+      rvm: 2.0  # minimum supported version
       before_script:
         - cd clients/ruby
-        - gem install bundler
+        - bundle install
+      script:
+        - rake test
+
+    # Ruby Client (latest Ruby version with jruby)
+    - language: ruby
+      rvm: jruby
+      before_script:
+        - cd clients/ruby
         - bundle install
       script:
         - rake test
