@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/googlei18n/myanmar-tools.svg?branch=master)](https://travis-ci.org/googlei18n/myanmar-tools)
-
-# Myanmar Tools (Zawgyi detection)
+# Myanmar Tools (Zawgyi detection & conversion)
 
 This project includes tools for processing font encodings used in Myanmar, currently with support for the widespread Zawgyi-One font encoding.  For more information on font encodings in Myanmar, read [the Unicode Myanmar FAQ](http://www.unicode.org/faq/myanmar.html).
 
@@ -16,6 +14,8 @@ Features:
 Conversion is also available via ICU in languages without support via Myanmar Tools; see "Zawgyi-to-Unicode Conversion" below.
 
 This is not an official Google product, but we hope that you’ll find *Myanmar Tools* useful to better support the languages of Myanmar.
+
+[![Build Status](https://travis-ci.org/google/myanmar-tools.svg?branch=master)](https://travis-ci.org/google/myanmar-tools)
 
 ## Why Myanmar Tools?
 
