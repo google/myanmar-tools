@@ -55,9 +55,11 @@ matrix:
         - mvn compile
         - mvn test
 
-    # JavaScript Client (minimum Node version)
+    # JavaScript Client (lower Node version)
+    # Note: even older Node.js versions might be allowed, but the
+    # test tooling requires more recent versions.
     - language: node_js
-      node_js: 4  # minimum supported version
+      node_js: 6
       before_script:
         - cd clients/js
         - npm install
@@ -83,7 +85,7 @@ matrix:
 
     # PHP Client (latest PHP version)
     - language: php
-      php: php
+      php: 7.3
       before_script:
         - composer install
       script:
@@ -103,7 +105,6 @@ matrix:
       rvm: jruby
       before_script:
         - cd clients/ruby
-        - gem install bundler
         - bundle install
       script:
         - rake test
