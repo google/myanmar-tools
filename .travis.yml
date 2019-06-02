@@ -57,7 +57,7 @@ matrix:
 
     # JavaScript Client (minimum Node version)
     - language: node_js
-      node_js: 0.10  # minimum supported version
+      node_js: 4  # minimum supported version
       before_script:
         - cd clients/js
         - npm install
@@ -83,7 +83,7 @@ matrix:
 
     # PHP Client (latest PHP version)
     - language: php
-      php: nightly
+      php: php
       before_script:
         - composer install
       script:
@@ -103,6 +103,7 @@ matrix:
       rvm: jruby
       before_script:
         - cd clients/ruby
+        - gem install bundler
         - bundle install
       script:
         - rake test
