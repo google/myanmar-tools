@@ -14,7 +14,7 @@ allprojects {
 }
 
 dependencies {
-    compile 'com.google.myanmartools:myanmar-tools:1.1.1'
+    compile 'com.google.myanmartools:myanmar-tools:1.1.2'
 }
 ```
 
@@ -26,7 +26,7 @@ If you are using a pom.xml:
 <dependency>
   <groupId>com.google.myanmartools</groupId>
   <artifactId>myanmar-tools</artifactId>
-  <version>1.1.1</version>
+  <version>1.1.2</version>
 </dependency>
 ```
 
