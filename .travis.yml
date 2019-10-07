@@ -49,6 +49,7 @@ matrix:
     # Java Client
     - language: java
       jdk: openjdk7  # minimum supported version
+      dist: trusty  # required for OpenJDK 7
       before_script:
         - cd clients/java
       script:
