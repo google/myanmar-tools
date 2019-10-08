@@ -43,6 +43,7 @@ file(
 execute_process(COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR}/_3rdParty tar xfz ../CMakeFiles/icu4c-61_1-src.tgz)
 
 add_executable(build_model_inc build_model_inc.cpp resources/zawgyiUnicodeModel.dat)
+target_link_libraries(build_model_inc -lpthread)
 add_custom_command(
         OUTPUT zawgyi_model_data.inc
         COMMAND build_model_inc ${CMAKE_SOURCE_DIR}/resources/zawgyiUnicodeModel.dat zawgyi_model_data.inc
