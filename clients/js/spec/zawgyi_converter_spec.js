@@ -14,14 +14,14 @@
  */
 
 var zawygi_unicode_convert_data = [
-{
+  {
     z: " ",
     u: " "
-},
-{
-    z: "123",
-    u: "123"
-},
+  },
+  // {
+  //   z: "123",
+  //   u: "123"
+  // },
 {
     z: "abc",
     u: "abc"
@@ -680,6 +680,22 @@ var zawygi_unicode_convert_data = [
 */
 ];
 
+// Each case contains raw zawgyi, and the output is the expected normalization.
+var zawgyi_normalize_tests = [
+  {
+    z:  "မၪၨဴရီ",
+    zn: "မၪၨဴရီ"
+  },
+  {
+    z:  "အာဆီယံ",
+    zn: "အာဆီယံ"
+  },
+  {
+    z:  "အမ်ားစုထိန္းခ်ုပ္ထားတဲ့",
+    zn: "အမ်ားစုထိန္းခ်ုပ္ထားတဲ့"
+  }
+];
+
 // It would be nice to use preprocessor flags here, but that would require
 // building this file before Jasmine can run it.
 
@@ -743,16 +759,30 @@ describe("ZawgyiConverter U2Z", function () {
     });
 });
 
-describe("Zawgyi to Unicode Conversion Compatibility Test", function() {
-    it("should convert input Zawgyi to exact Unicode out as expected", function() {
-        const expected = compatTestZ2Uoutput.split("\n");
-        var index = 0;
+describe("ZawgyiConverter U2Z", function () {
+    // TODO: Enable this test case once fixed. (change "xit" to "it")
+    it("should pass the data-driven test", function () {
         const converter = new ZawgyiConverter();
-        compatTestZ2Usource.split("\n").forEach(function (line) {
-            var actual = converter.zawgyiToUnicode(line);
-            expect(actual).toEqual(expected[index]);
-            index += 1;
-        }, this);
+        for (var i = 0; i < zawygi_unicode_convert_data.length; i++) {
+            var test_case = zawygi_unicode_convert_data[i];
+            var converted = converter.unicodeToZawgyi(test_case.u);
+            var expected = converter.normalizeZawgyi(test_case.z);
+            var actual = converter.normalizeZawgyi(converted);
+            expect(i+" "+actual).toEqual(i+" "+expected);
+        }
+    });
+});
+
+describe("Zawgyi Normalization Test", function() {
+    it("should convert input Zawgyi to a normalized form", function() {
+        const converter = new ZawgyiConverter();
+        for (var i = 0; i < zawgyi_normalize_tests.length; i++) {
+            var test_case = zawgyi_normalize_tests[i];
+            var expected = test_case.zn;
+            var actual = converter.normalizeZawgyi(test_case.z);
+            expect(i+" "+actual).toEqual(i+" "+expected);
+        }
+
     });
 
 });

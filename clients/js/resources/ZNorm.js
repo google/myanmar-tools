@@ -187,7 +187,7 @@ function getAllRulesZNorm() {
       s: '\u1037\u1039',
     },
     {
-      p: RegExp('^' + '[|\u106A\u106B]'),
+      p: RegExp('^' + '\u106B'),
       s: '\u100A',
     },
   ];

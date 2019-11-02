@@ -87,7 +87,7 @@ $zmedialra+ > \u103b;
 ::Null;
 \u1036 \u102f > \u102f \u1036;
 \u1037 \u1039 \u1037 > \u1037 \u1039 ;
-[\u106a|\u106b] > \u100a;
+\u106b > \u100a;
 
 # Phase N. Remove spaces.
 ::Null;
