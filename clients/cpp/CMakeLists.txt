@@ -17,7 +17,7 @@ cmake_minimum_required(VERSION 3.0)
 set(CMAKE_CXX_STANDARD 11)
 
 file(
-        DOWNLOAD "https://raw.githubusercontent.com/hunter-packages/gate/v0.8.1/cmake/HunterGate.cmake" CMakeFiles/HunterGate.cmake
+        DOWNLOAD "https://raw.githubusercontent.com/hunter-packages/gate/v0.8.1/cmake/HunterGate.cmake" ${CMAKE_BINARY_DIR}/CMakeFiles/HunterGate.cmake
         EXPECTED_HASH SHA1=b07c64067aebe94ba07d375c74b1bd1d7a696c67
 )
 include("${CMAKE_BINARY_DIR}/CMakeFiles/HunterGate.cmake")
@@ -40,9 +40,10 @@ file(
         DOWNLOAD "http://download.icu-project.org/files/icu4c/61.1/icu4c-61_1-src.tgz" CMakeFiles/icu4c-61_1-src.tgz
         EXPECTED_HASH SHA1=06ca7b1e64c28e07d5633a2e0257380884ea486b
 )
-execute_process(COMMAND ${CMAKE_COMMAND} -E chdir _3rdParty tar xfz ../CMakeFiles/icu4c-61_1-src.tgz)
+execute_process(COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR}/_3rdParty tar xfz ../CMakeFiles/icu4c-61_1-src.tgz)
 
 add_executable(build_model_inc build_model_inc.cpp resources/zawgyiUnicodeModel.dat)
+target_link_libraries(build_model_inc -lpthread)
 add_custom_command(
         OUTPUT zawgyi_model_data.inc
         COMMAND build_model_inc ${CMAKE_SOURCE_DIR}/resources/zawgyiUnicodeModel.dat zawgyi_model_data.inc
@@ -56,6 +57,13 @@ target_link_libraries(myanmartools glog::glog)
 set(TEST_FILES zawgyi_detector_unittest.cpp resources/compatibility.tsv)
 add_executable(myanmartools_test ${TEST_FILES})
 target_link_libraries(myanmartools_test myanmartools GTest::main)
+
+# Fuzz target; see http://llvm.org/docs/LibFuzzer.html
+# Requires CXX=clang++
+set(FUZZ_FILES zawgyi_detector_fuzz_target.cpp)
+add_executable(myanmartools_fuzz EXCLUDE_FROM_ALL ${FUZZ_FILES})
+target_compile_options(myanmartools_fuzz PUBLIC -fsanitize=fuzzer,address,undefined)
+target_link_libraries(myanmartools_fuzz myanmartools -fsanitize=fuzzer,address,undefined)
 
 enable_testing()
 add_test(
