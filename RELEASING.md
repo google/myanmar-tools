@@ -4,7 +4,7 @@ This document describes the steps required to update Myanmar Tools in package re
 
 ## Versioning
 
-Version tags apply to the entire repository.  It is therefore essential that you maintain the stability of all projects when making a release.  For example, if you are making a Java-specific change, you shouldn't commit changes that break other clients, even if you intend to fix them later.
+Version tags apply to the entire repository, but each language has a suffix on the tag.  For example, `v1.1.2+js` is version 1.1.2 for the JavaScript client.
 
 We use semantic versioning: change the small digit for minor bug fixes, the middle digit for larger bug fixes or minor feature improvements, and the large digit for major feature improvements that could also break backwards compatibility.
 
