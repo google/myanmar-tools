@@ -18,8 +18,9 @@ You must have write access to the Github repo, and you must also have write acce
 2. On the command line, sign in using `npm login`.
 3. Save the desired version to publish in `package.json` and commit.
 4. Ensure that the working directory is clean.  Commit or stash any lingering changes.
-4. Run `npm publish` in the `clients/js` directory.
-5. All done; make sure that the package got updated by visiting https://www.npmjs.com/package/myanmar-tools.
+5. Tag the commit with `v#.#.#+js`
+6. Run `npm publish` in the `clients/js` directory.
+7. All done; make sure that the package got updated by visiting https://www.npmjs.com/package/myanmar-tools.
 
 ## Releasing to Google Hosted Libraries (Browser JS)
 
