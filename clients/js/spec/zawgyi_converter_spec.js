@@ -18,10 +18,6 @@ var zawygi_unicode_convert_data = [
     z: " ",
     u: " "
   },
-  // {
-  //   z: "123",
-  //   u: "123"
-  // },
 {
     z: "abc",
     u: "abc"
@@ -770,6 +766,19 @@ describe("ZawgyiConverter U2Z", function () {
             var actual = converter.normalizeZawgyi(converted);
             expect(i+" "+actual).toEqual(i+" "+expected);
         }
+    });
+});
+
+describe("Zawgyi Normalization Test", function() {
+    it("should convert input Zawgyi to a normalized form", function() {
+        const converter = new ZawgyiConverter();
+        for (var i = 0; i < zawgyi_normalize_tests.length; i++) {
+            var test_case = zawgyi_normalize_tests[i];
+            var expected = test_case.zn;
+            var actual = converter.normalizeZawgyi(test_case.z);
+            expect(i+" "+actual).toEqual(i+" "+expected);
+        }
+
     });
 });
 
