@@ -93,7 +93,7 @@ public final class TransliterateZNorm extends Transliterate {
     Phase phase6 = addPhase();
     phase6.addRule(new Rule("\u1036\u102F", "\u102F\u1036"));
     phase6.addRule(new Rule("\u1037\u1039\u1037", "\u1037\u1039"));
-    phase6.addRule(new Rule("[|\u106A\u106B]", "\u100A"));
+    phase6.addRule(new Rule("\u106B", "\u100A"));
 
     // Rules for phase 7
     Phase phase7 = addPhase();

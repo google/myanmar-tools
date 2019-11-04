@@ -680,6 +680,22 @@ var zawygi_unicode_convert_data = [
 */
 ];
 
+// Each case contains raw zawgyi, and the output is the expected normalization.
+var zawgyi_normalize_tests = [
+  {
+    z:  "မၪၨဴရီ",
+    zn: "မၪၨဴရီ"
+  },
+  {
+    z:  "အာဆီယံ",
+    zn: "အာဆီယံ"
+  },
+  {
+    z:  "အမ်ားစုထိန္းခ်ုပ္ထားတဲ့",
+    zn: "အမ်ားစုထိန္းခ်ုပ္ထားတဲ့"
+  }
+];
+
 // It would be nice to use preprocessor flags here, but that would require
 // building this file before Jasmine can run it.
 
@@ -754,7 +770,18 @@ describe("Zawgyi to Unicode Conversion Compatibility Test", function() {
             index += 1;
         }, this);
     });
+});
 
+describe("Zawgyi Normalization Test", function() {
+    it("should convert input Zawgyi to a normalized form", function() {
+        const converter = new ZawgyiConverter();
+        for (var i = 0; i < zawgyi_normalize_tests.length; i++) {
+            var test_case = zawgyi_normalize_tests[i];
+            var expected = test_case.zn;
+            var actual = converter.normalizeZawgyi(test_case.z);
+            expect(i+" "+actual).toEqual(i+" "+expected);
+        }
+    });
 });
 
 describe("Unicode to Zawgyi Conversion Compatibility Test", function() {
