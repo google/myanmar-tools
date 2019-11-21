@@ -45,7 +45,8 @@ using namespace google_myanmar_tools;
 #define BIG_ENDIAN_LOAD(ptr, dest, bits) \
   static_assert(sizeof(dest) == bits / 8, \
     "Expected type to be " #bits " bits"); \
-  uint##bits##_t u = *(static_cast<const uint##bits##_t*>(ptr)); \
+  uint##bits##_t u; \
+  memcpy(&u, ptr, bits / 8); \
   u = BSWAP(u, bits); \
   memcpy(&dest, &u, bits / 8);
 
