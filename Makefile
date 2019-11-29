@@ -24,6 +24,7 @@ MAKE=make
 MVN=mvn
 NPM=npm
 RAKE=rake
+GO=go
 PHPUNIT=./vendor/bin/phpunit
 
 training/target: $(wildcard training/src/**/*)
@@ -47,11 +48,13 @@ copy-resources:
 	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/js/resources
 	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/ruby/lib/myanmar-tools/resources
 	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/php/resources
+	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/go/resources
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/java/src/test/resources/com/google/myanmartools
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/cpp/resources
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/js/resources
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/ruby/lib/myanmar-tools/resources
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/php/resources
+	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/go/resources
 
 	cp genconvert/input/mmgov_zawgyi_src.txt clients/java/src/test/resources/com/google/myanmartools
 	cp genconvert/input/mmgov_zawgyi_src.txt clients/js/resources
@@ -100,6 +103,9 @@ client-ruby: $(wildcard clients/ruby/**/*)
 
 client-php: $(wildcard clients/php/**/*)
 	$(COMPOSER) install
+
+client-go: $(wildcard clients/go/**/*)
+	cd clients/go && $(GO) generate && go test
 
 test: clients client-cpp client-js client-ruby client-php
 	cd clients/cpp && $(MAKE) test
