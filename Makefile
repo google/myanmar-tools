@@ -105,11 +105,12 @@ client-php: $(wildcard clients/php/**/*)
 	$(COMPOSER) install
 
 client-go: $(wildcard clients/go/**/*)
-	cd clients/go && $(GO) generate && go test
+	go get -u github.com/go-bindata/go-bindata && cd clients/go && go generate
 
 test: clients client-cpp client-js client-ruby client-php
 	cd clients/cpp && $(MAKE) test
 	cd clients/java && $(MVN) test
 	cd clients/js && $(NPM) test
 	cd clients/ruby && $(RAKE) test
+	cd client/go && $(GO) test
 	$(PHPUNIT) --configuration clients/php/phpunit.xml
