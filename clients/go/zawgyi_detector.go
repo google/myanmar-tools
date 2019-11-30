@@ -3,9 +3,10 @@ package myanmartools
 import (
 	"bufio"
 	"bytes"
+	"github.com/google/myanmar-tools/clients/go/internal/resources"
 )
 
-//go:generate go-bindata -o resources.go -pkg myanmartools ./resources
+//go:generate go-bindata -o ./internal/resources/resources.go -pkg resources ./resources
 
 //ZawgyiDetector struct
 type ZawgyiDetector struct {
@@ -19,7 +20,7 @@ func (zd *ZawgyiDetector) GetZawgyiProbability(input string) float64 {
 
 //NewZawgyiDetector return *NewZawgyiDetector
 func NewZawgyiDetector() *ZawgyiDetector {
-	binaryMarkovData := MustAsset("resources/zawgyiUnicodeModel.dat")
+	binaryMarkovData := resources.MustAsset("resources/zawgyiUnicodeModel.dat")
 	datReader := bufio.NewReader(bytes.NewBuffer(binaryMarkovData))
 	model := NewZawgyiUnicodeMarkovModelFromReader(datReader)
 	return &ZawgyiDetector{

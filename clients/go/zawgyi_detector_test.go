@@ -7,6 +7,7 @@ import (
 	"math/big"
 	"strings"
 	"testing"
+	"github.com/google/myanmar-tools/clients/go/internal/resources"
 )
 
 const float64EqualityThreshold = 1E-9
@@ -39,7 +40,7 @@ func TestZawgyiDetectorBehavior(t *testing.T) {
 func TestCompatibility(t *testing.T) {
 	t.Run("should produce the same resuls as in compatibility.csv", func(t *testing.T) {
 		detector := NewZawgyiDetector()
-		data, err := Asset("resources/compatibility.tsv")
+		data, err := resources.Asset("resources/compatibility.tsv")
 		if err != nil {
 			t.Fatalf("could not load resources/compatibility.tsv file %#v", err)
 		}
