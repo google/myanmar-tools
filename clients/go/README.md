@@ -4,7 +4,7 @@ This documentation is for Golang specific usage of *Myanmar Tools*.  For general
 
 ## Installation
 ```bash
-$ go get -u github.com/google/clients/go
+$ go get -u github.com/google/myanmar-tools/clients/go
 ```
 ## Usage
 
