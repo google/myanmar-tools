@@ -32,6 +32,11 @@ See language-specific documentation:
 - [JavaScript](clients/js/README.md)
 - [PHP](clients/php/README.md)
 - [Ruby](clients/ruby/README.md)
+- [C++](clients/cpp/README.md)
+- [Java](clients/java/README.md)
+- [JavaScript](clients/js/README.md)
+- [PHP](clients/php/README.md)
+- [Go](clients/go/README.md)
 
 Depending on your programming language, a typical use case should look something like this:
 
