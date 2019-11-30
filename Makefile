@@ -109,7 +109,7 @@ client-go: $(wildcard clients/go/**/*)
 	cd clients/go
 	$(GO) generate
 
-test: clients client-cpp client-js client-ruby client-php
+test: clients client-cpp client-js client-ruby client-php client-go
 	cd clients/cpp && $(MAKE) test
 	cd clients/java && $(MVN) test
 	cd clients/js && $(NPM) test

@@ -4,7 +4,7 @@ This documentation is for Golang specific usage of *Myanmar Tools*.  For general
 
 ## Installation
 ```bash
-$ go get -u github.com/ayeminag/go-myanmartools
+$ go get -u github.com/google/clients/go
 ```
 ## Usage
 
@@ -13,7 +13,7 @@ To detect Zawgyi, create an instance of ZawgyiDetector and call `GetZawgyiProbab
 ```go
 import (
     "fmt"
-    "github.com/ayeminag/go-mayanmartools"
+    "github.com/google/myanmar-tools/clients/go"
 )
 
 func main() {
