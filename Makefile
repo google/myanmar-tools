@@ -114,5 +114,5 @@ test: clients client-cpp client-js client-ruby client-php client-go
 	cd clients/java && $(MVN) test
 	cd clients/js && $(NPM) test
 	cd clients/ruby && $(RAKE) test
-	$(GO) get -u github.com/go-bindata/go-bindata/... && cd clients/go && $(GO) generate && $(GO) test
+	cd clients/go && $(GO) test
 	$(PHPUNIT) --configuration clients/php/phpunit.xml
