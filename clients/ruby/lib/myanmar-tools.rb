@@ -18,7 +18,7 @@ require 'myanmar-tools/zawgyi_unicode_markov_model'
 
 module MyanmarTools
 # Uses a machine learning model to determine whether a string of text is Zawgyi or Unicode.
-# For more details and documentation, see https://github.com/googlei18n/myanmar-tools
+# For more details and documentation, see https://github.com/google/myanmar-tools
 class ZawgyiDetector
   def initialize
     @model = ZawgyiUnicodeMarkovModel.new(stream_markov_model)
