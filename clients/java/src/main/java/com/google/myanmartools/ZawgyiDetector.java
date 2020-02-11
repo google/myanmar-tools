@@ -21,7 +21,7 @@ import java.io.InputStream;
 /**
  * Uses a machine learning model to determine whether a string of text is Zawgyi or Unicode.
  *
- * <p>For more details and documentation, see https://github.com/googlei18n/myanmar-tools
+ * <p>For more details and documentation, see https://github.com/google/myanmar-tools
  */
 public final class ZawgyiDetector {
   final ZawgyiUnicodeMarkovModel model;

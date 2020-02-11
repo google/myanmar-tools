@@ -51,7 +51,7 @@ For a complete working example, see [samples/php/Demo.php](../../samples/php/Dem
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/googlei18n/myanmar-tools . This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/google/myanmar-tools . This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 

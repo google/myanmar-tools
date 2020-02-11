@@ -23,7 +23,7 @@ limitations under the License.
   <packaging>jar</packaging>
   <version>1.1.4-SNAPSHOT</version>
   <name>myanmar-tools</name>
-  <url>https://github.com/googlei18n/myanmar-tools/</url>
+  <url>https://github.com/google/myanmar-tools/</url>
   <description>Tools for handling the Zawgyi font encoding in Myanmar.</description>
   <developers>
     <developer>
@@ -102,10 +102,10 @@ limitations under the License.
     </plugins>
   </build>
   <scm>
-    <connection>scm:git:https://github.com/googlei18n/myanmar-tools</connection>
+    <connection>scm:git:https://github.com/google/myanmar-tools</connection>
     <developerConnection>scm:git:git@github.com:googlei18n/myanmar-tools.git</developerConnection>
     <tag>HEAD</tag>
-    <url>https://github.com/googlei18n/myanmar-tools</url>
+    <url>https://github.com/google/myanmar-tools</url>
   </scm>
   <licenses>
     <license>
