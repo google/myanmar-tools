@@ -2,6 +2,22 @@
 
 This documentation is for C++ specific usage of *Myanmar Tools*.  For general documentation, see [the top-level README](../../README.md).
 
+## Building
+
+From this directory:
+
+```bash
+$ cmake CMakeLists.txt
+$ make
+$ make test
+```
+
+The first line sets up your Makefiles and also downloads the dependencies: GLog, GTest, and ICU4C.  The second line builds the code (on Unix-style environments), and the third line runs the tests.
+
+Note: None of the dependencies need to be linked at runtime.  GLog and GTest are only used for testing and debugging.  ICU4C is used only for its header files; no library symbols are required.
+
+## Usage Examples
+
 To detect Zawgyi, create a singleton instance of ZawgyiDetector, and call `GetZawgyiProbability` with your `char*` UTF-8 string.
 
 ```cpp
