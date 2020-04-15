@@ -37,10 +37,10 @@ find_package(glog CONFIG REQUIRED)
 
 message(STATUS "Downloading and extracting ICU4C...")
 file(
-        DOWNLOAD "http://download.icu-project.org/files/icu4c/61.1/icu4c-61_1-src.tgz" CMakeFiles/icu4c-61_1-src.tgz
-        EXPECTED_HASH SHA1=06ca7b1e64c28e07d5633a2e0257380884ea486b
+        DOWNLOAD "https://github.com/unicode-org/icu/releases/download/release-66-1/icu4c-66_1-src.tgz" CMakeFiles/icu4c-66_1-src.tgz
+        EXPECTED_HASH SHA1=68e87ea2044e92a5d86be6072b0eb3557f252d9f
 )
-execute_process(COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR}/_3rdParty tar xfz ../CMakeFiles/icu4c-61_1-src.tgz)
+execute_process(COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR}/_3rdParty tar xfz ../CMakeFiles/icu4c-66_1-src.tgz)
 
 add_executable(build_model_inc build_model_inc.cpp resources/zawgyiUnicodeModel.dat)
 target_link_libraries(build_model_inc -lpthread)
