@@ -15,4 +15,5 @@ setuptools.setup(name='myanmartools',
     package_dir={'': 'src'},
     include_package_data=True,
     package_data={'myanmartools': ['resources/*']},
-    install_requires=['numpy>=1.18'])
+    install_requires=['numpy>=1.18'],
+    python_requires='>=3.6')

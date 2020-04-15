@@ -119,7 +119,7 @@ matrix:
 
     # Python Client
     - language: python
-      python: 3.8
+      python: 3.6
       before_script:
         - cd clients/python
         - python setup.py install
