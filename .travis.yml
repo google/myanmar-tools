@@ -116,3 +116,12 @@ matrix:
         - go get -u github.com/go-bindata/go-bindata/...
       script:
         - cd clients/go && go generate && go test
+
+    # Python Client
+    - language: python
+      python: 3.8
+      before_script:
+        - cd clients/python
+        - python setup.py install
+      script:
+        - python -m unittest
