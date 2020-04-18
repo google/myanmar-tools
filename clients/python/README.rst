@@ -4,6 +4,22 @@ Myanmar Tools Python Documentation
 This documentation is python specific usage of Myanmar Tools.
 For general documentation, see `the top-level README`_.
 
+Installation
+------------
+
+From PyPI
+*********
+
+``$ pip install myanmartools``
+
+From GitHub
+***********
+
+``$ pip install 'git+https://github.com/google/myanmar-tools@master#egg=myanmartools&subdirectory=clients/python'``
+
+Usage Examples
+--------------
+
 To detect Zawgyi, create an instance of ZawgyiDetector,
 and call ``get_zawgyi_probability`` with a string::
 
