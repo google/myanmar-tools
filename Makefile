@@ -27,6 +27,7 @@ RAKE=rake
 GO=go
 PHPUNIT=./vendor/bin/phpunit
 PYTHON=python
+SWIFT=swift
 
 training/target: $(wildcard training/src/**/*)
 	$(MVN) -f training/pom.xml -q compile
@@ -51,6 +52,7 @@ copy-resources:
 	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/php/resources
 	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/go/resources
 	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/python/src/myanmartools/resources
+	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/swift/myanmartools/resources
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/java/src/test/resources/com/google/myanmartools
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/cpp/resources
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/js/resources
@@ -58,6 +60,7 @@ copy-resources:
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/php/resources
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/go/resources
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/python/src/myanmartools/resources
+	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/swift/myanmartoolsTests/resources
 
 	cp genconvert/input/mmgov_zawgyi_src.txt clients/java/src/test/resources/com/google/myanmartools
 	cp genconvert/input/mmgov_zawgyi_src.txt clients/js/resources
