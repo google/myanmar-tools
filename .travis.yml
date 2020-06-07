@@ -125,3 +125,12 @@ matrix:
         - python setup.py install
       script:
         - python -m unittest
+    - language: swift
+        osx_image: xcode10.1
+        env:
+            matrix:
+                - TEST_SDK=iphonesimulator12.1 OS=12.1 NAME='iPhone XR'
+        before_script:
+            - cd clients/swift
+        script:
+            - set -o pipefail && xcodebuild test -enableCodeCoverage YES -project myanmartools.xcodeproj -scheme myanmartools -sdk $TEST_SDK -destination "platform=iOS Simulator,OS=$OS,name=$NAME" ONLY_ACTIVE_ARCH=YES
