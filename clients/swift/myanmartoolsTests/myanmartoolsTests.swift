@@ -57,5 +57,9 @@ class myanmartoolsTests: XCTestCase {
         
     static var allTests = [
         ("testIgnoreNonMyanmarCodePoints", testIgnoreNonMyanmarCodePoints),
+        ("testStrongUnicodeReturnsLowScore", testStrongUnicodeReturnsLowScore),
+        ("testStrongZawgyiReturnsHighScore", testStrongZawgyiReturnsHighScore),
+        ("testIgnoreNumerals", testIgnoreNumerals),
+        ("testCompatibility", testCompatibility),
     ]
 }

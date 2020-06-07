@@ -118,7 +118,7 @@ client-go: $(wildcard clients/go/**/*)
 client-python: $(wildcard clients/python/**/*)
 	cd clients/python && $(PYTHON) setup.py install
 
-test: clients client-cpp client-js client-ruby client-php client-go client-python
+test: clients client-cpp client-js client-ruby client-php client-go client-python client-swift
 	cd clients/cpp && $(MAKE) test
 	cd clients/java && $(MVN) test
 	cd clients/js && $(NPM) test
@@ -126,3 +126,4 @@ test: clients client-cpp client-js client-ruby client-php client-go client-pytho
 	cd clients/go && $(GO) test
 	$(PHPUNIT) --configuration clients/php/phpunit.xml
 	cd clients/python && $(PYTHON) -m unittest
+	cd clients/swift && set -o pipefail && xcodebuild test -scheme myanmartools -destination platform="macOS"
