@@ -87,7 +87,6 @@ open class ZawgyiDetector{
             return -1 * Double.infinity
         }
         
-        //round to three decimal places and then return
         return (1.0 / (1.0 + exp(totalDelta)))
     }
 }
