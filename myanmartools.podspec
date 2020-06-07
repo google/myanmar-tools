@@ -19,10 +19,10 @@ Pod::Spec.new do |spec|
   spec.version      = "1.0"
   spec.summary      = "Zawgyi detection tool"
   spec.homepage     = "https://github.com/google/myanmar-tools"
-  spec.license      = { :type => "Apache", :file => "LICENCE.md" }
+  spec.license      = { :type => "Apache", :file => "LICENSE.md" }
   spec.author             = { "La Win Ko" => "lawinko11@gmail.com" }
   spec.social_media_url   = "https://www.facebook.com/lawinko.dev/"
-  spec.source       = { :git => "https://github.com/google/myanmar-tools.git", :tag => "v1.0" }
+  spec.source       = { :git => "https://github.com/lawinko/myanmar-tools.git", :tag => "v1.0+swift" }
   spec.source_files  = "clients/swift/myanmartools/src/**/*.{h,m,swift}"
   spec.resource  = "clients/swift/myanmartools/resources/zawgyiUnicodeModel.dat"
   spec.swift_version = '5.2.4'
