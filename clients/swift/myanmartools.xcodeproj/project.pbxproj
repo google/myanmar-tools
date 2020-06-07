@@ -15,6 +15,7 @@
 		9816C2FF248C0088009D06DA /* zawgyiUnicodeModel.dat in Resources */ = {isa = PBXBuildFile; fileRef = 9816C2FE248C0088009D06DA /* zawgyiUnicodeModel.dat */; };
 		9816C316248C092C009D06DA /* compatibility.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 9816C315248C092C009D06DA /* compatibility.tsv */; };
 		9816C319248C1134009D06DA /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9816C318248C1134009D06DA /* Extension.swift */; };
+		98BAA628248CCA7C00BDA31D /* LICENCE.md in Resources */ = {isa = PBXBuildFile; fileRef = 98BAA627248CCA7C00BDA31D /* LICENCE.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		9816C2FE248C0088009D06DA /* zawgyiUnicodeModel.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = zawgyiUnicodeModel.dat; sourceTree = "<group>"; };
 		9816C315248C092C009D06DA /* compatibility.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = compatibility.tsv; sourceTree = "<group>"; };
 		9816C318248C1134009D06DA /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		98BAA627248CCA7C00BDA31D /* LICENCE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENCE.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				9816C2F8248BFB75009D06DA /* resources */,
 				9816C2DD248BFAB5009D06DA /* myanmartools.h */,
 				9816C2DE248BFAB5009D06DA /* Info.plist */,
+				98BAA627248CCA7C00BDA31D /* LICENCE.md */,
 			);
 			path = myanmartools;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98BAA628248CCA7C00BDA31D /* LICENCE.md in Resources */,
 				9816C2FF248C0088009D06DA /* zawgyiUnicodeModel.dat in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
