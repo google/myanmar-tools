@@ -128,8 +128,8 @@ matrix:
     
     # Swift Client
     - language: objective-c
-        osx_image: xcode10.1
-        before_script:
-            - cd clients/swift
-        script:
-            - xcodebuild clean build test -project myanmartools.xcodeproj -scheme myanmartools -sdk iphonesimulator -destination "platform=iOS Simulator,OS=10.0,name=iPhone 6" -enableCodeCoverage YES CODE_SIGNING_REQUIRED=NO | xcpretty
+      osx_image: xcode10.1
+      before_script:
+        - cd clients/swift
+      script:
+        - xcodebuild clean build test -project myanmartools.xcodeproj -scheme myanmartools -sdk iphonesimulator -destination "platform=iOS Simulator,OS=10.0,name=iPhone 6" -enableCodeCoverage YES CODE_SIGNING_REQUIRED=NO | xcpretty
