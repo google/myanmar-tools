@@ -12,7 +12,9 @@ open class ZawgyiDetector{
     private var params: [[Float32]] = [[]]
     private var mapping: [Character: Int] = [:]
     
-    init(){
+    static let shared: ZawgyiDetector = ZawgyiDetector()
+    
+    private init(){
         do{
             if let dataURL = Bundle(for: ZawgyiDetector.self).url(forResource: "zawgyiUnicodeModel", withExtension: "dat"){
                 let markov = ZawgyiUnicodeMarkovModel(dataURL: dataURL)

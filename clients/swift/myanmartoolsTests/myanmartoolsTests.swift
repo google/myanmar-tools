@@ -9,7 +9,7 @@ import XCTest
 
 class myanmartoolsTests: XCTestCase {
 
-    var detector: ZawgyiDetector = ZawgyiDetector()
+    var detector: ZawgyiDetector = ZawgyiDetector.shared
     
     override class func setUp() {
         super.setUp()
