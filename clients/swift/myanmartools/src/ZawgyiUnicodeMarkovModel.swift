@@ -160,6 +160,7 @@ internal class ZawgyiUnicodeMarkovModel{
         let rangeB: [UInt32] = getChars(start: EXB_CP0, end: EXB_CP1)
         let spaceChars: [UInt32] = getChars(start: SPC_CP0, end: SPC_CP1)
         
+        //adding all characters into an array
         let myanmarCodePoints: [UInt32] = beforeDigits + afterDigits + rangeA + rangeB + spaceChars
         
         var mapping: [Character: Int] = [:]
@@ -170,6 +171,7 @@ internal class ZawgyiUnicodeMarkovModel{
             mapping[Character(unicodeScalar!)] = index
             index += 1
         }
+        
         return mapping
     }
     

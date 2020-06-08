@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => "https://github.com/google/myanmar-tools.git", :tag => "v1.1+swift" }
   spec.source_files  = "clients/swift/myanmartools/src/**/*.{h,m,swift}"
   spec.resource  = "clients/swift/myanmartools/resources/zawgyiUnicodeModel.dat"
-  spec.swift_version = '5.2.4'
+  spec.swift_version = '4.0','4.2','5.0'
   spec.ios.deployment_target  = '9.0'
   spec.osx.deployment_target  = '10.10'
 

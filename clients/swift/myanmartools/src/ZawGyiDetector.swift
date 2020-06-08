@@ -8,6 +8,7 @@
 import Foundation
 
 open class ZawgyiDetector{
+    
     private var params: [[Float32]] = [[]]
     private var mapping: [Character: Int] = [:]
     
@@ -17,7 +18,6 @@ open class ZawgyiDetector{
                 let markov = ZawgyiUnicodeMarkovModel(dataURL: dataURL)
                 self.params = markov.getParams()
                 self.mapping = markov.mapping()
-
             }else{
                 throw NSError(domain: "File not found error", code: NSFileNoSuchFileError, userInfo: nil)
             }
@@ -30,6 +30,8 @@ open class ZawgyiDetector{
         if verbose{
             print("Running detector on string: \(input)")
         }
+        
+        //previous code point and state
         var prevCp: Int = 0
         var prevState: Int = 0
         
@@ -55,6 +57,7 @@ open class ZawgyiDetector{
                 let char: Character = Character(UnicodeScalar(inputArray[offset])!)
                 cp = Int(char.unicodeScalarCodePoint())
 
+                //mapping transition value from code point
                 if let mapIndex = self.mapping[Character(UnicodeScalar(cp)!)]{
                     currentState = mapIndex
                 }else{

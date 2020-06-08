@@ -19,10 +19,8 @@ extension NSData{
     }
     
     func getBytes(range: NSRange) -> [UInt8]? {
-
         var buffer = [UInt8](repeating: 0, count: range.length)
         self.getBytes(&buffer, range: range)
-
         return buffer
     }
 }
