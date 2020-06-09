@@ -45,7 +45,7 @@ class myanmartoolsTests: XCTestCase {
             let string = String(data: data, encoding: .utf8)
             let nextLineSplit = string!.components(separatedBy: "\n")
             for nextLine in nextLineSplit{
-                let split = nextLine.components(separatedBy: "   ")
+                let split = nextLine.components(separatedBy: "\t")
                 if split.count ==  2{
                     XCTAssertTrue(detector.predict(input: split[1]) == Double(split[0]))
                 }
