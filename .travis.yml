@@ -131,8 +131,8 @@ matrix:
       osx_image: xcode10.1
       env:
         matrix:
-          - TEST_SDK=iphonesimulator12.1 OS=12.1 NAME='iPhone XR'
-          - TEST_SDK=iphonesimulator12.1 OS=12.1 NAME='iPhone 7'
-
+          - TEST_SDK=iphonesimulator11.4 OS=11.4 NAME='iPhone 7'
+      before_script:
+        - cd clients/swift
       script:
         - set -o pipefail && xcodebuild test -enableCodeCoverage YES -project myanmartools.xcodeproj -scheme myanmartools -sdk iphonesimulator -destination "platform=iOS Simulator,OS=$OS,name=$NAME" ONLY_ACTIVE_ARCH=YES
