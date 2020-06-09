@@ -135,4 +135,4 @@ matrix:
       before_script:
         - cd clients/swift
       script:
-        - set -o pipefail && xcodebuild test -enableCodeCoverage YES -project myanmartools.xcodeproj -scheme myanmartools -sdk iphonesimulator -destination "platform=iOS Simulator,OS=$OS,name=$NAME" ONLY_ACTIVE_ARCH=YES
+        - xcodebuild test -enableCodeCoverage YES -project myanmartools.xcodeproj -scheme myanmartools -sdk iphonesimulator -destination "platform=iOS Simulator,OS=$OS,name=$NAME" ONLY_ACTIVE_ARCH=YES
