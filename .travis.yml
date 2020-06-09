@@ -129,7 +129,10 @@ matrix:
     # Swift Client
     - language: objective-c
       osx_image: xcode10.1
-      before_script:
-        - cd clients/swift
+      env:
+        matrix:
+          - TEST_SDK=iphonesimulator12.1 OS=12.1 NAME='iPhone XR'
+          - TEST_SDK=iphonesimulator12.1 OS=12.1 NAME='iPhone 7'
+
       script:
-        - xcodebuild clean build test -project myanmartools.xcodeproj -scheme myanmartools -sdk iphonesimulator -destination "platform=iOS Simulator,OS=12.1,name=iPhone 6" -enableCodeCoverage YES CODE_SIGNING_REQUIRED=NO | xcpretty
+        - set -o pipefail && xcodebuild test -enableCodeCoverage YES -project myanmartools.xcodeproj -scheme myanmartools -sdk $TEST_SDK -destination "platform=iOS Simulator,OS=$OS,name=$NAME" ONLY_ACTIVE_ARCH=YES
