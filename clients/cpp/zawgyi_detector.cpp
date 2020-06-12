@@ -275,3 +275,13 @@ double ZawgyiDetector::GetZawgyiProbability(const char* input_utf8,
                                             int32_t length) const {
   return model_->Predict(input_utf8, length);
 }
+
+// C bindings (declared with extern "C").
+double GMTGetZawgyiProbability(const char* input_utf8) {
+  return GMTGetZawgyiProbabilityWithLength(input_utf8, -1);
+}
+
+double GMTGetZawgyiProbabilityWithLength(const char* input_utf8, int32_t length) {
+  ZawgyiDetector detector;
+  return detector.GetZawgyiProbability(input_utf8, length);
+}

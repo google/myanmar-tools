@@ -15,8 +15,13 @@
 #ifndef CPP_LIBRARY_H
 #define CPP_LIBRARY_H
 
+#ifdef __cplusplus
 #include <cstdint>
+#else  // __cplusplus
+#include <stdint.h>
+#endif  // __cplusplus
 
+#ifdef __cplusplus
 namespace google_myanmar_tools {
 
 // Forward-declaration
@@ -34,5 +39,20 @@ class ZawgyiDetector {
 };
 
 }  // namespace google_myanmar_tools
+
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif  // __cplusplus
+
+// C bindings (the "GMT" prefix stands for "Google Myanmar Tools")
+double GMTGetZawgyiProbability(const char* input_utf8);
+double GMTGetZawgyiProbabilityWithLength(const char* input_utf8, int32_t length);
+
+#ifdef __cplusplus
+}  // extern "C"
+#endif  // __cplusplus
+
 
 #endif
