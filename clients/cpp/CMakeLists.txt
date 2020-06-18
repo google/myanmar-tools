@@ -58,6 +58,10 @@ set(TEST_FILES zawgyi_detector_unittest.cpp resources/compatibility.tsv)
 add_executable(myanmartools_test ${TEST_FILES})
 target_link_libraries(myanmartools_test myanmartools GTest::main)
 
+set(C_TEST_FILES zawgyi_detector_unittest.c)
+add_executable(myanmartools_c_test ${C_TEST_FILES})
+target_link_libraries(myanmartools_c_test myanmartools)
+
 # Fuzz target; see http://llvm.org/docs/LibFuzzer.html
 # Requires CXX=clang++
 set(FUZZ_FILES zawgyi_detector_fuzz_target.cpp)
@@ -68,7 +72,12 @@ target_link_libraries(myanmartools_fuzz myanmartools -fsanitize=fuzzer,address,u
 enable_testing()
 add_test(
         NAME ZawgyiDetectorTest
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         COMMAND myanmartools_test resources/compatibility.tsv
+)
+add_test(
+        NAME ZawgyiDetectorCTest
+        COMMAND myanmartools_c_test
 )
 
 install(TARGETS myanmartools DESTINATION lib)

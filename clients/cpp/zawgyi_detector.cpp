@@ -277,11 +277,20 @@ double ZawgyiDetector::GetZawgyiProbability(const char* input_utf8,
 }
 
 // C bindings (declared with extern "C").
-double GMTGetZawgyiProbability(const char* input_utf8) {
-  return GMTGetZawgyiProbabilityWithLength(input_utf8, -1);
+GMTZawgyiDetector GMTOpenZawgyiDetector(void) {
+  return static_cast<GMTZawgyiDetector>(new ZawgyiDetector());
 }
 
-double GMTGetZawgyiProbabilityWithLength(const char* input_utf8, int32_t length) {
-  ZawgyiDetector detector;
-  return detector.GetZawgyiProbability(input_utf8, length);
+void GMTCloseZawgyiDetector(GMTZawgyiDetector detector) {
+  ZawgyiDetector* cppDetector = static_cast<ZawgyiDetector *>(detector);
+  delete cppDetector;
+}
+
+double GMTGetZawgyiProbability(GMTZawgyiDetector detector, const char* input_utf8) {
+  return GMTGetZawgyiProbabilityWithLength(detector, input_utf8, -1);
+}
+
+double GMTGetZawgyiProbabilityWithLength(GMTZawgyiDetector detector, const char* input_utf8, int32_t length) {
+  ZawgyiDetector* cppDetector = static_cast<ZawgyiDetector *>(detector);
+  return cppDetector->GetZawgyiProbability(input_utf8, length);
 }
