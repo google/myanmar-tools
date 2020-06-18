@@ -5,7 +5,7 @@ import XCTest
 final class MyanmarToolsTests: XCTestCase {
   func testZawgyiProbabilityWithStrongUnicodeShouldBeLow() {
     let strongUnicode = "အပြည်ပြည်ဆိုင်ရာ လူ့အခွင့်အရေး ကြေညာစာတမ်း"
-    XCTAssertLessThan(getZawgyiProbability(strongUnicode), 0.01)
+    XCTAssertLessThan(ZawgyiDetector().getZawgyiProbability(strongUnicode), 0.01)
   }
 
   func testZawgyiProbabilityWithStrongZawgyiShouldBeHigh() {
@@ -16,7 +16,7 @@ final class MyanmarToolsTests: XCTestCase {
       \u{1039}\u{1021}\u{1031}\u{101b}\u{1038} \u{1031}\u{107e}\u{1000}
       \u{100a}\u{102c}\u{1005}\u{102c}\u{1010}\u{1019}\u{1039}\u{1038}
       """
-    XCTAssertGreaterThan(getZawgyiProbability(strongZawgyi), 0.999)
+    XCTAssertGreaterThan(ZawgyiDetector().getZawgyiProbability(strongZawgyi), 0.999)
   }
 
   static var allTests = [
