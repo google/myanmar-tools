@@ -34,6 +34,7 @@ See language-specific documentation:
 - [PHP](clients/php/README.md)
 - [Python](clients/python/README.rst)
 - [Ruby](clients/ruby/README.md)
+- [Swift](clients/swift/README.md)
 
 Depending on your programming language, a typical use case should look something like this:
 
