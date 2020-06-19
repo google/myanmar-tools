@@ -275,3 +275,22 @@ double ZawgyiDetector::GetZawgyiProbability(const char* input_utf8,
                                             int32_t length) const {
   return model_->Predict(input_utf8, length);
 }
+
+// C bindings (declared with extern "C").
+GMTZawgyiDetector* GMTOpenZawgyiDetector(void) {
+  return reinterpret_cast<GMTZawgyiDetector*>(new ZawgyiDetector());
+}
+
+void GMTCloseZawgyiDetector(GMTZawgyiDetector* detector) {
+  ZawgyiDetector* cppDetector = reinterpret_cast<ZawgyiDetector*>(detector);
+  delete cppDetector;
+}
+
+double GMTGetZawgyiProbability(GMTZawgyiDetector* detector, const char* input_utf8) {
+  return GMTGetZawgyiProbabilityWithLength(detector, input_utf8, -1);
+}
+
+double GMTGetZawgyiProbabilityWithLength(GMTZawgyiDetector* detector, const char* input_utf8, int32_t length) {
+  ZawgyiDetector* cppDetector = reinterpret_cast<ZawgyiDetector*>(detector);
+  return cppDetector->GetZawgyiProbability(input_utf8, length);
+}

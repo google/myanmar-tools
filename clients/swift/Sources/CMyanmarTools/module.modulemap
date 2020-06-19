@@ -1,0 +1,5 @@
+module CMyanmarTools {
+  header "../../../cpp/public/myanmartools.h"
+  link "myanmartools"
+  export *
+}

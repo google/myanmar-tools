@@ -125,3 +125,10 @@ matrix:
         - python setup.py install
       script:
         - python -m unittest
+
+    # Swift Client on macOS
+    - os: osx
+      osx_image: xcode11.5
+      language: swift
+      script:
+        - make client-swift-test

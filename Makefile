@@ -27,6 +27,7 @@ RAKE=rake
 GO=go
 PHPUNIT=./vendor/bin/phpunit
 PYTHON=python
+SWIFT=swift
 
 training/target: $(wildcard training/src/**/*)
 	$(MVN) -f training/pom.xml -q compile
@@ -115,7 +116,31 @@ client-go: $(wildcard clients/go/**/*)
 client-python: $(wildcard clients/python/**/*)
 	cd clients/python && $(PYTHON) setup.py install
 
-test: clients client-cpp client-js client-ruby client-php client-go client-python
+# Until Swift 5.3 and SE-0272 are released, the Swift Package Manager
+# does not fully support binary library dependencies.
+#
+# In particular, libmyanmartools.dylib is not copied into the final
+# .xctest bundle, so the test fails to run when it can't find the
+# dylib:
+#
+#   The bundle “MyanmarToolsPackageTests.xctest” couldn’t be loaded
+#   because it is damaged or missing necessary resources. Try
+#   reinstalling the bundle.
+#   xctest (dlopen_preflight(myanmar-tools/clients/swift/.build/x86_64-apple-macosx/debug/MyanmarToolsPackageTests.xctest/Contents/MacOS/MyanmarToolsPackageTests): Library not loaded: @rpath/libmyanmartools.dylib
+#   Referenced from: myanmar-tools/clients/swift/.build/x86_64-apple-macosx/debug/MyanmarToolsPackageTests.xctest/Contents/MacOS/MyanmarToolsPackageTests
+#   Reason: image not found)
+#
+# Work around this by setting rpath in the linked binary to
+# $PWD/clients/cpp so it can find libmyanmartools.dylib. (This is not
+# a great workaround, since it points to the absolute path to the
+# build directory.)
+client-swift: client-cpp $(wildcard clients/swift/**/*)
+	$(SWIFT) build -Xlinker -L$(CURDIR)/clients/cpp -Xlinker -rpath -Xlinker $(CURDIR)/clients/cpp --package-path clients/swift
+
+client-swift-test: client-swift
+	$(SWIFT) test -Xlinker -L$(CURDIR)/clients/cpp -Xlinker -rpath -Xlinker $(CURDIR)/clients/cpp --package-path clients/swift
+
+test: clients client-cpp client-js client-ruby client-php client-go client-python client-swift client-swift-test
 	cd clients/cpp && $(MAKE) test
 	cd clients/java && $(MVN) test
 	cd clients/js && $(NPM) test
