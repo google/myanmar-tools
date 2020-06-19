@@ -47,13 +47,13 @@ extern "C" {
 #endif  // __cplusplus
 
 // C bindings (the "GMT" prefix stands for "Google Myanmar Tools")
-typedef void *GMTZawgyiDetector;
+typedef struct GMTZawgyiDetector GMTZawgyiDetector;
 
-GMTZawgyiDetector GMTOpenZawgyiDetector(void);
-void GMTCloseZawgyiDetector(GMTZawgyiDetector detector);
+GMTZawgyiDetector* GMTOpenZawgyiDetector(void);
+void GMTCloseZawgyiDetector(GMTZawgyiDetector* detector);
 
-double GMTGetZawgyiProbability(GMTZawgyiDetector detector, const char* input_utf8);
-double GMTGetZawgyiProbabilityWithLength(GMTZawgyiDetector detector, const char* input_utf8, int32_t length);
+double GMTGetZawgyiProbability(GMTZawgyiDetector* detector, const char* input_utf8);
+double GMTGetZawgyiProbabilityWithLength(GMTZawgyiDetector* detector, const char* input_utf8, int32_t length);
 
 #ifdef __cplusplus
 }  // extern "C"

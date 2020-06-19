@@ -27,7 +27,7 @@ int RunAllTests(void) {
     "\xb9\xe1\x80\xa1\xe1\x80\xb1\xe1\x80\x9b\xe1\x80\xb8 \xe1\x80"
     "\xb1\xe1\x81\xbe\xe1\x80\x80\xe1\x80\x8a\xe1\x80\xac\xe1\x80"
     "\x85\xe1\x80\xac\xe1\x80\x90\xe1\x80\x99\xe1\x80\xb9\xe1\x80\xb8";
-  GMTZawgyiDetector detector = GMTOpenZawgyiDetector();
+  GMTZawgyiDetector* detector = GMTOpenZawgyiDetector();
   double zawgyi_probability_unicode = GMTGetZawgyiProbability(detector, strong_unicode);
   int result = 0;
   if (zawgyi_probability_unicode < 0.001) {
