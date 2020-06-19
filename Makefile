@@ -130,15 +130,16 @@ client-python: $(wildcard clients/python/**/*)
 #   Referenced from: myanmar-tools/clients/swift/.build/x86_64-apple-macosx/debug/MyanmarToolsPackageTests.xctest/Contents/MacOS/MyanmarToolsPackageTests
 #   Reason: image not found)
 #
-# Work around this by setting rpath in the linked binary to
-# $PWD/clients/cpp so it can find libmyanmartools.dylib. (This is not
-# a great workaround, since it points to the absolute path to the
-# build directory.)
+# Work around this by setting DYLD_LIBRARY_PATH in the environment
+# when running the tests.
+#
+# Clients can use `install_name_tool` to adjust the search paths
+# as needed.
 client-swift: client-cpp $(wildcard clients/swift/**/*)
-	$(SWIFT) build -Xlinker -L$(CURDIR)/clients/cpp -Xlinker -rpath -Xlinker $(CURDIR)/clients/cpp --package-path clients/swift
+	$(SWIFT) build -Xlinker -L"$(CURDIR)"/clients/cpp --package-path clients/swift
 
 client-swift-test: client-swift
-	$(SWIFT) test -Xlinker -L$(CURDIR)/clients/cpp -Xlinker -rpath -Xlinker $(CURDIR)/clients/cpp --package-path clients/swift
+	DYLD_LIBRARY_PATH="$(CURDIR)"/clients/cpp $(SWIFT) test -Xlinker -L"$(CURDIR)"/clients/cpp --package-path clients/swift
 
 test: clients client-cpp client-js client-ruby client-php client-go client-python client-swift client-swift-test
 	cd clients/cpp && $(MAKE) test
