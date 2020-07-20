@@ -72,9 +72,12 @@ $ mkdir ~/corpuscrawler_output && cd ~/corpuscrawler_output
 $ corpuscrawler --language my --output . &
 $ corpuscrawler --language my-t-d0-zawgyi --output . &
 $ corpuscrawler --language shn --output . &
+$ corpuscrawler --language mnw --output . &
+$ corpuscrawler --language kar --output . &
+$ corpuscrawler --language pi-Mymr --output . &
 ```
 
-This will take a long time, as in several days.  The longer you let it run, the better your model will be.  Note that at a minimum, you must ensure that you have obtained data for both Unicode and Zawgyi; the directory should contain `my.txt`, `my-t-d0-zawgyi.txt`, and `shn.txt`.
+This will take a long time, as in several days.  The longer you let it run, the better your model will be.  Note that at a minimum, you must ensure that you have obtained data for both Unicode and Zawgyi; the directory should contain files for the six languages listed in the commands above.
 
 Once you have data available, train the model by running the following command in this directory:
 
