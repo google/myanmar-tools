@@ -2,7 +2,10 @@
 
 This project includes tools for processing font encodings used in Myanmar, currently with support for the widespread Zawgyi-One font encoding.  For more information on font encodings in Myanmar, read [the Unicode Myanmar FAQ](http://www.unicode.org/faq/myanmar.html).
 
-[Demo Page](http://zawgyi-unicode-test.appspot.com/convertui/)
+Unofficial demos:
+
+- [Detector Demo Page](https://sffc.github.io/myanmar-tools-demos/detector_demo.html)
+- [Converter Demo Page](http://zawgyi-unicode-test.appspot.com/convertui/)
 
 Features:
 
