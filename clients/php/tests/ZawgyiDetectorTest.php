@@ -68,19 +68,19 @@ class ZawgyiDetectorTest extends TestCase
             // STRINGS IDENTICAL IN UNICODE/ZAWGYI
             // TODO: These should return scores in the middle range.
             ["အသံကို အစားထိုးလိုပါသလား။", 0.995], // Truth: Identical in U/Z
-            ["နမူနာ", 0.90], // Truth: Identical in U/Z
-            [" ဦး", 0.995], // Truth: Identical in U/Z
+            ["နမူနာ", 0.26], // Truth: Identical in U/Z
+            [" ဦး", 0.35], // Truth: Identical in U/Z
 
             // UNICODE STRINGS WITH HIGH ZAWGYI SCORES
             // TODO: Fix detection so that these get low Zawgyi scores.
             ["အစားထိုး အထူးအက္ခရာ", 0.995], // Truth: Unicode (confirmed by yinmay@)
             ["ယခု မိုးရွာနေပါသလား။", 0.995], // Truth: Unicode (confirmed by yinmay@)
-            ["အခြား", 0.63], // Truth: Unicode (confirmed by yinmay@)
+            ["အခြား", 0.74], // Truth: Unicode (confirmed by yinmay@)
 
             // DIFFICULT STRINGS THAT DETECT CORRECTLY
             // Changes to the detector should not significantly change these scores.
             ["ကာမစာအုပ္မ်ား(ေစာက္ပတ္စာအုပ္မ်ား)", 1.0], // Truth: Zawgyi (confirmed by yinmay@)
-            ["ညႇပ္စရာမလို", 1.0], // Truth: Zawgyi (confirmed by yinmay@)
+            ["ညႇပ္စရာမလို", 0.82], // Truth: Zawgyi (confirmed by yinmay@)
         ];
 
         foreach ($cases as $case) {
