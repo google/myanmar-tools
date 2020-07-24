@@ -33,9 +33,6 @@ class ZawgyiUnicodeMarkovModel
     /** Magic number used to identify this object in byte streams. (Reads in ASCII as "BMARKOV ") */
     const BINARY_TAG = "555a4d4f44454c20";
 
-    /** Current serial format version number, used in association with the magic number. */
-    const BINARY_VERSION = 1;
-
     // Standard Myanmar code point range before digits
     const STD_CP0 = 0x1000;
     const STD_CP1 = 0x103F;
@@ -67,6 +64,9 @@ class ZawgyiUnicodeMarkovModel
     // BinaryMarkov
     private $classifier;
 
+    // TODO: Not currently used
+    private $ssv;
+
     /**
      * Creates an instance from a binary data stream.
      *
@@ -85,11 +85,19 @@ class ZawgyiUnicodeMarkovModel
 
         $binaryVersion = (int) unpack("H*", fread($stream, 4))[1];
 
-        if ($binaryVersion !== self::BINARY_VERSION) {
+        if ($binaryVersion === 1) {
+            $this->ssv = 0;
+        } else if ($binaryVersion == 2) {
+            // TODO: Support nonzero SSV if needed in the future
+            $this->ssv = (int) unpack("H*", fread($stream, 4))[1];
+            if ($this->ssv != 0) {
+                throw new Exception(sprintf("Unsupported ssv: %d", $this->ssv));
+            }
+        } else {
             throw new Exception(
                 sprintf(
-                    "Unexpected serial version number; expected %08X but got %08X",
-                    self::BINARY_VERSION, $binaryVersion));
+                    "Unexpected serial version number; expected 1 or 2 but got %08X",
+                    $binaryVersion));
         }
 
         // check for utf-8 encoding.
