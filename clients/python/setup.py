@@ -5,7 +5,7 @@ with open('README.rst') as f:
 
 setuptools.setup(
     name='myanmartools',
-    version='0.1',
+    version='1.2.0',
     url='https://github.com/google/myanmar-tools',
     author='William (Wai Yan) Zhu',
     author_email='williamzhu345@gmail.com',
