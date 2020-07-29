@@ -30,9 +30,6 @@ class ZawgyiUnicodeMarkovModel
     # Magic number used to identify this object in byte streams. (Reads in ASCII as "UZMODEL ")
     BINARY_TAG = "555a4d4f44454c20"
   
-    # Current serial format version number, used in association with the magic number.
-    BINARY_VERSION = 1
-  
     # Standard Myanmar code point range before digits
     STD_CP0 = 0x1000
     STD_CP1 = 0x103F
@@ -61,7 +58,7 @@ class ZawgyiUnicodeMarkovModel
     SPC_OFFSET = EXB_OFFSET + EXB_CP1 - EXB_CP0 + 1
     NUM_STATES = SPC_OFFSET + SPC_CP1 - SPC_CP0 + 1
 
-    private_constant :BINARY_TAG, :BINARY_VERSION, :STD_CP0, :STD_CP1, :AFT_CP0, :AFT_CP1,
+    private_constant :BINARY_TAG, :STD_CP0, :STD_CP1, :AFT_CP0, :AFT_CP1,
                      :EXA_CP0, :EXA_CP1, :EXB_CP0, :EXB_CP1, :SPC_CP0, :SPC_CP1, :STD_OFFSET,
                      :AFT_OFFSET, :EXA_OFFSET, :EXB_OFFSET, :SPC_OFFSET, :NUM_STATES
   
@@ -74,8 +71,16 @@ class ZawgyiUnicodeMarkovModel
       end
   
       binary_version = stream.read(4).unpack('H*')[0].to_i
-      if binary_version != BINARY_VERSION
-        raise "Unexpected serial version number: expected #{BINARY_VERSION} but got #{binary_version}"
+      if binary_version == 1
+        @ssv = 0
+      elsif binary_version == 2
+        # TODO: Support nonzero SSV if needed in the future
+        @ssv = stream.read(4).unpack('H*')[0].to_i
+        if @ssv != 0
+          raise "Unsupported ssv: #{@ssv}"
+        end
+      else          
+        raise "Unexpected serial version number: expected 1 or 2 but got #{binary_version}"
       end
   
       @classifier = BinaryMarkov.new(stream)

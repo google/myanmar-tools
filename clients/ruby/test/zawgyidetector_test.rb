@@ -58,17 +58,17 @@ class ZawgyiDetectorTest < Test::Unit::TestCase
     cases = []
     # STRINGS IDENTICAL IN UNICODE/ZAWGYI
     cases << {cp: "အသံကို အစားထိုးလိုပါသလား။", score: 0.995}
-    cases << {cp: "နမူနာ", score: 0.90}
-    cases << {cp: " ဦး", score: 0.995}
+    cases << {cp: "နမူနာ", score: 0.26}
+    cases << {cp: " ဦး", score: 0.35}
 
     # UNICODE STRINGS WITH HIGH ZAWGYI SCORES
     cases << {cp: "အစားထိုး အထူးအက္ခရာ", score: 0.995}
     cases << {cp: "ယခု မိုးရွာနေပါသလား။", score: 0.995}
-    cases << {cp: "အခြား", score: 0.63}
+    cases << {cp: "အခြား", score: 0.74}
 
     # DIFFICULT STRINGS THAT DETECT CORRECTLY
     cases << {cp: "ကာမစာအုပ္မ်ား(ေစာက္ပတ္စာအုပ္မ်ား)", score: 1.0}
-    cases << {cp: "ညႇပ္စရာမလို", score: 1.0}
+    cases << {cp: "ညႇပ္စရာမလို", score: 0.82}
 
     cases.each{|c|            
         result = @detector.get_zawgyi_probability(c[:cp])

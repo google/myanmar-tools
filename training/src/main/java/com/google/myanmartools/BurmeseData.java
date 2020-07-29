@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -37,6 +38,9 @@ public final class BurmeseData {
 
   private static final long SEED = 2017L;
   private static final double TRAINING_FRACTION = 0.9;
+
+  private static volatile ImmutableList<String> UNICODE_STRINGS = null;
+  private static volatile ImmutableList<String> ZAWGYI_STRINGS = null;
 
   // For readability, expand the getData() function to four functions with better names.
 
@@ -61,7 +65,10 @@ public final class BurmeseData {
    * depending on the arguments.
    */
   private static List<String> getData(boolean zawgyi, boolean training) throws IOException {
-    List<String> strings = zawgyi ? loadZawgyiStrings() : loadUnicodeStrings();
+    if (ZAWGYI_STRINGS == null || UNICODE_STRINGS == null) {
+      loadAllStrings();
+    }
+    List<String> strings = zawgyi ? ZAWGYI_STRINGS : UNICODE_STRINGS;
 
     Random rnd = new Random(SEED);
     Predicate<String> predicate =
@@ -73,24 +80,39 @@ public final class BurmeseData {
     return strings.stream().filter(predicate).collect(toImmutableList());
   }
 
-  private static ImmutableList<String> loadUnicodeStrings() throws IOException {
-    // TODO: Cache the result? This is only a tooling script, not runtime code.
-    ImmutableList.Builder<String> builder = ImmutableList.builder();
-    builder.addAll(loadStrings(DATA_DIRECTORY + "/my.txt"));
-    builder.addAll(loadStrings(DATA_DIRECTORY + "/shn.txt"));
-    return builder.build();
+  private static void loadAllStrings() throws IOException {
+    // Goal: 50% Zawgyi, 25% Burmese Unicode, and 25% Minority Unicode.
+    ZAWGYI_STRINGS = loadStrings("my-t-d0-zawgyi.txt");
+    int zawgyiCharCount = ZAWGYI_STRINGS.stream().mapToInt(line -> line.length()).sum();
+    ImmutableList.Builder<String> unicodeBuilder = ImmutableList.builder();
+    unicodeBuilder.addAll(loadStringsToLength("my.txt", zawgyiCharCount / 2));
+    unicodeBuilder.addAll(loadStringsToLength("shn.txt", zawgyiCharCount / 8));
+    unicodeBuilder.addAll(loadStringsToLength("mnw.txt", zawgyiCharCount / 8));
+    unicodeBuilder.addAll(loadStringsToLength("kar.txt", zawgyiCharCount / 8));
+    unicodeBuilder.addAll(loadStringsToLength("pi-Mymr.txt", zawgyiCharCount / 8));
+    UNICODE_STRINGS = unicodeBuilder.build();
+    int unicodeCharCount = UNICODE_STRINGS.stream().mapToInt(line -> line.length()).sum();
+    // System.err.println(zawgyiCharCount + " " + unicodeCharCount);
   }
 
-  private static ImmutableList<String> loadZawgyiStrings() throws IOException {
-    // TODO: Cache the result? This is only a tooling script, not runtime code.
-    return loadStrings(DATA_DIRECTORY + "/my-t-d0-zawgyi.txt");
+  private static ImmutableList<String> loadStringsToLength(String path, int maxLength) throws IOException {
+    AtomicInteger ai = new AtomicInteger();
+    return loadStrings(path)
+        .stream()
+        .filter(line -> {
+          int length = ai.addAndGet(line.length());
+          return length < maxLength;
+        })
+        .collect(toImmutableList());
   }
 
   private static ImmutableList<String> loadStrings(String path) throws IOException {
+    path = DATA_DIRECTORY + "/" + path;
     try (Stream<String> lines = Files.asCharSource(new File(path), Charsets.UTF_8).lines()) {
       return lines
           .map(line -> line.trim())
           .filter(line -> !line.isEmpty())
+          .filter(line -> line.charAt(0) != '#')
           .collect(toImmutableList());
     }
   }
