@@ -21,7 +21,7 @@ limitations under the License.
   <groupId>com.google.myanmartools</groupId>
   <artifactId>myanmar-tools</artifactId>
   <packaging>jar</packaging>
-  <version>1.1.4-SNAPSHOT</version>
+  <version>1.2.0-SNAPSHOT</version>
   <name>myanmar-tools</name>
   <url>https://github.com/google/myanmar-tools/</url>
   <description>Tools for handling the Zawgyi font encoding in Myanmar.</description>
@@ -131,13 +131,6 @@ limitations under the License.
       <groupId>com.google.caliper</groupId>
       <artifactId>caliper</artifactId>
       <version>1.0-beta-2</version>
-      <scope>test</scope>
-    </dependency>
-    <!-- NOTE: Caliper requires Guava version 18, but Truth requires version 20 or higher.  By default, we use Guava 23 (for Truth).  When running Caliper, change this to version 18, then clean and rebuild.  Do not check in version 18, because it will break CI! -->
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>20.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
