@@ -27,7 +27,14 @@ RAKE=rake
 GO=go
 PHPUNIT=./vendor/bin/phpunit
 PYTHON=python
-SWIFT=swift
+
+# /usr/bin/swift is under macOS System Integrity Protection, which
+# filters out environment variables like DYLD_LIBRARY_PATH which let
+# it discover the C++ libmyanmartools.dylib.
+#
+# /Applications/Xcode.app/.../XcodeDefault.toolchain/usr/bin/swift is
+# *not* under SIP, so use that instead of /usr/bin/swift.
+SWIFT=$(shell xcrun -f swift)
 
 training/target: $(wildcard training/src/**/*)
 	$(MVN) -f training/pom.xml -q compile
