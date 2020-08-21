@@ -16,7 +16,7 @@ To detect Zawgyi, create an instance of ZawgyiDetector, and call `getZawgyiProba
 const google_myanmar_tools = require("myanmar-tools"); 
 const detector = new google_myanmar_tools.ZawgyiDetector();
 const score = detector.getZawgyiProbability("မ္း");
-// score is now 0.999772 (very likely Zawgyi)
+// score is now 0.9994253818489524 (very likely Zawgyi)
 ```
 
 Zawgyi can be converted to Unicode as follows:
@@ -37,7 +37,7 @@ For a complete working example, see [samples/node/demo.js](../../samples/node/de
 Include the file *zawgyi_detector.min.js*.  It is available on [Google Hosted Libraries](https://developers.google.com/speed/libraries/#myanmar-tools):
 
 ```html
-<script src="https://ajax.googleapis.com/ajax/libs/myanmar-tools/1.1.3/zawgyi_detector.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/myanmar-tools/1.2.0/zawgyi_detector.min.js"></script>
 ```
 
 After doing this, the ZawgyiDetector will be available as the global `google_myanmar_tools.ZawgyiDetector`, and you can use it the same way as above:
@@ -45,13 +45,13 @@ After doing this, the ZawgyiDetector will be available as the global `google_mya
 ```js
 const detector = new google_myanmar_tools.ZawgyiDetector();
 const score = detector.getZawgyiProbability("မ္း");
-// score is now 0.999772 (very likely Zawgyi)
+// score is now 0.0.9997572675217831 (very likely Zawgyi)
 ```
 
 Likewise for the converter:
 
 ```html
-<script src="https://ajax.googleapis.com/ajax/libs/myanmar-tools/1.1.3/zawgyi_converter.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/myanmar-tools/1.2.0/zawgyi_converter.min.js"></script>
 ```
 
 ```js
