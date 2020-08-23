@@ -37,7 +37,7 @@ For a complete working example, see [samples/node/demo.js](../../samples/node/de
 Include the file *zawgyi_detector.min.js*.  It is available on [Google Hosted Libraries](https://developers.google.com/speed/libraries/#myanmar-tools):
 
 ```html
-<script src="https://ajax.googleapis.com/ajax/libs/myanmar-tools/1.2.0/zawgyi_detector.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/myanmar-tools/1.2.1/zawgyi_detector.min.js"></script>
 ```
 
 After doing this, the ZawgyiDetector will be available as the global `google_myanmar_tools.ZawgyiDetector`, and you can use it the same way as above:
@@ -51,7 +51,7 @@ const score = detector.getZawgyiProbability("မ္း");
 Likewise for the converter:
 
 ```html
-<script src="https://ajax.googleapis.com/ajax/libs/myanmar-tools/1.2.0/zawgyi_converter.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/myanmar-tools/1.2.1/zawgyi_converter.min.js"></script>
 ```
 
 ```js
