@@ -18,8 +18,8 @@ package com.google.myanmartools;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
-import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.Resources;
 import com.google.myanmartools.ZawgyiDetector;
@@ -55,7 +55,7 @@ public class ZawgyiDetectorTestingDataTest {
 
   private static ImmutableList<String> loadStrings(boolean zawgyi) throws IOException {
     try (Stream<String> lines =
-        Resources.asCharSource(Resources.getResource("com/google/myanmartools/testData.tsv"), Charsets.UTF_8).lines()) {
+        Resources.asCharSource(Resources.getResource("com/google/myanmartools/testData.tsv"), UTF_8).lines()) {
       return lines
           .map(line -> line.trim())
           .filter(line -> !line.isEmpty())
