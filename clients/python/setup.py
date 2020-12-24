@@ -29,5 +29,5 @@ setuptools.setup(
     package_dir={'': 'src'},
     include_package_data=True,
     package_data={'myanmartools': ['resources/*']},
-    python_requires='>=3.7'
+    python_requires='>=3.8'
 )
