@@ -60,7 +60,7 @@ matrix:
     # Note: even older Node.js versions might be allowed, but the
     # test tooling requires more recent versions.
     - language: node_js
-      node_js: 10
+      node_js: 6
       before_script:
         - cd clients/js
         - npm install
