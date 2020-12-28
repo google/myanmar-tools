@@ -62,7 +62,7 @@ matrix:
     - language: node_js
       node_js: 6
       before_script:
-        - npm install -v npm@5.7.1
+        - npm install -g npm@5.7.1
         - cd clients/js
         - npm ci
       script:
