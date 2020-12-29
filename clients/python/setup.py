@@ -10,14 +10,13 @@ setuptools.setup(
     author='William (Wai Yan) Zhu',
     author_email='williamzhu345@gmail.com',
     classifiers=[
-	'Development Status :: 4 - Beta',
-	'Intended Audience :: Developers',
-	'Intended Audience :: Science/Research',
-	'License :: OSI Approved :: Apache Software License',
-	'Operating System :: OS Independent',
-	'Programming Language :: Python :: 3.7',
-	'Programming Language :: Python :: 3.8',
-	'Topic :: Text Processing'
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Developers',
+        'Intended Audience :: Science/Research',
+        'License :: OSI Approved :: Apache Software License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python :: 3.8',
+        'Topic :: Text Processing'
     ],
     license='Apache License, Version 2.0',
     description='Tools for processing font encodings used in Myanmar',
@@ -29,6 +28,5 @@ setuptools.setup(
     package_dir={'': 'src'},
     include_package_data=True,
     package_data={'myanmartools': ['resources/*']},
-    install_requires=['numpy>=1.18'],
-    python_requires='>=3.7'
+    python_requires='>=3.8'
 )
