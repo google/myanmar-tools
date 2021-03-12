@@ -1,0 +1,77 @@
+name: Myanmar Tools CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: '*'
+
+jobs:
+
+  # Training Data Project
+  training:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          java-version: '8'
+      - name: Training Data
+        run: |
+          cd training
+          mvn compile
+          mvn test
+
+  # Generate-Converter Project
+  gen-conv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          java-version: '8'
+      - name: Generate-Converter
+        run: |
+          cd genconvert
+          mvn compile
+          mvn test
+
+  # Check consistency between genconvert and compiled converters
+  genconvert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          java-version: '8'
+      - name: Consistency genconvert vs compiled
+        run: |
+          make transcompile
+          # There should not be any dirty files:
+          git update-index --refresh
+          git diff-index HEAD --exit-code
+
+  # Java Client
+  java:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          java-version: '7'
+      - name: Java client test
+        run: |
+          cd clients/java
+          mvn compile
+          mvn test
+      
+  # Python Client
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python  
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Python client test
+        run: |
+          cd clients/python
+          python setup.py install
+          python -m unittest
