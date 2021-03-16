@@ -18,7 +18,7 @@ Conversion is also available via ICU in languages without support via Myanmar To
 
 This is not an official Google product, but we hope that you’ll find *Myanmar Tools* useful to better support the languages of Myanmar.
 
-[![Build Status](https://travis-ci.org/google/myanmar-tools.svg?branch=master)](https://travis-ci.org/google/myanmar-tools)
+[![Build Status](https://github.com/google/myanmar-tools/actions/workflows/mynmr_tools_ci.yml/badge.svg)](https://github.com/google/myanmar-tools/actions)
 
 ## Why Myanmar Tools?
 
