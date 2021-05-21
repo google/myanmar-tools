@@ -75,3 +75,14 @@ jobs:
           cd clients/python
           python setup.py install
           python -m unittest
+
+  # Swift Client on macOS
+  swift:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Configure XCode version
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '11.5'
+      - run: make client-swift-test
