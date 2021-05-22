@@ -16,6 +16,12 @@ The first line sets up your Makefiles and also downloads the dependencies: GLog,
 
 Note: None of the dependencies need to be linked at runtime.  GLog and GTest are only used for testing and debugging.  ICU4C is used only for its header files; no library symbols are required.
 
+Note: If the GTest build fails when running the above commands, try passing the following flag to cmake (see [#42](https://github.com/google/myanmar-tools/issues/42) for more discussion):
+
+```bash
+$ CXXFLAGS="-Wno-error=deprecated-copy" cmake CMakeLists.txt
+```
+
 ## Usage Examples
 
 To detect Zawgyi, create a singleton instance of ZawgyiDetector, and call `GetZawgyiProbability` with your `char*` UTF-8 string.
