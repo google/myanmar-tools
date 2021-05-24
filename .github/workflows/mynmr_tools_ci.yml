@@ -48,6 +48,19 @@ jobs:
           git update-index --refresh
           git diff-index HEAD --exit-code
 
+  # CPP Client
+  cpp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: cpp-check
+        run: |
+          sudo apt-get -y install cmake
+          cd clients/cpp
+          CXXFLAGS="-w" cmake CMakeLists.txt
+          make
+          make test
+
   # Java Client
   java:
     runs-on: ubuntu-latest
