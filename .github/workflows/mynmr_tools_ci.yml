@@ -73,7 +73,37 @@ jobs:
           cd clients/java
           mvn compile
           mvn test
-      
+
+  # JavaScript Client (latest Node version)
+  javascript-latest-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Javascript client test
+        run: |
+          cd clients/js
+          npm ci
+          npm run test
+
+  # JavaScript Client (lower npm version)
+  javascript-older-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+      - name: Javascript client test
+        run: |
+          cd clients/js
+          npm install -g npm@5.7.1
+          npm version
+          npm ci
+          npm run test
+
   # Python Client
   python:
     runs-on: ubuntu-latest
