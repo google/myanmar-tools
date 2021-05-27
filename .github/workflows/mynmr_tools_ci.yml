@@ -73,6 +73,21 @@ jobs:
           cd clients/java
           mvn compile
           mvn test
+
+  # Ruby Client (latest Ruby version with jruby)
+  ruby:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: jruby-head
+      - name: Run Rake tests
+        run: |
+          pushd clients/ruby
+          bundle install
+          rake test
+          popd
       
   # Python Client
   python:
