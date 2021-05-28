@@ -75,7 +75,7 @@ jobs:
           mvn test
 
   # Ruby Client (minimum Ruby version)
-  ruby:
+  ruby-min-version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -90,7 +90,7 @@ jobs:
           popd
 
   # Ruby Client (latest Ruby version with jruby)
-  ruby:
+  ruby-latest-jruby:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
