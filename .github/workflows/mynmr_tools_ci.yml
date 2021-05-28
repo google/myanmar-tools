@@ -144,7 +144,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '14'
-          check-latest: true
       - name: Javascript client test
         run: |
           cd clients/js
