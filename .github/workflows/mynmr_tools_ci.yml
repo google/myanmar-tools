@@ -86,8 +86,15 @@ jobs:
       - uses: "ramsey/composer-install@v1"
       - run: ./vendor/bin/phpunit --configuration clients/php/phpunit.xml
 
-  # PHP Client (latest PHP version)
-  php-latest-version:
+  # PHP Client (latest PHP v7 version)
+  #
+  # Note: PHP v8+ not supported. Error output for v8:
+  #
+  #   phpunit/phpunit[6.0.0, ..., 6.5.14] require php ^7.0 -> your php version (8.0.5) does not satisfy that requirement.
+  #   Root composer.json requires phpunit/phpunit ^6 -> satisfiable by phpunit/phpunit[6.0.0, ..., 6.5.14].
+  #
+  php-latest-v7-version:
+    name: PHP latest v 7.x version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
