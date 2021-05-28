@@ -143,11 +143,12 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: 6.x
+          node-version: '14'
+          check-latest: true
       - name: Javascript client test
         run: |
-          npm install -g npm@5.7.1
           cd clients/js
+          npm version
           npm ci
           npm run test
 
@@ -160,10 +161,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: Setup node
         uses: actions/setup-node@v1
+        with:
+          node-version: '6.x'
       - name: Javascript client test
         run: |
-          cd clients/js
           npm install -g npm@5.7.1
+          cd clients/js
           npm version
           npm ci
           npm run test
