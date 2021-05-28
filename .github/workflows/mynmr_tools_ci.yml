@@ -74,6 +74,18 @@ jobs:
           mvn compile
           mvn test
       
+  # PHP Client (minimum PHP version)
+  php-min-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup PHP with min version
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.0'
+      - uses: "ramsey/composer-install@v1"
+      - run: ./vendor/bin/phpunit --configuration clients/php/phpunit.xml
+
   # Python Client
   python:
     runs-on: ubuntu-latest
