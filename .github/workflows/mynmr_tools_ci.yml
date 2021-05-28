@@ -74,6 +74,21 @@ jobs:
           mvn compile
           mvn test
 
+  # Ruby Client (minimum Ruby version)
+  ruby:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.0  # minimum supported version
+      - name: Run Rake tests
+        run: |
+          pushd clients/ruby
+          bundle install
+          rake test
+          popd
+
   # Ruby Client (latest Ruby version with jruby)
   ruby:
     runs-on: ubuntu-latest
