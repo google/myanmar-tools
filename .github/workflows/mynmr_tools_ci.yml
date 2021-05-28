@@ -104,6 +104,67 @@ jobs:
           rake test
           popd
       
+  # PHP Client (minimum PHP version)
+  php-min-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup PHP with min version
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.0'
+      - uses: "ramsey/composer-install@v1"
+      - run: ./vendor/bin/phpunit --configuration clients/php/phpunit.xml
+
+  # PHP Client (latest PHP v7 version)
+  #
+  # Note: PHP v8+ not supported. Error output for v8:
+  #
+  #   phpunit/phpunit[6.0.0, ..., 6.5.14] require php ^7.0 -> your php version (8.0.5) does not satisfy that requirement.
+  #   Root composer.json requires phpunit/phpunit ^6 -> satisfiable by phpunit/phpunit[6.0.0, ..., 6.5.14].
+  #
+  php-latest-v7-version:
+    name: PHP latest v 7.x version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup PHP with the latest version
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+      - uses: "ramsey/composer-install@v1"
+      - run: ./vendor/bin/phpunit --configuration clients/php/phpunit.xml
+
+  # JavaScript Client (latest Node version)
+  javascript-latest-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Javascript client test
+        run: |
+          cd clients/js
+          npm ci
+          npm run test
+
+  # JavaScript Client (lower npm version)
+  javascript-older-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+      - name: Javascript client test
+        run: |
+          cd clients/js
+          npm install -g npm@5.7.1
+          npm version
+          npm ci
+          npm run test
+
   # Python Client
   python:
     runs-on: ubuntu-latest
