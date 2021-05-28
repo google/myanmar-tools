@@ -101,7 +101,7 @@ jobs:
       - name: Setup PHP with the latest version
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 'latest'
+          php-version: '7.4'
       - uses: "ramsey/composer-install@v1"
       - run: ./vendor/bin/phpunit --configuration clients/php/phpunit.xml
 
