@@ -113,14 +113,17 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: 6.x
       - name: Javascript client test
         run: |
+          npm install -g npm@5.7.1
           cd clients/js
           npm ci
           npm run test
 
   # JavaScript Client (lower npm version)
+  # Note: even older Node.js versions might be allowed, but the
+  # test tooling requires more recent versions.
   javascript-older-test:
     runs-on: ubuntu-latest
     steps:
