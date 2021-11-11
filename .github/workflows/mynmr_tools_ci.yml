@@ -207,3 +207,20 @@ jobs:
         with:
           xcode-version: '11.5'
       - run: make client-swift-test
+  
+  # Dart Client(Flutter)
+  dart:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '2.5.3'
+      - name: Install dependencies
+        run: |
+          cd clients/dart
+          flutter pub get
+      - name: Run dart tests
+        run: |
+          cd clients/dart
+          flutter test
