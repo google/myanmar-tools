@@ -28,6 +28,7 @@ GO=go
 PHPUNIT=./vendor/bin/phpunit
 PYTHON=python
 FLUTTER=flutter
+DOTNET=dotnet
 
 # /usr/bin/swift is under macOS System Integrity Protection, which
 # filters out environment variables like DYLD_LIBRARY_PATH which let
@@ -61,6 +62,7 @@ copy-resources:
 	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/go/resources
 	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/python/src/myanmartools/resources
 	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/dart/resources
+	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/c#/Resources
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/java/src/test/resources/com/google/myanmartools
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/cpp/resources
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/js/resources
@@ -69,19 +71,24 @@ copy-resources:
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/go/resources
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/python/src/myanmartools/resources
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/dart/resources
+	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/c#/Resources
 
 	cp genconvert/input/mmgov_zawgyi_src.txt clients/java/src/test/resources/com/google/myanmartools
 	cp genconvert/input/mmgov_zawgyi_src.txt clients/js/resources
 	cp genconvert/input/mmgov_zawgyi_src.txt clients/dart/resources
+	cp genconvert/input/mmgov_zawgyi_src.txt clients/c#/Resources
 	cp genconvert/input/udhr_mya_unicode_src.txt clients/js/resources
 	cp genconvert/input/udhr_mya_unicode_src.txt clients/java/src/test/resources/com/google/myanmartools
 	cp genconvert/input/udhr_mya_unicode_src.txt clients/dart/resources
+	cp genconvert/input/udhr_mya_unicode_src.txt clients/c#/Resources
 	cp genconvert/output/mmgov_unicode_out.txt clients/java/src/test/resources/com/google/myanmartools
 	cp genconvert/output/mmgov_unicode_out.txt clients/js/resources
 	cp genconvert/output/mmgov_unicode_out.txt clients/dart/resources
+	cp genconvert/output/mmgov_unicode_out.txt clients/c#/Resources
 	cp genconvert/output/udhr_mya_zawgyi_out.txt clients/java/src/test/resources/com/google/myanmartools
 	cp genconvert/output/udhr_mya_zawgyi_out.txt clients/js/resources
 	cp genconvert/output/udhr_mya_zawgyi_out.txt clients/dart/resources
+	cp genconvert/output/udhr_mya_zawgyi_out.txt clients/c#/Resources
 
 train: zawgyiUnicodeModel.dat compatibility.tsv testData.tsv copy-resources
 
@@ -133,6 +140,9 @@ client-python: $(wildcard clients/python/**/*)
 client-dart:$(wildcard clients/dart/**/*)
 	cd clients/dart && $(FLUTTER) pub get
 
+client-csharp:$(wildcard clients/c#/**/*)
+	cd clients/c# && $(DOTNET) restore
+
 # Until Swift 5.3 and SE-0272 are released, the Swift Package Manager
 # does not fully support binary library dependencies.
 #
@@ -158,7 +168,7 @@ client-swift: client-cpp $(wildcard clients/swift/**/*)
 client-swift-test: client-swift
 	DYLD_LIBRARY_PATH="$(CURDIR)"/clients/cpp $(SWIFT) test -Xlinker -L"$(CURDIR)"/clients/cpp --package-path clients/swift
 
-test: clients client-cpp client-js client-ruby client-php client-go client-python client-swift client-swift-test client-dart
+test: clients client-cpp client-js client-ruby client-php client-go client-python client-swift client-swift-test client-dart client-csharp
 	cd clients/cpp && $(MAKE) test
 	cd clients/java && $(MVN) test
 	cd clients/js && $(NPM) test
@@ -167,3 +177,4 @@ test: clients client-cpp client-js client-ruby client-php client-go client-pytho
 	$(PHPUNIT) --configuration clients/php/phpunit.xml
 	cd clients/python && $(PYTHON) -m unittest
 	cd clients/dart && $(FLUTTER) test
+	cd clients/c# && $(DOTNET) test

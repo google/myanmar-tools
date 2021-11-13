@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+  <ContentWithTargetPath 
+       Include="../Resources/zawgyiUnicodeModel.dat"
+       CopyToOutputDirectory="PreserveNewest"
+       TargetPath="resources/zawgyiUnicodeModel.dat" />
+  <ContentWithTargetPath 
+       Include="../Resources/zawgyiUnicodeModel.dat"
+       CopyToPublishDirectory="PreserveNewest"
+       TargetPath="resources/zawgyiUnicodeModel.dat" />
+	</ItemGroup>
+</Project>
