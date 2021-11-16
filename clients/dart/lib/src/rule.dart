@@ -10,7 +10,7 @@ class Rule {
   String contextAfter = '';
   RegExp get pattern=>_pattern;
   Rule(this.patternString,this.substitution, {this.matchOnStart=false,this.revisitPosition=-1}){
-    _pattern=RegExp(patternString,multiLine: true,unicode: true,dotAll: true);
+    _pattern=RegExp(patternString,unicode: true);
   }
 
   Rule setInfo(String ruleInfo) {
