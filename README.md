@@ -10,7 +10,7 @@ Unofficial demos:
 Features:
 
 - Detect whether a string is Zawgyi or Unicode.
-  - Supported in C++, Java, JavaScript (both Node.js and browser), PHP, and Ruby
+  - Supported in C++, Java, JavaScript (both Node.js and browser), PHP, Ruby, Dart and C#
 - Convert a string from Zawgyi to Unicode or from Unicode to Zawgyi
   - Supported in Java and JavaScript
 
@@ -38,6 +38,8 @@ See language-specific documentation:
 - [Python](clients/python/README.rst)
 - [Ruby](clients/ruby/README.md)
 - [Swift](clients/swift/README.md)
+- [Dart](clients/dart/README.md)
+- [C#](clients/c%23/README.md)
 
 Depending on your programming language, a typical use case should look something like this:
 
