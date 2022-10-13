@@ -33,8 +33,10 @@ class ZawgyiDetectorTest : public testing::Test {
 };
 
 TEST_F (ZawgyiDetectorTest, strongTest) {
-  const char* strong_unicode = u8"အပြည်ပြည်ဆိုင်ရာ လူ့အခွင့်အရေး ကြေညာစာတမ်း";
-  const char* strong_zawgyi = u8"အျပည္ျပည္ဆိုင္ရာ လူ႔အခြင့္အေရး ေၾကညာစာတမ္း";
+  const char* strong_unicode =
+      reinterpret_cast<const char*>(u8"အပြည်ပြည်ဆိုင်ရာ လူ့အခွင့်အရေး ကြေညာစာတမ်း");
+  const char* strong_zawgyi =
+      reinterpret_cast<const char*>(u8"အျပည္ျပည္ဆိုင္ရာ လူ႔အခြင့္အေရး ေၾကညာစာတမ္း");
   EXPECT_LT(
       detector_.GetZawgyiProbability(strong_unicode),
       0.001);
