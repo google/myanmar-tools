@@ -52,7 +52,9 @@ add_custom_command(
 set(SOURCE_FILES zawgyi_detector.cpp public/myanmartools.h zawgyi_detector-impl.h zawgyi_model_data.inc)
 include_directories(myanmartools ${CMAKE_BINARY_DIR} ${CMAKE_BINARY_DIR}/_3rdParty/icu/source/common)
 add_library(myanmartools SHARED ${SOURCE_FILES})
+add_library(myanmartools_static STATIC ${SOURCE_FILES})
 target_link_libraries(myanmartools glog::glog)
+target_link_libraries(myanmartools_static glog::glog)
 
 set(TEST_FILES zawgyi_detector_unittest.cpp resources/compatibility.tsv)
 add_executable(myanmartools_test ${TEST_FILES})
