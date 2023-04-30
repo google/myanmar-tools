@@ -56,6 +56,8 @@ add_library(myanmartools_static STATIC ${SOURCE_FILES})
 target_link_libraries(myanmartools glog::glog)
 target_link_libraries(myanmartools_static glog::glog)
 
+file(COPY ${GLOG_ROOT}/lib/libglog.a DESTINATION ${CMAKE_BINARY_DIR})
+
 set(TEST_FILES zawgyi_detector_unittest.cpp resources/compatibility.tsv)
 add_executable(myanmartools_test ${TEST_FILES})
 target_link_libraries(myanmartools_test myanmartools GTest::main)
