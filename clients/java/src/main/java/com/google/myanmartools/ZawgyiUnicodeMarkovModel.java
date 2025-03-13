@@ -63,13 +63,21 @@ class ZawgyiUnicodeMarkovModel {
   private static final int SPC_CP0 = '\u2000';
   private static final int SPC_CP1 = '\u200B';
 
+  // Variation selectors
+  private static final int VAR_CP0 = '\uFE00';
+  private static final int VAR_CP1 = '\uFE0D';
+
   // Indices into Markov nodes
   private static final short STD_OFFSET = 1;
   private static final short AFT_OFFSET = STD_OFFSET + STD_CP1 - STD_CP0 + 1;
   private static final short EXA_OFFSET = AFT_OFFSET + AFT_CP1 - AFT_CP0 + 1;
   private static final short EXB_OFFSET = EXA_OFFSET + EXA_CP1 - EXA_CP0 + 1;
   private static final short SPC_OFFSET = EXB_OFFSET + EXB_CP1 - EXB_CP0 + 1;
-  private static final short END_OFFSET = SPC_OFFSET + SPC_CP1 - SPC_CP0 + 1;
+
+  // Number of code points, which depends on the SSV
+  private static final short END_OFFSET_0 = SPC_OFFSET + SPC_CP1 - SPC_CP0 + 1;
+  private static final short END_OFFSET_1 = SPC_OFFSET;
+  private static final short END_OFFSET_2 = SPC_OFFSET + VAR_CP1 - VAR_CP0 + 1;
 
   /**
    * SSV: An ID representing which Unicode code points to include in the model:
@@ -81,7 +89,8 @@ class ZawgyiUnicodeMarkovModel {
    */
   static final int SSV_STD_EXA_EXB_SPC = 0;
   static final int SSV_STD_EXA_EXB = 1;
-  static final int SSV_COUNT = 2;
+  static final int SSV_STD_EXA_EXB_VAR = 2;
+  static final int SSV_COUNT = 3;
 
   /**
    * Returns the index of the state in the Markov chain corresponding to the given code point.
@@ -112,12 +121,23 @@ class ZawgyiUnicodeMarkovModel {
     if (ssv == SSV_STD_EXA_EXB_SPC && SPC_CP0 <= cp && cp <= SPC_CP1) {
       return cp - SPC_CP0 + SPC_OFFSET;
     }
+    if (ssv == SSV_STD_EXA_EXB_VAR && VAR_CP0 <= cp && cp <= VAR_CP1) {
+      return cp - VAR_CP0 + SPC_OFFSET;
+    }
     return 0;
   }
 
   /** The number of states in the Markov chain. */
   static short getSize(int ssv) {
-    return ssv == SSV_STD_EXA_EXB_SPC ? END_OFFSET : SPC_OFFSET;
+    if (ssv == 0) {
+      return END_OFFSET_0;
+    } else if (ssv == 1) {
+      return END_OFFSET_1;
+    } else if (ssv == 2) {
+      return END_OFFSET_2;
+    } else {
+      throw new AssertionError();
+    }
   }
 
   final BinaryMarkov classifier;
@@ -159,7 +179,7 @@ class ZawgyiUnicodeMarkovModel {
     if (ssv < 0 || ssv >= SSV_COUNT) {
       throw new IOException(
           String.format(
-              "Unexpected value in ssv position; expected 0 or 1 but got %08X",
+              "Unexpected value in ssv position; expected 0-2 but got %08X",
               ssv));
     }
     classifier = new BinaryMarkov(stream);
