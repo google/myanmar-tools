@@ -29,6 +29,7 @@ PHPUNIT=./vendor/bin/phpunit
 PYTHON=python
 FLUTTER=flutter
 DOTNET=dotnet
+SSV=0
 
 # /usr/bin/swift is under macOS System Integrity Protection, which
 # filters out environment variables like DYLD_LIBRARY_PATH which let
@@ -42,7 +43,7 @@ training/target: $(wildcard training/src/**/*)
 	$(MVN) -f training/pom.xml -q compile
 
 zawgyiUnicodeModel.dat: training/target
-	TMP=`mktemp`; $(MVN) -f training/pom.xml -q -e exec:java -Dexec.args="'$(CORPUS)'" > $$TMP; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat; exit 0; fi
+	TMP=`mktemp`; $(MVN) -f training/pom.xml -q -e exec:java -Dexec.args="'$(CORPUS)' $(SSV)" > $$TMP; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP training/src/main/resources/com/google/myanmartools/trainedModel.dat; exit 0; fi
 	$(MVN) -f training/pom.xml -q process-resources
 
 compatibility.tsv: zawgyiUnicodeModel.dat training/target
