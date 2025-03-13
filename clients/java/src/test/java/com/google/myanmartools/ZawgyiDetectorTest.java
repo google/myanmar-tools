@@ -94,6 +94,7 @@ public class ZawgyiDetectorTest {
       {"အစားထိုး အထူးအက္ခရာ", 0.995}, // Truth: Unicode (confirmed by yinmay@)
       {"ယခု မိုးရွာနေပါသလား။", 0.995}, // Truth: Unicode (confirmed by yinmay@)
       {"အခြား", 0.74}, // Truth: Unicode (confirmed by yinmay@)
+      {"ၸ︀ၞ်ꩭူမ︀ႃꩭေ︀ႃၺꩫ︀်ၸ︀ြႃကꩭၞ်ꩫ︀ႝမ︀ွက︀်လ︀ွ် ꩡ︀ွ်တ︀ႃ ။", 0.995}, // Truth: Unicode (Phake language, #119)
 
       // DIFFICULT STRINGS THAT DETECT CORRECTLY
       // Changes to the detector should not significantly change these scores.

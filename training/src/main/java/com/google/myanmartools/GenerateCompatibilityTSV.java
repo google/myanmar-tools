@@ -38,7 +38,7 @@ public class GenerateCompatibilityTSV {
   public static void main(String[] args) throws IOException {
     BufferedReader tsvReader =
         new BufferedReader(new InputStreamReader(getResourceAsStream("com/google/myanmartools/compatibility.tsv"), UTF_8));
-    ZawgyiDetector detector = new ZawgyiDetector(getResourceAsStream("com/google/myanmartools/zawgyiUnicodeModel.dat"));
+    ZawgyiDetector detector = new ZawgyiDetector(getResourceAsStream("com/google/myanmartools/trainedModel.dat"));
     String line;
     while ((line = tsvReader.readLine()) != null) {
       String input = line.split("\t", -1)[1].trim();

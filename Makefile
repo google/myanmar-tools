@@ -29,6 +29,7 @@ PHPUNIT=./vendor/bin/phpunit
 PYTHON=python
 FLUTTER=flutter
 DOTNET=dotnet
+SSV=0
 
 # /usr/bin/swift is under macOS System Integrity Protection, which
 # filters out environment variables like DYLD_LIBRARY_PATH which let
@@ -42,7 +43,7 @@ training/target: $(wildcard training/src/**/*)
 	$(MVN) -f training/pom.xml -q compile
 
 zawgyiUnicodeModel.dat: training/target
-	TMP=`mktemp`; $(MVN) -f training/pom.xml -q -e exec:java -Dexec.args="'$(CORPUS)'" > $$TMP; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat; exit 0; fi
+	TMP=`mktemp`; $(MVN) -f training/pom.xml -q -e exec:java -Dexec.args="'$(CORPUS)' $(SSV)" > $$TMP; if [ $$? -ne 0 ]; then cat $$TMP; rm $$TMP; exit 1; else mv $$TMP training/src/main/resources/com/google/myanmartools/trainedModel.dat; exit 0; fi
 	$(MVN) -f training/pom.xml -q process-resources
 
 compatibility.tsv: zawgyiUnicodeModel.dat training/target
@@ -54,15 +55,15 @@ testData.tsv: training/target
 	$(MVN) -f training/pom.xml -q process-resources
 
 copy-resources:
-	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/java/src/main/resources/com/google/myanmartools
-	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/cpp/resources
-	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/js/resources
-	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/ruby/lib/myanmar-tools/resources
-	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/php/resources
-	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/go/resources
-	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/python/src/myanmartools/resources
-	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/dart/resources
-	cp training/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat clients/c#/Resources
+	cp training/src/main/resources/com/google/myanmartools/trainedModel.dat clients/java/src/main/resources/com/google/myanmartools/zawgyiUnicodeModel.dat
+	cp training/src/main/resources/com/google/myanmartools/trainedModel.dat clients/cpp/resources/zawgyiUnicodeModel.dat
+	cp training/src/main/resources/com/google/myanmartools/trainedModel.dat clients/js/resources/zawgyiUnicodeModel.dat
+	cp training/src/main/resources/com/google/myanmartools/trainedModel.dat clients/ruby/lib/myanmar-tools/resources/zawgyiUnicodeModel.dat
+	cp training/src/main/resources/com/google/myanmartools/trainedModel.dat clients/php/resources/zawgyiUnicodeModel.dat
+	cp training/src/main/resources/com/google/myanmartools/trainedModel.dat clients/go/resources/zawgyiUnicodeModel.dat
+	cp training/src/main/resources/com/google/myanmartools/trainedModel.dat clients/python/src/myanmartools/resources/zawgyiUnicodeModel.dat
+	cp training/src/main/resources/com/google/myanmartools/trainedModel.dat clients/dart/resources/zawgyiUnicodeModel.dat
+	cp training/src/main/resources/com/google/myanmartools/trainedModel.dat clients/c#/Resources/zawgyiUnicodeModel.dat
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/java/src/test/resources/com/google/myanmartools
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/cpp/resources
 	cp training/src/main/resources/com/google/myanmartools/compatibility.tsv clients/js/resources
