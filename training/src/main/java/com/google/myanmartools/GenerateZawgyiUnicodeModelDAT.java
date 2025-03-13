@@ -40,8 +40,8 @@ public final class GenerateZawgyiUnicodeModelDAT {
     BurmeseData.DATA_DIRECTORY = args[0];
 
     int ssv = 0;
-    if (args.length >= 2 && args[1].equals("1")) {
-      ssv = 1;
+    if (args.length >= 2) {
+      ssv = Integer.parseInt(args[1]);
     }
 
     ZawgyiUnicodeMarkovModelBuilder builder = new ZawgyiUnicodeMarkovModelBuilder(ssv);
